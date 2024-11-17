@@ -4,21 +4,22 @@
  * This code handles:                                                         *
  * - some fixup to improve the table of contents                              *
  * - the obsolete warning on outdated specs                                   *
+ * - modified by CDN18: remove analytics, add translations, make assets local *
  ******************************************************************************/
 (function () {
   "use strict";
   var ESCAPEKEY = 27;
   var collapseSidebarText = '<span aria-hidden="true">←</span> '
-    + '<span>Collapse Sidebar</span>';
+    + '<span>折叠侧边栏</span>';
   var expandSidebarText = '<span aria-hidden="true">→</span> '
-    + '<span>Pop Out Sidebar</span>';
+    + '<span>弹出侧边栏</span>';
   var tocJumpText = '<span aria-hidden="true">↑</span> '
-    + '<span>Jump to Table of Contents</span>';
+    + '<span>跳转到目录</span>';
 
   var sidebarMedia = window.matchMedia('screen and (min-width: 78em)');
   var autoToggle = function (e) { toggleSidebar(e.matches) };
-  if (sidebarMedia.addListener) {
-    sidebarMedia.addListener(autoToggle);
+  if (sidebarMedia.addEventListener) {
+    sidebarMedia.addEventListener('change', autoToggle);
   }
 
   function toggleSidebar(on, skipScroll) {
@@ -48,7 +49,7 @@
         window.scrollBy(0, 0 - tocHeight);
       }
       tocNav.focus();
-      sidebarMedia.addListener(autoToggle); // auto-collapse when out of room
+      sidebarMedia.addEventListener('change', autoToggle); // auto-collapse when out of room
     }
     else {
       document.body.classList.add('toc-inline');
@@ -74,10 +75,10 @@
     toggle.href = '#toc';
     toggle.innerHTML = collapseSidebarText;
 
-    sidebarMedia.addListener(autoToggle);
+    sidebarMedia.addEventListener('change', autoToggle);
     var toggler = function (e) {
       e.preventDefault();
-      sidebarMedia.removeListener(autoToggle); // persist explicit off states
+      sidebarMedia.removeEventListener('change', autoToggle); // persist explicit off states
       toggleSidebar();
       return false;
     }
@@ -129,7 +130,7 @@
     }, false);
   }
   else {
-    console.warn("Can't find Table of Contents. Please use <nav id='toc'> around the ToC.");
+    console.warn("找不到目录。请在目录周围使用 <nav id='toc'> 标签。");
   }
 
   /* Amendment Diff Toggling */
@@ -206,99 +207,8 @@
     }
   }
 
-  /* Deprecation warning */
-  if (document.location.hostname === "www.w3.org" && /^\/TR\/\d{4}\//.test(document.location.pathname)) {
-    var request = new XMLHttpRequest();
-
-    request.open('GET', 'https://www.w3.org/TR/tr-outdated-spec');
-    request.onload = function () {
-      if (request.status < 200 || request.status >= 400) {
-        return;
-      }
-      try {
-        var currentSpec = JSON.parse(request.responseText);
-      } catch (err) {
-        console.error(err);
-        return;
-      }
-      document.body.classList.add("outdated-spec");
-      var node = document.createElement("p");
-      node.classList.add("outdated-warning");
-      node.tabIndex = -1;
-      node.setAttribute("role", "dialog");
-      node.setAttribute("aria-modal", "true");
-      node.setAttribute("aria-labelledby", "outdatedWarning");
-      if (currentSpec.style) {
-        node.classList.add(currentSpec.style);
-      }
-
-      var frag = document.createDocumentFragment();
-      var heading = document.createElement("strong");
-      heading.id = "outdatedWarning";
-      heading.innerHTML = currentSpec.header;
-      frag.appendChild(heading);
-
-      var anchor = document.createElement("a");
-      anchor.href = currentSpec.latestUrl;
-      anchor.innerText = currentSpec.latestUrl + ".";
-
-      var warning = document.createElement("span");
-      warning.innerText = currentSpec.warning;
-      warning.appendChild(anchor);
-      frag.appendChild(warning);
-
-      var button = document.createElement("button");
-      var handler = makeClickHandler(node);
-      button.addEventListener("click", handler);
-      button.innerHTML = "&#9662; collapse";
-      frag.appendChild(button);
-      node.appendChild(frag);
-
-      function makeClickHandler(node) {
-        var isOpen = true;
-        return function collapseWarning(event) {
-          var button = event.target;
-          isOpen = !isOpen;
-          node.classList.toggle("outdated-collapsed");
-          document.body.classList.toggle("outdated-spec");
-          button.innerText = (isOpen) ? '\u25BE collapse' : '\u25B4 expand';
-        }
-      }
-
-      document.body.appendChild(node);
-      button.focus();
-      window.onkeydown = function (event) {
-        var isCollapsed = node.classList.contains("outdated-collapsed");
-        if (event.keyCode === ESCAPEKEY && !isCollapsed) {
-          button.click();
-        }
-      }
-
-      window.addEventListener("click", function (event) {
-        if (!node.contains(event.target) && !node.classList.contains("outdated-collapsed")) {
-          button.click();
-        }
-      });
-
-      document.addEventListener("focus", function (event) {
-        var isCollapsed = node.classList.contains("outdated-collapsed");
-        var containsTarget = node.contains(event.target);
-        if (!isCollapsed && !containsTarget) {
-          event.stopPropagation();
-          node.focus();
-        }
-      }, true); // use capture to enable event delegation as focus doesn't bubble up
-    };
-
-    request.onerror = function () {
-      console.error("Request to https://www.w3.org/TR/tr-outdated-spec failed.");
-    };
-
-    request.send();
-  }
-
   /* Dark mode toggle */
-  const darkCss = document.querySelector('link[rel~="stylesheet"][href^="https://www.w3.org/StyleSheets/TR/2016/dark"]');
+  const darkCss = document.querySelector('link[rel~="stylesheet"][href^="/assets/dark.css"]');
   if (darkCss) {
     const colorScheme = localStorage.getItem("tr-theme") || "auto";
     darkCss.disabled = colorScheme === "light";
@@ -314,8 +224,8 @@
       `.trim();
     }
     render.innerHTML = `
-      <a id="toc-theme-toggle" role="radiogroup" aria-label="Select a color scheme">
-        <span aria-hidden="true"><img src="logos/dark.svg" title="theme toggle icon" /></span>
+      <a id="toc-theme-toggle" role="radiogroup" aria-label="选择配色方案">
+        <span aria-hidden="true"><img src="logos/dark.svg" title="主题切换按钮" /></span>
         <span>
         ${["light", "dark", "auto"].map(createOption).join("")}
         </span>
@@ -334,21 +244,4 @@
     var tocNav = document.querySelector('#toc-nav');
     tocNav.appendChild(...render.children);
   }
-
-
-  /* Matomo analytics */
-  if (document.location.hostname === "www.w3.org" && /^\/TR\//.test(document.location.pathname)) {
-    var _paq = window._paq = window._paq || [];
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function () {
-      var u = "https://www.w3.org/analytics/piwik/";
-      _paq.push(['setTrackerUrl', u + 'matomo.php']);
-      _paq.push(['setSiteId', '447']);
-      var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-      g.type = 'text/javascript'; g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
-    })();
-  }
-
 })();
