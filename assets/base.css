@@ -235,7 +235,7 @@
 		margin: 0.4rem 0 0.2rem .4rem;
 	}
 
-	.head img[src*="logos/W3C"] {
+	.head img[src*="W3C.svg"] {
 		display: block;
 		border: solid #1a5e9a;
 		border: solid var(--logo-bg);
@@ -248,12 +248,12 @@
 		font-weight: bold;
 	}
 
-	.head a:hover > img[src*="logos/W3C"],
-	.head a:focus > img[src*="logos/W3C"] {
+	.head a:hover > img[src*="W3C.svg"],
+	.head a:focus > img[src*="W3C.svg"] {
 		opacity: .8;
 	}
 
-	.head a:active > img[src*="logos/W3C"] {
+	.head a:active > img[src*="W3C.svg"] {
 		background: #c00;
 		background: var(--logo-active-bg);
 		border-color: #c00;
