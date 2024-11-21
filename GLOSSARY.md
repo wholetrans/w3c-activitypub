@@ -5,7 +5,7 @@
 | English | 中文 | 备注 |
 | ------- | ---- | ---- |
 | Social Network | 社交网络 | |
-| Working Group | 工作小组 | |
+| Working Group | 工作组 | |
 | Repository | 存储库 | |
 | Issues | 问题追踪 | |
 | Commits | 提交历史 | |
@@ -17,6 +17,12 @@
 | copyright | 版权所有 | |
 | seperator for header | 标题分隔栏 | |
 | abstract | 摘要 | |
+| technical report | 技术报告 | |
+| essential claim | 基本权利要求 | |
+| be governed by | 受约束 | |
+| process document | 过程文档 | |
+| overview | 概述 | |
+| specification | 规范 | |
 | ---- | ---- | ---- |
 | federate | verb. 联合 | |
 | federated API | 联合 API | |
