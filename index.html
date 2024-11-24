@@ -888,65 +888,60 @@
     <!--OddPage-->
     <h2 id="x1-overview"><span class="secno">1. </span>概述</h2>
 
-    <p>ActivityPub provides two layers:</p>
+    <p>ActivityPub 协议有两部分：</p>
 
     <ul>
       <li>
-        <b>A server to server federation protocol</b>
-        (so decentralized websites can share information)
+        <b>服务端之间进行联合的协议</b>
+        （以便去中心化的网站相互共享信息）
       </li>
       <li>
-        <b>A client to server protocol</b>
-        (so users, including real-world users, bots, and other automated processes,
-        can communicate with ActivityPub using their accounts on servers,
-        from a phone or desktop or web application or whatever)
+        <b>客户端到服务端的协议</b>
+        （以便用户，包括真实用户、机器人以及其他自动化进程，
+        通过其在服务器上的账户，使用手机、桌面端或网页应用等
+        采用 ActivityPub 进行通信）
       </li>
     </ul>
 
     <p>
-      ActivityPub implementations can implement just one of these things or
-      both of them.
-      However, once you've implemented one, it isn't too many steps to
-      implement the other, and there are a lot of benefits to both (making
-      your website part of the decentralized social web, and being able to
-      use clients and client libraries that work across a wide variety of
-      social websites).
+      ActivityPub 的实现可以只实现其中一种，也可以两种都实现。
+      不过，一旦实现了其中一种，实现另一种并不会太复杂，
+      两者都有诸多好处（使你的网站成为去中心化社交网络的一部分，
+      并能够使用能在各种社交网站上运行的客户端和客户端库）。
     </p>
 
     <p>
-      In ActivityPub, a user is represented by "<a href="https://w3c.wholetrans.org/activitypub/#actors">actors</a>"
-      via the user's accounts on servers.
-      User's accounts on different servers correspond to different actors.
-      Every Actor has:
+      在 ActivityPub 中，用户通过其在服务器上的帐户以“<a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>”的形式表示。
+      用户在不同服务器上的帐户对应于不同的行为体。
+      每个行为体都具有：
     </p>
 
     <ul>
-      <li><b>An <code>inbox</code>:</b> How they get messages from the world</li>
-      <li><b>An <code>outbox</code>:</b> How they send messages to others</li>
+      <li><b>一个<code>inbox</code>（收件箱）：</b>用于接收来自外界的消息</li>
+      <li><b>一个<code>outbox</code>（发件箱）：</b>用于向外界发送消息</li>
     </ul>
 
     <p>
-      <img src="./assets/tutorial-1.png" alt="Actor with inbox and outbox">
+      <img src="./assets/tutorial-1.png" alt="具有收件箱与发件箱的行为体示意图">
     </p>
 
     <p>
-      These are endpoints, or really, just URLs which are listed in the
-      ActivityPub actor's ActivityStreams description.
-      (More on ActivityStreams later).
+      它们都是端点，或者说，是在 ActivityPub 行为体的 ActivityStreams 描述中列出的 URL。
+      （稍后详细讨论 ActivityStreams）。
     </p>
 
     <p>
-      Here's an example of the record of our friend Alyssa P. Hacker:
+      以下是我们的朋友小A的记录示例：
     </p>
 
     <div class="example">
-      <div class="example-title marker"><span>Example 1</span></div>
+      <div class="example-title marker"><span>示例 1</span></div>
       <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Person"</span>,
  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Alyssa P. Hacker"</span>,
  <span class="hljs-attr">"preferredUsername"</span>: <span class="hljs-string">"alyssa"</span>,
- <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"Lisp enthusiast hailing from MIT"</span>,
+ <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"一枚来自 MIT 的 Lisp 爱好者"</span>,
  <span class="hljs-attr">"inbox"</span>: <span class="hljs-string">"https://social.example/alyssa/inbox/"</span>,
  <span class="hljs-attr">"outbox"</span>: <span class="hljs-string">"https://social.example/alyssa/outbox/"</span>,
  <span class="hljs-attr">"followers"</span>: <span class="hljs-string">"https://social.example/alyssa/followers/"</span>,
@@ -955,110 +950,91 @@
     </div>
 
     <p>
-      ActivityPub uses [<cite><a class="bibref"
-          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] for its
-      vocabulary.
-      This is pretty great because ActivityStreams includes all the common
-      terms you need to represent all the activities and content flowing
-      around a social network.
-      It's likely that ActivityStreams already includes all the vocabulary
-      you need, but even if it doesn't, ActivityStreams can be extended
-      via [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-JSON-LD">JSON-LD</a></cite>].
-      If you know what JSON-LD is, you can take advantage of the cool linked
-      data approaches provided by JSON-LD.
-      If you don't, don't worry, JSON-LD documents and ActivityStreams can be
-      understood as plain old simple JSON.
-      (If you're going to add extensions, that's the point at which JSON-LD
-      really helps you out).
+      ActivityPub使用[<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]作为其术语表。
+      这很好，因为ActivityStreams已经包含了您在社交网络中表示所有活动和内容所需的常用术语。
+      ActivityStreams很可能已经涵盖了您需要的所有术语，不过即使没有，您也可以通过[<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-JSON-LD">JSON-LD</a></cite>]扩展ActivityStreams。
+      如果您了解JSON-LD，您可以利用JSON-LD提供的优秀的关联数据方法。
+      如果不了解，也不用担心，JSON-LD文档与ActivityStreams都可以按照传统的JSON来理解。
+      （当你需要添加扩展时，JSON-LD会真正发挥作用）。
     </p>
 
     <p>
-      So, okay.
-      Alyssa wants to talk to her friends, and her friends want to talk to
-      her!
-      Luckily these "inbox" and "outbox" things can help us out.
-      They both behave differently for GET and POST.
-      Let's see how that works:
+      好的，我们考虑以下场景：
+      小A想和她的朋友们聊天，她的朋友们也想和她聊天。
+      此时，“收件箱”与“发件箱”可以帮助我们实现这一需求。
+      它们在 GET 和 POST 请求中的行为不同。
+      我们看一下它们是如何运作的：
     </p>
 
     <p>
       <img src="./assets/tutorial-2.png"
-        alt="Actor with messages flowing from rest of world to inbox and from outbox to rest of world">
+        alt="行为体的消息在外部世界、收件箱与发件箱之间流动的示意图">
     </p>
 
     <p>
-      Hey nice, so just as a recap:
+      总结一下：
     </p>
 
     <ul>
       <li>
-        You can POST to someone's inbox to send them a message
-        (server-to-server / federation only... this <em>is</em> federation!)
+        您可以通过向某人的收件箱发送POST请求来向他们发送消息
+        （仅限服务端间通信/联合...这种行为<em>就是</em>联合！）
       </li>
       <li>
-        You can GET from your inbox to read your latest messages
-        (client-to-server; this is like reading your social
-        network stream)
+        您可以向自己的收件箱发送GET请求以读取最新消息
+        （客户端到服务端；这相当于读取您的社交网络信息流）
       </li>
       <li>
-        You can POST to your outbox to send messages to the world
-        (client-to-server)
+        您可以向自己的发件箱发送POST请求，将消息发送给全世界
+        （客户端到服务端）
       </li>
       <li>
-        You can GET from someone's outbox to see what messages they've
-        posted (or at least the ones you're authorized to see).
-        (client-to-server and/or server-to-server)
+        您可以发送GET请求阅读某人的发件箱内容，查看他们发布了哪些消息
+        （或至少查看您有权限查看的消息内容）。
+        （客户端到服务端和/或服务端间均可执行）
       </li>
     </ul>
 
     <p>
-      Of course, if that last one (GET'ing from someone's outbox) was the
-      only way to see what people have sent, this wouldn't be a very
-      efficient federation protocol!
-      Indeed, federation happens usually by servers posting messages sent by
-      actors to actors on other servers' inboxes.
+      当然，如果最后一种情况（向某人的发件箱发送 GET 请求）是查看别人发送消息的唯一方式，这就不是一个高效的联合协议了！
+      实际上，联合通常由服务端进行，服务端将行为体要发送的消息发送到其他服务器上行为体的收件箱中。
     </p>
 
     <p>
-      Let's see an example!
-      Let's say Alyssa wants to catch up with her friend, Ben Bitdiddle.
-      She lent him a book recently and she wants to make sure he returns it
-      to her.
-      Here's the message she composes, as an ActivityStreams object:
+      让我们看一个例子。
+      假设小A想和她的朋友小B叙旧。
+      她最近借给他一本书，想让他读完后还给她。
+      以下是她撰写的消息，以 ActivityStreams 对象的形式呈现：
     </p>
 
     <div class="example">
-      <div class="example-title marker"><span>Example 2</span></div>
+      <div class="example-title marker"><span>示例 2</span></div>
       <pre class="highlight json hljs" aria-busy="false"
         aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
  <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
- <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Say, did you finish reading that book I lent you?"</span>}</pre>
+ <span class="hljs-attr">"content"</span>: <span class="hljs-string">"话说，我借你那本书你读完了没？"</span>}</pre>
     </div>
 
     <p>
-      This is a note addressed to Ben.
-      She POSTs it to her outbox.
+      这是一条发给小B的消息（note）。
+      小A将这条消息 POST 到自己的发件箱。
     </p>
 
     <p>
-      <img src="./assets/tutorial-3.png" alt="Actor posting message to outbox">
+      <img src="./assets/tutorial-3.png" alt="行为体向自身发件箱发送消息的示意图">
     </p>
 
     <p>
-      Since this is a non-activity object, the server recognizes that this is
-      an object being newly created, and does the courtesy of wrapping it in
-      a Create activity.
-      (Activities sent around in ActivityPub generally follow the pattern of
-      some activity by some actor being taken on some object.
-      In this case the activity is a Create of a Note object, posted by a
-      Person).
+      由于这是一个非活动对象，服务器会识别出这是一个新创建的对象，并将其包装在一个创建活动（Create actiivty）中。
+      （在ActivityPub中传递的活动通常遵循某个行为体对某个对象执行某种活动的模式。
+      在本例中，此活动是由一个Person发布的针对消息对象的创建活动）。
     </p>
-
 
     <div class="example">
-      <div class="example-title marker"><span>Example 3</span></div>
+      <div class="example-title marker"><span>示例 3</span></div>
       <pre class="highlight json hljs" aria-busy="false"
         aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
@@ -1069,39 +1045,36 @@
             <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/49e2d03d-b53a-4c4c-a95c-94a6abf45a19"</span>,
             <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
             <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
-            <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Say, did you finish reading that book I lent you?"</span>}}</pre>
+            <span class="hljs-attr">"content"</span>: <span class="hljs-string">"话说，我借你那本书你读完了没？"</span>}}</pre>
     </div>
 
     <p>
-      Alyssa's server looks up Ben's ActivityStreams actor object, finds his
-      inbox endpoint, and POSTs her object to his inbox.
+      小A的服务器查找小B的 ActivityStreams 行为体对象，找到他的收件箱端点后，将小A的消息对象 POST 到他的收件箱。
     </p>
 
     <p>
-      <img src="./assets/tutorial-4.png" alt="Server posting to remote actor&#39;s inbox">
+      <img src="./assets/tutorial-4.png" alt="服务端向外站行为体收件箱发送消息的示意图">
     </p>
 
     <p>
-      Technically these are two separate steps... one is client to server
-      communication, and one is server to server communication (federation).
-      But, since we're using them both in this example, we can abstractly
-      think of this as being a streamlined submission from outbox to inbox:
+      严格来说，这分为两个独立的步骤……一个是从客户端到服务端的通信，
+      另一个是服务端之间的通信（联合）。但是，在本例中我们同时使用了这两种方式，
+      因此可以抽象地将其理解为一个消息从发件箱到收件箱的传递端过程：
     </p>
 
     <p>
-      <img src="./assets/tutorial-5.png" alt="Note flowing from one actor&#39;s outbox to other actor&#39;s inbox">
+      <img src="./assets/tutorial-5.png" alt="消息从一个行为体的发件箱流向另一行为体的收件箱的示意图">
     </p>
 
     <p>
-      Cool!
-      A while later, Alyssa checks what new messages she's gotten.
-      Her phone polls her inbox via GET, and amongst a bunch of cat videos
-      posted by friends and photos of her nephew posted by her sister, she
-      sees the following:
+      很好，我们继续上面的场景示例。
+      一段时间后，小A检查了她收到的新消息。
+      她的手机通过 GET 请求轮询她的收件箱，结果在一堆朋友发布的猫咪视频
+      和她姐姐发的侄子的照片中，她看到了如下内容：
     </p>
 
     <div class="example">
-      <div class="example-title marker"><span>Example 4</span></div>
+      <div class="example-title marker"><span>示例 4</span></div>
       <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{"@context": "https://www.w3.org/ns/activitystreams",
  "type": "Create",
  "id": "https://chatty.example/ben/p/51086",
@@ -1112,15 +1085,14 @@
             "attributedTo": "https://chatty.example/ben/",
             "to": ["https://social.example/alyssa/"],
             "inReplyTo": "https://social.example/alyssa/posts/49e2d03d-b53a-4c4c-a95c-94a6abf45a19",
-            "content": "&lt;p&gt;Argh, yeah, sorry, I'll get it back to you tomorrow.&lt;/p&gt;
-                        &lt;p&gt;I was reviewing the section on register machines,
-                           since it's been a while since I wrote one.&lt;/p&gt;"}}</pre>
+            "content": "&lt;p&gt;哦哦, 不好意思, 我明天就还你。&lt;/p&gt;
+                        &lt;p&gt;我在看注册机那一部分，我很久没写过这个了。&lt;/p&gt;"}}</pre>
     </div>
 
-    <p>Alyssa is relieved, and likes Ben's post:</p>
+    <p>小A松了一口气，赞了小B的帖文：</p>
 
     <div class="example">
-      <div class="example-title marker"><span>Example 5</span></div>
+      <div class="example-title marker"><span>示例 5</span></div>
       <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/5312e10e-5110-42e5-a09b-934882b3ecec"</span>,
@@ -1130,21 +1102,17 @@
     </div>
 
     <p>
-      She POSTs this message to her outbox.
-      (Since it's an activity, her server knows it doesn't need to wrap it in
-      a Create object).
+      她将此消息POST到她的发件箱。
+      （由于这是一个活动，她的服务器不需要将其封装在创建对象中）。
     </p>
 
     <p>
-      Feeling happy about things, she decides to post a public message to her
-      followers.
-      Soon the following message is blasted to all the members of her
-      followers collection, and since it has the special Public group
-      addressed, is generally readable by anyone.
+      由于感到很高兴，小A决定向她的关注者发布一条公开消息。
+      很快，以下消息被发送给她关注者集合中的所有成员，并且由于消息的目标地址包含特殊的公共（Public）组，任何人都可以读取这条消息。
     </p>
 
     <div class="example">
-      <div class="example-title marker"><span>Example 6</span></div>
+      <div class="example-title marker"><span>示例 6</span></div>
       <pre class="highlight json hljs" aria-busy="false"
         aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
@@ -1157,28 +1125,25 @@
             <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
             <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://social.example/alyssa/followers/"</span>,
                    <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>],
-            <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Lending books to friends is nice.  Getting them back is even nicer! :)"</span>}}</pre>
+            <span class="hljs-attr">"content"</span>: <span class="hljs-string">"有借有还，再借不难 :)"</span>}}</pre>
     </div>
 
     <section id="social-web-working-group" inlist="" rel="schema:hasPart" resource="#social-web-working-group">
-      <h3 property="schema:name" id="x1-1-social-web-working-group"><span class="secno">1.1 </span>Social Web Working
-        Group</h3>
+      <h3 property="schema:name" id="x1-1-social-web-working-group"><span class="secno">1.1 </span>社交网络工作组</h3>
       <div datatype="rdf:HTML" property="schema:description">
         <p>
-          <a href="https://w3c.wholetrans.org/activitypub/#Overview">ActivityPub</a> is one of several related
-          specifications being produced by the Social Web Working Group.
-          Implementers interested in alternative approaches and complementary
-          protocols should review [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-Micropub">Micropub</a></cite>] and the overview document
+          <a href="https://w3c.wholetrans.org/activitypub/#Overview">ActivityPub</a> 是社交网络工作组正在制定的几个相关规范之一。
+          对其他方法与补充协议感兴趣的实现者应查阅[<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-Micropub">Micropub</a></cite>]及其概述文档
           [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">Social-Web-Protocols</a></cite>].
+              href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">社交网络协议</a></cite>]。
         </p>
       </div>
     </section>
   </section>
 
   <section id="conformance"><!--OddPage-->
-    <h2 id="x2-conformance"><span class="secno">2. </span>Conformance</h2>
+    <h2 id="x2-conformance"><span class="secno">2. </span>规范性</h2>
     <p>
       As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
       and notes in this specification are non-normative. Everything else in this specification is
@@ -1191,7 +1156,7 @@
     </p>
 
     <section id="specification-profiles">
-      <h3 id="x2-1-specification-profiles"><span class="secno">2.1 </span>Specification Profiles</h3>
+      <h3 id="x2-1-specification-profiles"><span class="secno">2.1 </span>规范概述</h3>
       <p>
         This specification defines two closely related and interacting
         protocols:
