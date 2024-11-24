@@ -1145,73 +1145,58 @@
   <section id="conformance"><!--OddPage-->
     <h2 id="x2-conformance"><span class="secno">2. </span>规范性</h2>
     <p>
-      As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
-      and notes in this specification are non-normative. Everything else in this specification is
-      normative.
+      除标记为非规范性的章节外，本规范中的所有撰写指引、图表、示例和注释都是非规范性的。规范中的其他所有内容均为规范性内容。
     </p>
-    <p id="respecRFC2119">The key words <em class="rfc2119">MAY</em>, <em class="rfc2119">MUST</em>, <em
-        class="rfc2119">MUST NOT</em>, <em class="rfc2119">SHOULD</em>, and <em class="rfc2119">SHOULD NOT</em> are
-      to be interpreted as described in [<cite><a class="bibref"
-          href="https://w3c.wholetrans.org/activitypub/#bib-RFC2119">RFC2119</a></cite>].
+    <p id="respecRFC2119">以下关键词 <em class="rfc2119">可以</em>、<em class="rfc2119">必须</em>、<em
+      class="rfc2119">禁止</em>、<em class="rfc2119">应当</em>以及<em class="rfc2119">不应当</em>，
+    应按照 [<cite><a class="bibref"
+        href="https://w3c.wholetrans.org/activitypub/#bib-RFC2119">RFC2119</a></cite>] 中的描述进行解释。
     </p>
 
     <section id="specification-profiles">
       <h3 id="x2-1-specification-profiles"><span class="secno">2.1 </span>规范概述</h3>
       <p>
-        This specification defines two closely related and interacting
-        protocols:
+        本规范定义了两套紧密相关且相互作用的协议：
       </p>
       <dl>
-        <dt>A client to server protocol, or "Social API"</dt>
+        <dt>客户端到服务端的协议，或称"社交API"</dt>
         <dd>
-          This protocol permits a client to act <i>on behalf</i> of a user.
-          For example, this protocol is used by a mobile phone application to
-          interact with a social stream of the user's actor.
+          该协议允许客户端<i>代表</i>用户执行操作。例如，移动设备应用程序使用此协议与用户的行为体的社交信息流互动。
         </dd>
-        <dt>A server to server protocol, or "Federation Protocol"</dt>
+        <dt>服务端到服务端到协议，或称"联合协议"</dt>
         <dd>
-          This protocol is used to distribute activities between actors on
-          different servers, tying them into the same social graph.
+          该协议用于在不同服务器上的行为体之间分发活动，将它们连接到同一份社交图谱中。
         </dd>
       </dl>
       <p>
-        The ActivityPub specification is designed so that once either of
-        these protocols are implemented, supporting the other is of very
-        little additional effort.
-        However, servers may still implement one without the other.
-        This gives three conformance classes:
+        ActivityPub规范的设计使得实现了这些协议中的一个后，支持另一个协议所需的额外工作将非常少。
+        但是，服务端仍可以仅实现其中一个协议。
+        这带来了三个一致性类别：
       </p>
       <dl>
-        <dt>ActivityPub conformant Client</dt>
+        <dt>符合ActivityPub标准的客户端</dt>
         <dd>
-          This designation applies to any implementation of the entirety of the
-          client portion of the client to server protocol.
+          此称号适用于实现了客户端到服务端协议客户端部分的全部内容的任何实现。
         </dd>
-        <dt>ActivityPub conformant Server</dt>
+        <dt>符合ActivityPub标准的服务端</dt>
         <dd>
-          This designation applies to any implementation of the entirety of the
-          server portion of the client to server protocol.
+          此称号适用于实现了客户端到服务端协议服务端部分的全部内容的任何实现。
         </dd>
-        <dt>ActivityPub conformant Federated Server</dt>
+        <dt>符合ActivityPub标准的联合式服务端</dt>
         <dd>
-          This designation applies to any implementation of the entirety of
-          the federation protocols.
+          此称号适用于实现了联合协议的全部内容的任何实现。
         </dd>
       </dl>
       <p>
-        It is called out whenever a portion of the specification only applies
-        to implementation of the federation protocol.
-        In addition, whenever requirements are specified, it is called out
-        whether they apply to the client or server (for the client-to-server
-        protocol) or whether referring to a sending or receiving server in
-        the server-to-server protocol.
+        规范的某个部分仅适用于联合协议的实现时，均会明确指出。
+        此外，在指定要求时，会明确说明这些要求是针对客户端还是服务端（对于客户端到服务端协议而言），或是指服务端到服务端协议中的发送方或接收方服务器。
       </p>
     </section>
   </section>
 
   <section id="obj">
     <!--OddPage-->
-    <h2 id="x3-objects"><span class="secno">3. </span>Objects</h2>
+    <h2 id="x3-objects"><span class="secno">3. </span>对象</h2>
     <p>
       Objects are the core concept around which both [<cite><a class="bibref"
           href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] and
