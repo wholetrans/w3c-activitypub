@@ -843,7 +843,7 @@
       <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#i18n-concerns" class="tocxref"><span
             class="secno">A. </span>国际化</a></li>
       <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-considerations"
-          class="tocxref"><span class="secno">B. </span>安全考量</a>
+          class="tocxref"><span class="secno">B. </span>安全注意事项</a>
         <ol class="toc">
           <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#authorization" class="tocxref"><span
                 class="secno">B.1 </span>身份验证与授权</a></li>
@@ -1198,48 +1198,40 @@
     <!--OddPage-->
     <h2 id="x3-objects"><span class="secno">3. </span>对象</h2>
     <p>
-      Objects are the core concept around which both [<cite><a class="bibref"
-          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] and
-      ActivityPub are built.
-      Objects are often wrapped in Activities and are contained in streams of
-      Collections, which are themselves subclasses of Objects.
-      See the [<cite><a class="bibref"
-          href="https://w3c.wholetrans.org/activitypub/#bib-Activity-Vocabulary">Activity-Vocabulary</a></cite>]
-      document,
-      particularly the
-      <a href="https://www.w3.org/TR/activitystreams-vocabulary/#types">Core Classes</a>;
-      ActivityPub follows the mapping of this vocabulary very closely.
+      对象是[<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]和
+      ActivityPub两者构建的核心概念。
+      对象通常嵌套在活动中，包含在集合（Collections）的流中，而集合本身是对象的子类。
+      请参阅[<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-Activity-Vocabulary">活动术语表</a></cite>]
+      文档，
+      特别是
+      <a href="https://www.w3.org/TR/activitystreams-vocabulary/#types">核心类</a>部分；
+      ActivityPub严格遵从该术语表的映射。
     </p>
     <p>
-      ActivityPub defines some terms in addition to those provided by
-      ActivityStreams.
-      These terms are provided in the ActivityPub
-      <a href="https://www.w3.org/TR/json-ld/#the-context">JSON-LD context</a>
-      at
-      <code>https://www.w3.org/ns/activitystreams</code>.
-      Implementers <em class="rfc2119" title="SHOULD">SHOULD</em> include the ActivityPub context in their
-      object definitions.
-      Implementers <em class="rfc2119" title="MAY">MAY</em> include additional context as appropriate.
+      除ActivityStreams提供的术语外，ActivityPub定义了一些额外的术语。
+      这些额外术语在ActivityPub的
+      <a href="https://www.w3.org/TR/json-ld/#the-context">JSON-LD 上下文</a>
+      中定义，地址为
+      <code>https://www.w3.org/ns/activitystreams</code>。
+      实现者<em class="rfc2119" title="SHOULD">应当</em>在其对象定义中包含ActivityPub上下文。
+      实现者<em class="rfc2119" title="MAY">可以</em>根据需要添加附加上下文。
     </p>
     <p>
-      ActivityPub shares the same
+      ActivityPub 沿用了与 ActivityStreams 相同的
       <a href="https://www.w3.org/TR/activitystreams-core/#urls">
-        URI / IRI conventions as in ActivityStreams</a>.
+        URI / IRI 约定</a>。
     </p>
     <p>
-      Servers <em class="rfc2119" title="SHOULD">SHOULD</em> validate the content they receive to avoid content
-      spoofing attacks.
-      (A server should do something at least as robust as checking that
-      the object appears as received at its origin, but mechanisms
-      such as checking signatures would be better if available).
-      No particular mechanism for verification is authoritatively specified by
-      this document, but please see <a href="https://w3c.wholetrans.org/activitypub/#security-considerations">Security
-        Considerations</a> for some suggestions and good practices.
+      服务端<em class="rfc2119" title="SHOULD">应当</em>验证其接收的内容，以避免内容欺骗攻击。
+      （服务端至少应该做到检查对象是否按原始状态接收，但如果可能，使用签名等机制会更好）。
+      本文档尚未权威性地指定特定的验证机制，但您可参阅<a href="https://w3c.wholetrans.org/activitypub/#security-considerations">安全注意事项</a>以获取一些建议和最佳实践。
     </p>
     <div class="informative">
-      As an example, if example.com receives the activity
+      例如，如果 example.com 收到活动
       <div class="example">
-        <div class="example-title marker"><span>Example 7</span></div>
+        <div class="example-title marker"><span>示例 7</span></div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
@@ -1251,103 +1243,80 @@
     <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://example.org/~alice/note/23"</span>,
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
     <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://example.org/~alice"</span>,
-    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"I'm a goat"</span>
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"我是一只羊"</span>
   }
 }</pre>
       </div>
-      it should dereference the <code>id</code> both to ensure that it exists
-      and is a valid object, and that it is not misrepresenting the object.
-      (In this example, Mallory could be spoofing an object allegedly posted
-      by Alice).
-    </div>
-    <section id="obj-id">
-      <h3 id="x3-1-object-identifiers"><span class="secno">3.1 </span>Object Identifiers</h3>
+      它应该解引用 <code>id</code> 以确保其存在、为有效对象，且没有错误地表示该对象。
+      （在本例中，Mallory 可能正在伪造一个据称由 Alice 发布的对象）。
+      </div>
+      <section id="obj-id">
+      <h3 id="x3-1-object-identifiers"><span class="secno">3.1 </span>对象标识符</h3>
       <p>
-        All Objects in [<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] should have
-        unique
-        global
-        identifiers.
-        ActivityPub extends this requirement; all objects distributed by the
-        ActivityPub protocol <em class="rfc2119" title="MUST">MUST</em> have unique global identifiers, unless they
-        are intentionally transient (short lived activities that are not
-        intended to be able to be looked up, such as some kinds of chat
-        messages or game notifications).
-        These identifiers must fall into one of the following groups:
+        [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 中的所有对象都应该具有唯一的全局标识符。
+        ActivityPub 扩展了此要求；以 ActivityPub 协议分发的所有对象<em class="rfc2119" title="MUST">必须</em>具有唯一的全局标识符，除非它们是有意被设为瞬态的（例如某些类型的聊天消息或游戏通知等短生命周期且不需要能够被查找的活动）。
+        这些标识符必须属于以下类型之一：
       </p>
       <ol>
         <li>
-          Publicly dereferencable URIs, such as HTTPS URIs, with their
-          authority belonging to that of their originating server.
-          (Publicly facing content <em class="rfc2119" title="SHOULD">SHOULD</em> use HTTPS URIs).
+          可公开解引用的 URI，如 HTTPS URI，其权限属于其源服务器。
+          （面向公众的内容<em class="rfc2119" title="SHOULD">应</em>使用 HTTPS URI）。
         </li>
         <li>
-          An ID explicitly specified as the JSON <code>null</code> object,
-          which implies an anonymous object (a part of its parent context)
+          显式指定为 JSON <code>null</code> 对象的 ID，这意味着该对象是一个匿名对象（作为其上级上下文的一部分）
         </li>
       </ol>
       <p>
-        Identifiers <em class="rfc2119" title="MUST">MUST</em> be provided for activities posted in server to
-        server communication, unless the activity is intentionally transient.
-        However, for client to server communication, a server receiving an
-        object posted to the outbox with no specified <code>id</code> <em class="rfc2119" title="SHOULD">SHOULD</em>
-        allocate an object ID in the actor's namespace and attach it to the
-        posted object.
+        在服务端间通信中发布的活动<em class="rfc2119" title="MUST">必须</em>提供标识符，除非该活动是有意被设为瞬态的。
+        但是，对于客户端到服务器的通信，接收到没有指定 <code>id</code> 的对象的服务器<em class="rfc2119" title="SHOULD">应</em>在行为体的命名空间中分配一个对象 ID 并将其附加到接收到的对象之上。
       </p>
-      <p>All objects have the following properties:</p>
+      <p>所有对象都具有以下属性：</p>
       <dl>
         <dt>id</dt>
         <dd>
-          The object's unique global identifier (unless the object is transient,
-          in which case the <code>id</code> <em class="rfc2119" title="MAY">MAY</em> be omitted).
+          对象的唯一全局标识符（除非对象是瞬态的，在此情形下 <code>id</code> <em class="rfc2119" title="MAY">可以</em>省略）。
         </dd>
         <dt>type</dt>
         <dd>
-          The type of the object.
+          对象的类型。
         </dd>
       </dl>
     </section>
 
     <section id="retrieving-objects">
-      <h3 id="x3-2-retrieving-objects"><span class="secno">3.2 </span>Retrieving objects</h3>
+      <h3 id="x3-2-retrieving-objects"><span class="secno">3.2 </span>检索对象</h3>
       <p>
-        The HTTP GET method may be dereferenced against an object's
-        <code>id</code> property to retrieve the activity.
-        Servers <em class="rfc2119" title="MAY">MAY</em> use HTTP content negotiation as defined in [<cite><a
-            class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-RFC7231">RFC7231</a></cite>] to
-        select the type of data to return in response to a request,
-        but <em class="rfc2119" title="MUST">MUST</em> present the ActivityStreams object representation
-        in response to
-        <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>,
-        and <em class="rfc2119" title="SHOULD">SHOULD</em> also present the ActivityStreams representation in
-        response to <code>application/activity+json</code> as well.
-        The client <em class="rfc2119" title="MUST">MUST</em> specify an <code>Accept</code> header with the
+        可以针对对象的<code>id</code>属性使用HTTP GET方法以检索活动。
+        服务器<em class="rfc2119" title="MAY">可以</em>按照[<cite><a
+            class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-RFC7231">RFC7231</a></cite>]中的定义使用HTTP内容协商机制
+        来选择响应请求时返回的数据类型，
+        但<em class="rfc2119" title="MUST">必须</em>在响应
         <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>
-        media type in order to retrieve the activity.
+        时给出ActivityStreams对象表示格式，
+        并<em class="rfc2119" title="SHOULD">应当</em>在响应
+        <code>application/activity+json</code>时也给出ActivityStreams表示格式。
+        客户端在检索活动时<em class="rfc2119" title="MUST">必须</em>指定一个带有
+        <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>
+        媒体类型的<code>Accept</code>标头。
       </p>
       <p>
-        Servers <em class="rfc2119" title="MAY">MAY</em> implement other behavior for requests which do not comply
-        with the above requirement.
-        (For example, servers may implement additional legacy protocols, or
-        may use the same URI for both HTML and ActivityStreams
-        representations of a resource).
+        服务端<em class="rfc2119" title="MAY">可以</em>对不符合上述要求的请求实施其他行为。
+        （例如，服务器可能会实现额外的遗留协议，或
+        使用相同的URI同时提供资源的HTML和ActivityStreams格式）。
       </p>
       <p>
-        Servers <em class="rfc2119" title="MAY">MAY</em> require authorization as specified in
-        <a href="https://w3c.wholetrans.org/activitypub/#authorization" class="sec-ref"><span class="secno">B.1</span>
-          <span class="sec-title">Authentication and Authorization</span></a>, and may additionally implement their
-        own authorization rules.
-        Servers <em class="rfc2119" title="SHOULD">SHOULD</em> fail requests which do not pass their authorization
-        checks with the appropriate HTTP error code, or the 403 Forbidden
-        error code where the existence of the object is considered private.
-        An origin server which does not wish to disclose the existence of
-        a private target <em class="rfc2119" title="MAY">MAY</em> instead respond with a status code of
-        404 Not Found.
+        服务端<em class="rfc2119" title="MAY">可以</em>根据<a href="https://w3c.wholetrans.org/activitypub/#authorization" class="sec-ref"><span class="secno">B.1</span>
+          <span class="sec-title">身份验证和授权</span></a>中的规定要求身份验证，
+        并且可以额外地实现其自身的授权规则。
+        对于未通过身份验证检查的请求，服务器<em class="rfc2119" title="SHOULD">应当</em>返回适当的HTTP错误代码，
+        或者在对象的存在被认为是私密的情况下返回403 Forbidden错误码。
+        如果源服务器不希望披露私密目标的存在，<em class="rfc2119" title="MAY">可以</em>改为返回404 Not Found状态码。
       </p>
     </section>
 
     <section id="source-property">
-      <h3 id="x3-3-the-source-property"><span class="secno">3.3 </span>The source property</h3>
+      <h3 id="x3-3-the-source-property"><span class="secno">3.3 </span>源属性（Source property）</h3>
       <p>
         In addition to all the properties defined by the
         [<cite><a class="bibref"
