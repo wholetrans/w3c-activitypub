@@ -1248,7 +1248,7 @@
 }</pre>
       </div>
       它应该解引用 <code>id</code> 以确保其存在、为有效对象，且没有错误地表示该对象。
-      （在本例中，Mallory 可能正在伪造一个据称由 Alice 发布的对象）。
+      （在本例中，小M可能正在伪造一个据称由小A发布的对象）。
       </div>
       <section id="obj-id">
       <h3 id="x3-1-object-identifiers"><span class="secno">3.1 </span>对象标识符</h3>
@@ -1318,200 +1318,215 @@
     <section id="source-property">
       <h3 id="x3-3-the-source-property"><span class="secno">3.3 </span>源属性（Source property）</h3>
       <p>
-        In addition to all the properties defined by the
-        [<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-Activity-Vocabulary">Activity-Vocabulary</a></cite>],
-        ActivityPub extends the <code>Object</code> by
-        supplying the <code>source</code> property.
-        The <code>source</code> property is intended to convey some
-        sort of source from which the <code>content</code> markup
-        was derived, as a form of provenance, or to support future
-        editing by clients.
-        In general, clients do the conversion from <code>source</code>
-        to <code>content</code>, not the other way around.
+        在[<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-Activity-Vocabulary">Activity-Vocabulary</a></cite>]
+        中定义的所有属性之外，ActivityPub 通过源属性（<code>source</code>属性）扩展了对象（<code>Object</code>）。
+        <code>source</code>属性作为一种出处形式，旨在传达某种来源，用于派生 <code>content</code> 标记，或支持客户端的后续编辑。
+        通常情况下，客户端会从<code>source</code>转换到<code>content</code>，而不是从<code>content</code>转换为<code>source</code>。
       </p>
       <p>
-        The value of <code>source</code> is itself an object
-        which uses its own <code>content</code> and <code>mediaType</code>
-        fields to supply source information.
+        <code>source</code>的值本身就是一个对象，
+        使用其自身的<code>content</code>和<code>mediaType</code>字段提供来源信息。
       </p>
       <div class="example">
-        <div class="example-title marker"><span>Example 8</span></div>
+        <div class="example-title marker"><span>示例 8</span></div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
                {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>}],
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
   <span class="hljs-attr">"id"</span>: <span class="hljs-string">"http://postparty.example/p/2415"</span>,
-  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;I &lt;em&gt;really&lt;/em&gt; like strawberries!&lt;/p&gt;"</span>,
+  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;草莓 &lt;em&gt;十分地&lt;/em&gt; 美味！&lt;/p&gt;"</span>,
   <span class="hljs-attr">"source"</span>: {
-    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"I *really* like strawberries!"</span>,
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"草莓 *十分地* 美味！"</span>,
     <span class="hljs-attr">"mediaType"</span>: <span class="hljs-string">"text/markdown"</span>}
 }</pre>
       </div>
       <div class="note">
-        <div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span><span
-            style="text-transform: none">: What to do when clients can't meaningfully handle a mediaType?</span></div>
-        <div class="">
-          <p>
-            In general, it's best to let a user edit their original post
-            in the same source format they originally composed it in.
-            But not all clients can reliably provide a nice interface for
-            all source types, and since clients are expected to do the
-            conversion from <code>source</code> to <code>content</code>,
-            some clients may work with a media type that another client
-            does not know how to work with.
-            While a client could feasibly provide the <code>content</code>
-            markup to be edited and ignore the source, this means that the
-            user will lose the more desirable form of the original
-            <code>source</code> in any future revisions.
-            A client doing so should thus provide a minimally obtrusive warning
-            cautioning that the original source format is not understood and is
-            thus being ignored.
-          </p>
-          <p>
-            For example, Alyssa P. Hacker likes to post to her ActivityPub
-            powered blog via an Emacs client she has written, leveraging
-            <a href="http://orgmode.org/">Org mode</a>.
-            Later she switches to editing on her phone's client, which
-            has no idea what <code>text/x-org</code> is or how to render
-            it to HTML, so it provides a text box to edit the original
-            <code>content</code> instead.
-            A helpful warning displays above the edit area saying,
-            "This was originally written in another markup language we don't
-            know how to handle. If you edit, you'll lose your original
-            source!"
-            Alyssa decides the small typo fix isn't worth losing her nice
-            org-mode markup and decides to make the update when she gets
-            home.
-          </p>
-        </div>
+        <div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>注</span><span
+          style="text-transform: none">：如何应对客户端无法有效处理媒体类型的情形？</span></div>
+      <div class="">
+        <p>
+          通常情况下，最好让用户用最初撰写内容的源格式编辑原始文章。
+          但客户端不一定能为所有源类型提供可靠的友好界面，另外，由于客户端负责将<code>source</code>转换为<code>content</code>，
+          某些客户端可能会使用其他客户端不知道如何处理的媒体类型。
+          尽管客户端理论上可以提供可编辑的<code>content</code>标记并忽略源格式，但这意味着用户在今后的修改中将丢失其首选的理想<code>source</code>格式。
+          因此，这样做的客户端应当提供一个微不足道的警告，说明原始源格式未被识别并将被忽略。
+        </p>
+        <p>
+          举例来说，小A喜欢使用自己开发的Emacs客户端，通过<a href="http://orgmode.org/">Org mode</a>在她的ActivityPub博客上发文。
+          后来她转而使用手机客户端编辑，而该客户端完全不知道<code>text/x-org</code>是什么，也不知道如何将其渲染为HTML，
+          所以它提供了一个文本框来编辑原始的<code>content</code>。
+          编辑区上方会显示一个有帮助的警告："这最初是用另一种我们无法处理的标记语言编写的。如果您进行编辑，将会丢失原始来源文本！"
+          小A认为修复小小的拼写错误不值得失去她精心制作的org-mode标记，于是决定等到回家再进行更新。
+        </p>
       </div>
     </section>
   </section>
 
   <section id="actors">
     <!--OddPage-->
-    <h2 id="x4-actors"><span class="secno">4. </span>Actors</h2>
+    <h2 id="x4-actors"><span class="secno">4. </span>行为体</h2>
     <p>
-      ActivityPub actors are generally one of the
+      ActivityPub 行为体通常是
       <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">
-        ActivityStreams Actor Types</a>,
-      but they don't have to be. For example, a
+        ActivityStreams 行为体类型</a> 之一，
+      但并非必须如此。例如，
       <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-profile">
-        Profile</a> object
-      might be used as an actor, or a type from an ActivityStreams extension.
-      Actors are <a href="https://w3c.wholetrans.org/activitypub/#retrieving-objects">retrieved</a> like any other
-      Object in ActivityPub.
-      Like other ActivityStreams objects, actors have an <code>id</code>,
-      which is a URI.
-      When entered directly into a user interface (for example on a login
-      form), it is desirable to support simplified naming.
-      For this purpose, ID normalization <em class="rfc2119" title="SHOULD">SHOULD</em> be performed as follows:
+        账户</a> 对象
+      可以作为行为体，也可作为一个从 ActivityStreams 扩展的类型。
+      <a href="https://w3c.wholetrans.org/activitypub/#retrieving-objects">检索</a>行为体的方式与检索 ActivityPub 中的任何其他对象相同。
+      与其他 ActivityStreams 对象一样，行为体拥有一个 <code>id</code>，
+      它是一个 URI。
+      当直接输入到用户界面（例如登录表单）时，最好支持简化的命名方式。
+      为此，<em class="rfc2119" title="SHOULD">应当</em> 执行以下 ID 规范化操作：
     </p>
     <ol>
       <li>
-        If the entered ID is a valid URI, then it is to be used directly.
+        如果输入的 ID 是有效的 URI，则直接使用它。
       </li>
       <li>
-        If it appears that the user neglected to add a scheme for a URI that
-        would otherwise be considered valid, such as
-        <code>example.org/alice/</code>, clients <em class="rfc2119" title="MAY">MAY</em> attempt to provide
-        a default scheme, preferably <code>https</code>.
+        如果用户似乎没有为一个本来有效的 URI 添加协议头，例如
+        <code>example.org/alice/</code>，客户端<em class="rfc2119" title="MAY">可以</em>尝试回落到
+        一个默认协议，最好是 <code>https</code>。
       </li>
       <li>
-        Otherwise, the entered value should be considered invalid.
+        否则，输入的值应视为无效。
       </li>
     </ol>
 
     <p>
-      Once the actor's URI has been identified, it should be dereferenced.
+      确定了行为体的 URI 后，应当对其进行解引用。
     </p>
 
     <div class="note">
-      <div role="heading" class="note-title marker" id="h-note-0" aria-level="3"><span>Note</span></div>
+      <div role="heading" class="note-title marker" id="h-note-0" aria-level="3"><span>注意</span></div>
       <div class="">
-        ActivityPub does not dictate a specific relationship between
-        "users" and Actors; many configurations are possible.
-        There may be multiple human users or organizations controlling an
-        Actor, or likewise one human or organization may control multiple
-        Actors. Similarly, an Actor may represent a piece of software,
-        like a bot, or an automated process.
-        More detailed "user" modelling, for example linking together of Actors which
-        are controlled by the same entity, or allowing one Actor to be presented
-        through multiple alternate profiles or aspects, are at the discretion
-        of the implementation.
+        ActivityPub 没有明确规定“用户”与行为体之间的特定关系；可以采取多种配置方式。
+        可以有多个人类用户或组织用户控制一个行为体，也可以是一个人类或组织控制多个行为体。
+        同样地，行为体也可以代表一个软件，例如机器人，或一个自动化流程。
+        更详细的“用户”建模，例如关联由同一实体控制的行为体，或允许同一行为体以多个账户或面貌呈现，由具体实现自行决定。
       </div>
     </div>
 
     <section id="actor-objects">
-      <h3 id="x4-1-actor-objects"><span class="secno">4.1 </span><i>Actor</i> objects</h3>
+      <h3 id="x4-1-actor-objects"><span class="secno">4.1 </span><i>行为体</i>对象</h3>
       <p>
-        Actor objects <em class="rfc2119" title="MUST">MUST</em> have, in addition to the properties mandated by
+        除必须包含
         <a href="https://w3c.wholetrans.org/activitypub/#obj-id" class="sec-ref"><span class="secno">3.1</span> <span
-            class="sec-title">Object Identifiers</span></a>, the following properties:
+            class="sec-title">对象标识符</span></a>规定的属性外，
+            <i>行为体</i> 对象还<em class="rfc2119" title="MUST">必须</em>包含以下属性：
       </p>
       <dl>
-        <dt id="inbox-property">inbox</dt>
+        <dt id="inbox-property">收件箱</dt>
         <dd>
-          A reference to an [<cite><a class="bibref"
+          对一个 [<cite><a class="bibref"
               href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
           <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
             <code>OrderedCollection</code></a>
-          comprised of all the messages received by the actor; see
+          的引用，包含该<i>行为体</i>接收到的所有消息；详见
           <a href="https://w3c.wholetrans.org/activitypub/#inbox" class="sec-ref"><span class="secno">5.2</span> <span
-              class="sec-title">Inbox</span></a>.
+              class="sec-title">收件箱</span></a>。
         </dd>
-        <dt id="outbox-property">outbox</dt>
+        <dt id="outbox-property">发件箱</dt>
         <dd>
-          An [<cite><a class="bibref"
+          对一个 [<cite><a class="bibref"
               href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
           <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
             <code>OrderedCollection</code></a>
-          comprised of all the messages produced by the actor; see
+          的引用，包含该<i>行为体</i>发送的所有消息；详见
           <a href="https://w3c.wholetrans.org/activitypub/#outbox" class="sec-ref"><span class="secno">5.1</span> <span
-              class="sec-title">Outbox</span></a>.
+              class="sec-title">发件箱</span></a>。
         </dd>
       </dl>
       <p>
-        Implementations <em class="rfc2119" title="SHOULD">SHOULD</em>, in addition, provide the following
-        properties:
+        实现者 <em class="rfc2119" title="SHOULD">应当</em> 另外提供以下属性：
       </p>
       <dl>
-        <dt id="following-property">following</dt>
+        <dt id="following-property">following（关注）</dt>
         <dd>
-          A link to an [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] collection
-          of
-          the actors that
-          this actor is following; see <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span
-              class="secno">5.4</span> <span class="sec-title">Following Collection</span></a>
+          一个 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
+          包含该<i>行为体</i>关注的所有<i>行为体</i>；详见
+          <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span
+              class="secno">5.4</span> <span class="sec-title">关注集合</span></a>。
         </dd>
-        <dt id="followers-property">followers</dt>
+        <dt id="followers-property">followers（粉丝）</dt>
         <dd>
-          A link to an [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] collection
-          of
-          the actors that
-          follow this actor; see <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span
-              class="secno">5.3</span> <span class="sec-title">Followers Collection</span></a>.
+          一个 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
+          包含关注该<i>行为体</i>的所有<i>行为体</i>；详见
+          <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span
+              class="secno">5.3</span> <span class="sec-title">粉丝集合</span></a>。
         </dd>
       </dl>
       <p>
-        Implementations <em class="rfc2119" title="MAY">MAY</em> provide the following properties:
+        实现者 <em class="rfc2119" title="MAY">可以</em> 提供以下属性：
       </p>
       <dl>
-        <dt id="liked-property">liked</dt>
+        <dt id="liked-property">liked（点赞）</dt>
         <dd>
-          A link to an [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] collection
-          of
-          objects this
-          actor has liked; see <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span
-              class="secno">5.5</span> <span class="sec-title">Liked Collection</span></a>.
+          一个 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
+          包含该<i>行为体</i>点赞的所有对象；详见
+          <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span
+              class="secno">5.5</span> <span class="sec-title">点赞集合</span></a>。
+        </dd>
+      </dl>
+      <h3 id="x4-1-actor-objects"><span class="secno">4.1 </span><i>行为体</i> 对象</h3>
+      <p>
+        除 <a href="https://w3c.wholetrans.org/activitypub/#obj-id" class="sec-ref"><span class="secno">3.1</span> <span
+            class="sec-title">对象标识符</span></a> 中强制要求的属性外，行为体对象<em class="rfc2119" title="MUST">必须</em> 具有以下属性：
+      </p>
+      <dl>
+        <dt id="inbox-property">inbox（收件箱）</dt>
+        <dd>
+          对 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+            <code>OrderedCollection</code>（有序集合）</a> 的引用，该集合包含行为体接收到的所有消息；参见
+          <a href="https://w3c.wholetrans.org/activitypub/#inbox" class="sec-ref"><span class="secno">5.2</span> <span
+              class="sec-title">收件箱</span></a>。
+        </dd>
+        <dt id="outbox-property">outbox（发件箱）</dt>
+        <dd>
+          一个 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+            <code>OrderedCollection</code>（有序集合）</a>，包含行为体创建的所有消息；参见
+          <a href="https://w3c.wholetrans.org/activitypub/#outbox" class="sec-ref"><span class="secno">5.1</span> <span
+              class="sec-title">发件箱</span></a>。
+        </dd>
+      </dl>
+      <p>
+        此外，ActivityPub 实现<em class="rfc2119" title="SHOULD">应当</em> 提供以下属性：
+      </p>
+      <dl>
+        <dt id="following-property">following（关注）</dt>
+        <dd>
+          一个指向 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，该集合包含此行为体正在关注的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span
+              class="secno">5.4</span> <span class="sec-title">关注集合</span></a>。
+        </dd>
+        <dt id="followers-property">followers（粉丝）</dt>
+        <dd>
+          一个指向 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，该集合包含关注此行为体的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span
+              class="secno">5.3</span> <span class="sec-title">粉丝集合</span></a>。
+        </dd>
+      </dl>
+      <p>
+        实现<em class="rfc2119" title="MAY">可以</em> 提供以下属性：
+      </p>
+      <dl>
+        <dt id="liked-property">liked（点赞）</dt>
+        <dd>
+          一个指向[<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，该集合包含此行为体点赞过的对象；参见 <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span
+              class="secno">5.5</span> <span class="sec-title">点赞集合</span></a>。
         </dd>
       </dl>
       <div class="example">
-        <div class="example-title marker"><span>Example 9</span></div>
+        <div class="example-title marker"><span>示例 9</span></div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
                {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"ja"</span>}],
@@ -1530,137 +1545,102 @@
   ]
 }</pre>
       </div>
-      <p>Implementations <em class="rfc2119" title="MAY">MAY</em>, in addition, provide the following properties:</p>
+      <p>实现<em class="rfc2119" title="MAY">可以</em>额外提供以下属性：</p>
       <dl>
         <dt id="streams-property">streams</dt>
         <dd>
-          A list of supplementary Collections which may be of interest.
+          可能感兴趣的补充集合列表。
         </dd>
         <dt id="preferredUsername">preferredUsername</dt>
         <dd>
-          A short username which may be used to refer to the actor, with no
-          uniqueness guarantees.
+          可用于指代行为体的简短用户名，不提供唯一性保证。
         </dd>
         <dt id="endpoints">endpoints</dt>
         <dd>
-          A json object which maps additional (typically server/domain-wide)
-          endpoints which may be useful either for this actor or someone
-          referencing this actor.
-          This mapping may be nested inside the actor document as the value
-          or may be a link to a JSON-LD document with these properties.
+          一个映射额外（通常为服务端/域级别的）端点的 JSON 对象，这些端点可能对该行为体或引用该行为体的其他人有用。
+          此映射可以作为值嵌套在行为体文档中，也可以是指向包含这些属性的JSON-LD文档的链接。
         </dd>
       </dl>
 
       <p>
-        The <code>endpoints</code> mapping <em class="rfc2119" title="MAY">MAY</em> include the following
-        properties:
+        <code>endpoints</code> 映射<em class="rfc2119" title="MAY">可以</em>包含以下属性：
       </p>
       <dl>
         <dt id="proxyUrl">proxyUrl</dt>
         <dd>
-          Endpoint URI so this actor's clients may access remote
-          ActivityStreams objects which require authentication to access.
-          To use this endpoint, the client posts an
-          <code>x-www-form-urlencoded</code> <code>id</code> parameter
-          with the value being the <code>id</code> of the requested
-          ActivityStreams object.
+          端点 URI，该行为体的客户端可以通过此 URI 访问需要身份验证的外站 ActivityStreams 对象。
+          要使用此端点，客户端需按 <code>x-www-form-urlencoded</code> 格式提交 <code>id</code> 参数，参数值为要请求的 ActivityStreams 对象的 <code>id</code>。
         </dd>
         <dt id="oauthAuthorizationEndpoint">oauthAuthorizationEndpoint</dt>
         <dd>
-          If OAuth 2.0 bearer tokens [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] are being used
-          for authenticating
-          <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">client to server
-            interactions</a>,
-          this endpoint specifies a URI at which a browser-authenticated user
-          may obtain a new authorization grant.
+          若<a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>使用
+          OAuth 2.0 不记名令牌[<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] 进行身份验证，
+          此端点指定一个 URI，通过浏览器完成认证的用户可在该 URI 上获取新的授权许可。
         </dd>
         <dt id="oauthTokenEndpoint">oauthTokenEndpoint</dt>
         <dd>
-          If OAuth 2.0 bearer tokens [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] are being used
-          for authenticating
-          <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">client to server
-            interactions</a>,
-          this endpoint specifies a URI at which a client may acquire an
-          access token.
+          若<a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>使用
+          OAuth 2.0 不记名令牌[<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] 进行身份验证，
+          此端点指定一个 URI，客户端可以在该 URI 获取访问令牌。
         </dd>
         <dt id="provideClientKey">provideClientKey</dt>
         <dd>
-          If Linked Data Signatures and HTTP Signatures are being used for
-          authentication and authorization, this endpoint specifies a URI at
-          which browser-authenticated users may authorize a client's public
-          key for
-          <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">client to server
-            interactions</a>.
+          若身份验证和授权使用链接数据签名和 HTTP 签名，此端点指定一个 URI，通过浏览器完成认证的用户可在此 URI 上将授权客户端的公钥用于
+          <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端的交互</a>。
         </dd>
         <dt id="signClientKey">signClientKey</dt>
         <dd>
-          If Linked Data Signatures and HTTP Signatures are being used for
-          authentication and authorization, this endpoint specifies a URI at
-          which a client key may be signed by the actor's key for a time
-          window to act on behalf of the actor in interacting with foreign
-          servers.
+          若身份验证和授权使用链接数据签名和 HTTP 签名，则此端点指定一个 URI，在一段时间内，行为体的密钥可以在该 URI 上对客户端密钥进行签名，以代表行为体与外部服务器进行交互。
         </dd>
         <dt id="sharedInbox">sharedInbox</dt>
         <dd>
-          An optional endpoint
+          此端点为可选端点，
           <a href="https://w3c.wholetrans.org/activitypub/#shared-inbox-delivery">
-            used for wide delivery of publicly addressed activities
-            and activities sent to followers</a>.
-          <code>sharedInbox</code> endpoints <em class="rfc2119" title="SHOULD">SHOULD</em> also be publicly
-          readable <code>OrderedCollection</code> objects containing
-          objects addressed to the <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">Public</a>
-          special collection.
-          Reading from the <code>sharedInbox</code> endpoint <em class="rfc2119" title="MUST NOT">MUST NOT</em> present
-          objects which are not addressed to the <code>Public</code>
-          endpoint.
+            用于广泛传递公开寻址的活动及发送给粉丝的活动</a>。
+          <code>sharedInbox</code> 端点也应该是公开可读的 <code>OrderedCollection</code> 对象，其中包含寻址到<a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共</a>特殊集合的对象。
+          从 <code>sharedInbox</code> 端点读取内容时，禁止呈现未寻址到公共（<code>Public</code>）端点的对象。
         </dd>
       </dl>
 
       <div class="note">
-        <div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div>
+        <div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>注</span></div>
         <div class="" id="as2-actor-properties">
           <p>
-            As the upstream vocabulary for ActivityPub, any applicable
             [<cite><a class="bibref"
-                href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] property
-            may
-            be used on ActivityPub Actors.
-            Some ActivityStreams properties are particularly worth highlighting
-            to demonstrate how they are used in ActivityPub implementations.
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 是 ActivityPub 的上游术语表，任何适用于
+            [<cite><a class="bibref"
+                href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 的属性都可以在 ActivityPub 行为体上使用。
+            在此特别强调以下 ActivityStreams 属性，以演示它们在 ActivityPub 实现中的使用方法。
           </p>
 
           <dl>
             <dt id="url-property">url</dt>
             <dd>
-              A link to the actor's "profile web page", if not equal to the
-              value of <code>id</code>.
+              若该属性的值不等于 <code>id</code>，则指向行为体“账户页面”的链接。
             </dd>
             <dt id="name-property">name</dt>
             <dd>
-              The preferred "nickname" or "display name" of the actor.
+              行为体设置的“昵称”或“显示名称”。
             </dd>
             <dt id="summary-property">summary</dt>
-            <dd>A quick summary or bio by the user about themselves.</dd>
+            <dd>用户关于自身的简介或简要总结。</dd>
             <dt id="icon-property">icon</dt>
             <dd>
-              A link to an image or an Image object which represents the user's
-              profile picture (this may be a thumbnail).
+              指向代表用户头像图片或图片对象的链接（可以是一个缩略图）。
             </dd>
           </dl>
         </div>
       </div>
       <div class="note">
-        <div role="heading" class="note-title marker" id="h-note-2" aria-level="4"><span>Note</span></div>
+        <div role="heading" class="note-title marker" id="h-note-2" aria-level="4"><span>注</span></div>
         <p class="" id="actor-text-direction">
-          Properties containing natural language values,
-          such as <code>name</code>, <code>preferredUsername</code>, or
-          <code>summary</code>, make use of
+          包含自然语言值的属性（如 <code>name</code>、<code>preferredUsername</code> 或 <code>summary</code>）使用在
           <a href="https://www.w3.org/TR/activitystreams-core/#naturalLanguageValues">
-            natural language support defined in ActivityStreams</a>.
+            ActivityStreams 中定义的自然语言支持</a>。
         </p>
       </div>
     </section>
@@ -1669,7 +1649,7 @@
 
   <section id="collections">
     <!--OddPage-->
-    <h2 id="x5-collections"><span class="secno">5. </span>Collections</h2>
+    <h2 id="x5-collections"><span class="secno">5. </span>集合</h2>
     <p>
       [<cite><a class="bibref"
           href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
