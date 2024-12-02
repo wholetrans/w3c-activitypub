@@ -1653,198 +1653,174 @@
     <p>
       [<cite><a class="bibref"
           href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
-      defines the collection concept; ActivityPub
-      defines several collections with special behavior.
-      Note that ActivityPub makes use of
+      定义了集合（collection）的概念；而 ActivityPub 定义了若干具有特殊行为的集合。
+      请注意，ActivityPub 使用 
       <a href="https://www.w3.org/TR/activitystreams-core/#paging">
-        ActivityStreams paging</a>
-      to traverse large sets of objects.
+        ActivityStreams 的分页机制</a>
+      来遍历大型对象集合。
     </p>
 
     <p>
-      Note that some of these collections are specified to be of type
+      请注意，这些集合中，部分集合被明确规定为
       <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
         <code>OrderedCollection</code></a>
-      specifically, while others are permitted to be either a
+      类型，而另一些则可以是
       <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
         <code>Collection</code></a>
-      or an
+      或者
       <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-        <code>OrderedCollection</code></a>.
-      An
+        <code>OrderedCollection</code></a>。
       <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
         <code>OrderedCollection</code></a>
-      <em class="rfc2119" title="MUST">MUST</em> be presented consistently in reverse chronological order.
+      <em class="rfc2119" title="MUST">必须</em>统一以时间倒序（从新到旧）呈现。
     </p>
 
     <div class="note">
-      <div role="heading" class="note-title marker" id="h-note-3" aria-level="3"><span>Note</span></div>
+      <div role="heading" class="note-title marker" id="h-note-3" aria-level="3"><span>注意</span></div>
       <p class="">
-        What property is used to determine the reverse chronological order
-        is intentionally left as an implementation detail.
-        For example, many SQL-style databases use an incrementing integer
-        as an identifier, which can be reasonably used for handling
-        insertion order in most cases.
-        In other databases, an insertion time timestamp may be preferred.
-        What is used isn't important, but the ordering of elements must
-        remain intact, with newer items first.
-        A property which changes regularly, such a "last updated" timestamp,
-        should not be used.
+        用于确定时间倒序的属性特意被留作实现细节处理。
+        例如，许多 SQL 风格的数据库使用递增整数作为标识符，这在大多数情况下可以合理地处理插入顺序。
+        对于其他数据库，使用插入时间戳可能更为合适。
+        所使用的属性本身并不重要，但元素的顺序必须保持原样，即新的条目在前。
+        不应使用会被经常更改的字段，例如“上次更新”时间戳。
       </p>
     </div>
 
     <section id="outbox">
-      <h3 id="x5-1-outbox"><span class="secno">5.1 </span>Outbox</h3>
+      <h3 id="x5-1-outbox"><span class="secno">5.1 </span>发件箱（Outbox）</h3>
       <p>
-        The outbox is discovered through the <code>outbox</code>
-        property of an <a href="https://w3c.wholetrans.org/activitypub/#actors">actor's</a> profile.
-        The <code>outbox</code> <em class="rfc2119" title="MUST">MUST</em> be an
+        <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>通过 <code>outbox</code> 属性在其配置文件中暴露发件箱，供 ActivityPub 服务发现。
+        <code>outbox</code>
+        <em class="rfc2119" title="MUST">必须</em>是一个
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-          <code>OrderedCollection</code></a>.
+          <code>OrderedCollection</code></a>（有序集合）。
       </p>
       <p>
-        The outbox stream contains activities the user has
-        published, subject to the ability of the requestor to retrieve the
-        activity (that is, the contents of the outbox are filtered by the
-        permissions of the person reading it).
-        If a user submits a request without
-        <a href="https://w3c.wholetrans.org/activitypub/#authorization">Authorization</a> the server should
-        respond with all of the <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">Public</a>
-        posts.
-        This could potentially be all relevant objects published by the
-        user, though the number of available items is left to the
-        discretion of those implementing and deploying the server.
+        发件箱流包含用户已发布的活动，但具体包含的内容取决于发起请求的用户获取活动的权限（即，Outbox 的内容会根据读取者的权限进行过滤）。
+        如果用户提交了一个未进行
+        <a href="https://w3c.wholetrans.org/activitypub/#authorization">身份验证</a>
+        的请求，服务端应返回用户所有的
+        <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公开</a>
+        帖文。
+        这可能包括用户发布的所有相关对象，但可用条目的数量由软件实现与服务器管理员自行决定。
       </p>
       <p>
-        The outbox accepts HTTP POST requests, with behaviour described in
-        <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">Client to Server
-          Interactions</a>.
+        发件箱接受 HTTP POST 请求，其行为参见
+        <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>
+        部分。
       </p>
     </section>
 
     <section id="inbox">
-      <h3 id="x5-2-inbox"><span class="secno">5.2 </span>Inbox</h3>
+      <h3 id="x5-2-inbox"><span class="secno">5.2 </span>收件箱（Inbox）</h3>
 
       <p>
-        The inbox is discovered through the <code>inbox</code>
-        property of an <a href="https://w3c.wholetrans.org/activitypub/#actors">actor's</a> profile.
-        The <code>inbox</code> <em class="rfc2119" title="MUST">MUST</em> be an
+        行为体通过 <code>inbox</code> 属性在其配置文件中暴露收件箱，供 ActivityPub 服务发现。
+        <code>inbox</code>
+        <em class="rfc2119" title="MUST">必须</em>是一个
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-          <code>OrderedCollection</code></a>.
+          <code>OrderedCollection</code></a>（有序集合）。
       </p>
 
       <p>
-        The inbox stream contains all activities received by the
-        actor.
-        The server <em class="rfc2119" title="SHOULD">SHOULD</em> filter content according to the requester's
-        permission.
-        In general, the owner of an inbox is likely to be able to access
-        all of their inbox contents. Depending on access control, some
-        other content may be public, whereas other content may require
-        authentication for non-owner users, if they can access the inbox
-        at all.
+        收件箱流包含行为体接收到的所有活动。
+        服务端 <em class="rfc2119" title="SHOULD">应当</em> 根据请求者的权限筛选内容。
+        通常情况下，收件箱的拥有者可以访问收件箱的全部内容。
+        根据访问控制规则，某些其他内容可能公开，若其它不拥有收件箱的用户也可以在特定条件下访问收件箱，则可能需要进行身份验证。
       </p>
 
       <p>
-        The server <em class="rfc2119" title="MUST">MUST</em> perform de-duplication of activities returned by
-        the inbox. Duplication can occur if an activity is addressed both
-        to an actor's followers, and a specific
-        actor who also follows the recipient actor, and the server has failed
-        to de-duplicate the recipients list.
-        Such deduplication <em class="rfc2119" title="MUST">MUST</em> be performed by comparing the
-        <code>id</code> of the activities and dropping any activities
-        already seen.
+        服务端 <em class="rfc2119" title="MUST">必须</em> 对通过收件箱返回的活动进行去重。
+        若同一活动既发送给行为体的粉丝，也直接发送给特定的关联行为体，但服务端未能对收件方列表进行去重，则可能产生重复。
+        此类去重 <em class="rfc2119" title="MUST">必须</em> 通过比较活动的
+        <code>id</code>
+        实现，并去除任何已存在的活动。
       </p>
 
       <p>
-        The inboxes of actors on federated servers accepts HTTP POST requests,
-        with behaviour described in <a href="https://w3c.wholetrans.org/activitypub/#delivery">Delivery</a>.
-        Non-federated servers <em class="rfc2119" title="SHOULD">SHOULD</em> return a 405 Method Not Allowed upon
-        receipt of a POST request.
+        能够进行联合的服务端上的行为体的收件箱可接受 HTTP POST 请求，其行为参见
+        <a href="https://w3c.wholetrans.org/activitypub/#delivery">信息投递</a>
+        部分。
+        不进行联合的服务端<em class="rfc2119" title="SHOULD">应当</em> 在接收到 POST 请求时返回 405 方法不被允许。
       </p>
     </section>
 
     <section id="followers">
-      <h3 id="x5-3-followers-collection"><span class="secno">5.3 </span>Followers Collection</h3>
+      <h3 id="x5-3-followers-collection"><span class="secno">5.3 </span>粉丝集合（Followers Collection）</h3>
       <p>
-        Every <a href="https://w3c.wholetrans.org/activitypub/#actors">actor</a> <em class="rfc2119"
-          title="SHOULD">SHOULD</em> have a <code>followers</code>
-        collection.
-        This is a list of everyone who has sent a
-        <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-follow">Follow</a>
-        activity for the actor, added as a
-        <a href="https://w3c.wholetrans.org/activitypub/#follow-activity-outbox">side effect</a>.
-        This is where one would find a list of all the actors that are
-        following the actor.
-        The <code>followers</code> collection <em class="rfc2119" title="MUST">MUST</em> be either an
+        每个 <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>
+        <em class="rfc2119" title="SHOULD">应当</em> 拥有一个 <code>followers</code> （粉丝）集合。
+        这是一个包含所有对该行为体发送过
+        <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-follow">Follow</a>（关注）
+        活动的行为体的列表，行为体被添加到粉丝集合是收到关注活动的一个
+        <a href="https://w3c.wholetrans.org/activitypub/#follow-activity-outbox">副作用（side effect）</a>。
+        可以通过该集合找到所有关注当前行为体的用户的列表。
+        <code>followers</code> （粉丝）集合
+        <em class="rfc2119" title="MUST">必须</em> 是
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-          <code>OrderedCollection</code></a>
-        or a
+          <code>OrderedCollection</code></a> （有序集合）
+        或
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
-          <code>Collection</code></a>
-        and <em class="rfc2119" title="MAY">MAY</em> be filtered on privileges of an authenticated user
-        or as appropriate when no authentication is given.
+          <code>Collection</code></a> （集合）
+        类型，且 <em class="rfc2119" title="MAY">可以</em> 根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
       </p>
 
       <div class="note">
-        <div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span><span
-            style="text-transform: none">: Default for notification targeting</span></div>
+        <div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>注意</span><span
+            style="text-transform: none">：通知目标默认设置</span></div>
         <p class="">
-          The follow activity generally is a request to see the objects an actor
-          creates. This makes the Followers collection an appropriate default
-          target for <a href="https://w3c.wholetrans.org/activitypub/#delivery">delivery</a> of notifications.
+          关注活动通常可被理解为查看某个行为体创建的对象的请求。
+          这使粉丝集合成为接收
+          <a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>的合适默认目标。
         </p>
       </div>
     </section>
 
     <section id="following">
-      <h3 id="x5-4-following-collection"><span class="secno">5.4 </span>Following Collection</h3>
+      <h3 id="x5-4-following-collection"><span class="secno">5.4 </span>关注集合（Following Collection）</h3>
       <p>
-        Every actor <em class="rfc2119" title="SHOULD">SHOULD</em> have a <code>following</code> collection.
-        This is a list of everybody that the actor has followed, added as a
-        <a href="https://w3c.wholetrans.org/activitypub/#follow-activity-outbox">side effect</a>.
-        The <code>following</code> collection <em class="rfc2119" title="MUST">MUST</em> be either an
+        每个 <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>都
+        <em class="rfc2119" title="SHOULD">应当</em> 拥有一个 <code>following</code> （关注）集合。
+        这是该行为体关注的所有人的列表，行为体被添加到关注集合是发送关注活动的一个
+        <a href="https://w3c.wholetrans.org/activitypub/#follow-activity-outbox">副作用</a>。
+        <code>following</code> （关注）集合 <em class="rfc2119" title="MUST">必须</em> 是
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-          <code>OrderedCollection</code></a>
-        or a
+          <code>OrderedCollection</code></a> （有序集合）
+        或
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
-          <code>Collection</code></a>
-        and <em class="rfc2119" title="MAY">MAY</em> be filtered on privileges of an authenticated user
-        or as appropriate when no authentication is given.
+          <code>Collection</code></a> （集合）
+        类型，且 <em class="rfc2119" title="MAY">可以</em> 根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
       </p>
     </section>
 
     <section id="liked">
-      <h3 id="x5-5-liked-collection"><span class="secno">5.5 </span>Liked Collection</h3>
+      <h3 id="x5-5-liked-collection"><span class="secno">5.5 </span>点赞集合</h3>
       <p>
-        Every actor <em class="rfc2119" title="MAY">MAY</em> have a <code>liked</code> collection.
-        This is a list of every object from all of the actor's <code>Like</code>
-        activities, added as a <a href="https://w3c.wholetrans.org/activitypub/#like-activity-outbox">side effect</a>.
-        The <code>liked</code> collection <em class="rfc2119" title="MUST">MUST</em> be either an
+        每个 <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>
+        <em class="rfc2119" title="MAY">可以</em> 拥有一个 <code>liked</code> （点赞）集合。
+        这是该行为体产生的所有 <code>Like</code> （点赞）活动中所有对象的列表，这些对象被添加到点赞集合是
+        产生点赞活动的一个
+        <a href="https://w3c.wholetrans.org/activitypub/#like-activity-outbox">副作用</a>。
+        <code>liked</code> （点赞）集合 <em class="rfc2119" title="MUST">必须</em> 是
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-          <code>OrderedCollection</code></a>
-        or a
+          <code>OrderedCollection</code></a> （有序集合）
+        或
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
-          <code>Collection</code></a>
-        and <em class="rfc2119" title="MAY">MAY</em> be filtered on privileges of an authenticated user
-        or as appropriate when no authentication is given.
+          <code>Collection</code></a> （集合）
+        类型，并且 <em class="rfc2119" title="MAY">可以</em> 根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
       </p>
     </section>
 
     <section id="public-addressing">
-      <h3 id="x5-6-public-addressing"><span class="secno">5.6 </span>Public Addressing</h3>
+      <h3 id="x5-6-public-addressing"><span class="secno">5.6 </span>公共寻址</h3>
       <p>
-        In addition to [<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] collections
-        and
-        objects,
-        Activities may additionally be addressed to the special "public"
-        collection, with the identifier
-        <code>https://www.w3.org/ns/activitystreams#Public</code>.
-        For example:
+        除 [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合与对象之外，活动还可以被寻址到特殊的“公共”集合，其标识符为
+        <code>https://www.w3.org/ns/activitystreams#Public</code>。
+        例如：
       </p>
       <div class="example">
-        <div class="example-title marker"><span>Example 10</span></div>
+        <div class="example-title marker"><span>示例 10</span></div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
   <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>,
@@ -1852,82 +1828,67 @@
 }</pre>
       </div>
       <p>
-        Activities addressed to this special URI shall be accessible to all
-        users, without authentication.
-        Implementations <em class="rfc2119" title="MUST NOT">MUST NOT</em> deliver to the "public" special collection;
-        it is not capable of receiving actual activities.
-        However, actors <em class="rfc2119" title="MAY">MAY</em> have a
+        寻址到此特殊 URI 的活动应可供所有用户访问，无需身份验证。
+        实现 <em class="rfc2119" title="MUST NOT">不得</em> 将活动传递到“公共”集合；它无法接收实际的活动。
+        然而，行为体 <em class="rfc2119" title="MAY">可以</em> 拥有一个
         <a href="https://w3c.wholetrans.org/activitypub/#sharedInbox"><code>sharedInbox</code></a>
-        endpoint which is available for efficient shared delivery of public
-        posts (as well as posts to followers-only); see
+        端点，用于高效共享与传递公开帖文（以及仅对粉丝可见的帖文）；请参阅
         <a href="https://w3c.wholetrans.org/activitypub/#shared-inbox-delivery" class="sec-ref"><span
-            class="secno">7.1.3</span> <span class="sec-title">Shared Inbox Delivery</span></a>.
+            class="secno">7.1.3</span> <span class="sec-title">共享收件箱投递</span></a>。
       </p>
       <div class="note">
-        <div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span></div>
+        <div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>注意</span></div>
         <div class="">
           <p>
-            Compacting an ActivityStreams object using the ActivityStreams
-            JSON-LD context might result in
+            使用 ActivityStreams JSON-LD 上下文压缩 ActivityStreams 对象可能会导致
             <code>https://www.w3.org/ns/activitystreams#Public</code>
-            being represented as simply <code>Public</code> or <code>as:Public</code>
-            which are valid representations of the Public collection.
-            Implementations which treat ActivityStreams objects as simply
-            JSON rather than converting an incoming activity over to a
-            local context using JSON-LD tooling should be aware of this
-            and should be prepared to accept all three representations.
+            被简单表示为 <code>Public</code> 或 <code>as:Public</code>，它们都是公共集合的有效表示形式。
+            若实现将 ActivityStreams 对象简单视为 JSON，而非使用 JSON-LD 工具将传入的活动转换为本站上下文，则应当意识到这一点，且应该准备好接受全部三种表示形式。
           </p>
         </div>
       </div>
     </section>
 
     <section id="likes">
-      <h3 id="x5-7-likes-collection"><span class="secno">5.7 </span>Likes Collection</h3>
+      <h3 id="x5-7-likes-collection"><span class="secno">5.7 </span>点赞列表集合（Likes Collection）</h3>
       <p>
-        Every object <em class="rfc2119" title="MAY">MAY</em> have a <code>likes</code> collection.
-        This is a list of all <code>Like</code> activities with this object
-        as the <code>object</code> property, added as a
-        <a href="https://w3c.wholetrans.org/activitypub/#like-activity-inbox">side effect</a>.
-        The <code>likes</code> collection <em class="rfc2119" title="MUST">MUST</em> be either an
+        每个对象 <em class="rfc2119" title="MAY">可以</em> 拥有一个 <code>likes</code> （点赞列表）集合。
+        这是所有以该对象作为 <code>object</code> 属性的 <code>Like</code> （点赞）活动的列表，这些活动被添加到点赞列表集合是处理过程中的一种
+        <a href="https://w3c.wholetrans.org/activitypub/#like-activity-inbox">副作用</a> 。
+        <code>likes</code> （点赞列表）集合 <em class="rfc2119" title="MUST">必须</em> 是
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-          <code>OrderedCollection</code></a>
-        or a
+          <code>OrderedCollection</code></a> （有序集合）
+        或
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
-          <code>Collection</code></a>
-        and <em class="rfc2119" title="MAY">MAY</em> be filtered on privileges of an authenticated user
-        or as appropriate when no authentication is given.
+          <code>Collection</code></a> （集合）
+        类型，并且 <em class="rfc2119" title="MAY">可以</em> 根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
       </p>
 
       <div class="note">
-        <div role="heading" class="note-title marker" id="h-note-6" aria-level="4"><span>Note</span></div>
+        <div role="heading" class="note-title marker" id="h-note-6" aria-level="4"><span>注意</span></div>
         <div class="">
           <p>
-            Care should be taken to not confuse the the
-            <a href="https://w3c.wholetrans.org/activitypub/#likes"><code>likes</code></a>
-            collection with the similarly named but different
-            <a href="https://w3c.wholetrans.org/activitypub/#liked"><code>liked</code></a> collection.
-            In sum:
+            应注意不要将 <a href="https://w3c.wholetrans.org/activitypub/#likes"><code>likes</code></a>
+            （点赞列表）集合与名称相似但不同的
+            <a href="https://w3c.wholetrans.org/activitypub/#liked"><code>liked</code></a> （点赞）集合混淆。
+            总而言之：
           </p>
 
           <ul>
             <li>
-              <b>liked:</b>
-              Specifically a property of actors.
-              This is a collection of <code>Like</code> activities performed
-              <i>by the actor</i>,
-              added to the collection as a
-              <a href="https://w3c.wholetrans.org/activitypub/#like-activity-outbox">
-                side effect of delivery to the outbox</a>.
+              <b>liked：（点赞）</b>
+              是行为体专有的属性。
+              这是<em>由行为体执行</em>的 <code>Like</code> （点赞）活动的集合，
+              点赞活动被添加到点赞集合是其
+              <a href="https://w3c.wholetrans.org/activitypub/#like-activity-outbox">被投递到发件箱的副作用</a>。
             </li>
 
             <li>
-              <b>likes:</b>
-              May be a property of any object.
-              This is a collection of <code>Like</code> activities referencing
-              this object,
-              added to the collection as a
-              <a href="https://w3c.wholetrans.org/activitypub/#like-activity-inbox">
-                side effect of delivery to the inbox</a>.
+              <b>likes：（点赞列表）</b>
+              可以是任何对象的属性。
+              这是引用了此对象的 <code>Like</code> （点赞）活动的集合，
+              点赞活动被添加到点赞列表集合是其
+              <a href="https://w3c.wholetrans.org/activitypub/#like-activity-inbox">被投递到收件箱的副作用</a>。
             </li>
           </ul>
         </div>
@@ -1935,27 +1896,25 @@
     </section>
 
     <section id="shares">
-      <h3 id="x5-8-shares-collection"><span class="secno">5.8 </span>Shares Collection</h3>
+      <h3 id="x5-8-shares-collection"><span class="secno">5.8 </span>分享集合（Shares Collection）</h3>
       <p>
-        Every object <em class="rfc2119" title="MAY">MAY</em> have a <code>shares</code> collection.
-        This is a list of all <code>Announce</code> activities with this object
-        as the <code>object</code> property, added as a
-        <a href="https://w3c.wholetrans.org/activitypub/#announce-activity-inbox">side effect</a>.
-        The <code>shares</code> collection <em class="rfc2119" title="MUST">MUST</em> be either an
+        每个对象 <em class="rfc2119" title="MAY">可以</em> 拥有一个 <code>shares</code> （分享）集合。
+        这是所有以该对象作为 <code>object</code> 属性的 <code>Announce</code> （推送）活动的列表，这些活动被添加到分享集合是处理过程中的一种
+        <a href="https://w3c.wholetrans.org/activitypub/#announce-activity-inbox">副作用</a>。
+        <code>shares</code> （分享）集合 <em class="rfc2119" title="MUST">必须</em> 是
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-          <code>OrderedCollection</code></a>
-        or a
+          <code>OrderedCollection</code></a> （有序集合）
+        或
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
-          <code>Collection</code></a>
-        and <em class="rfc2119" title="MAY">MAY</em> be filtered on privileges of an authenticated user
-        or as appropriate when no authentication is given.
+          <code>Collection</code></a> （集合）
+        类型，且 <em class="rfc2119" title="MAY">可以</em> 根据已认证用户的权限或在未进行身份验证时的适当情况进行过滤。
       </p>
     </section>
   </section>
 
   <section id="client-to-server-interactions">
     <!--OddPage-->
-    <h2 id="x6-client-to-server-interactions"><span class="secno">6. </span>Client to Server Interactions</h2>
+    <h2 id="x6-client-to-server-interactions"><span class="secno">6. </span>客户端到服务端交互</h2>
     <p>
       Activities as defined by [<cite><a class="bibref"
           href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] are the core
