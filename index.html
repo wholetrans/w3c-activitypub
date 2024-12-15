@@ -1916,35 +1916,29 @@
     <!--OddPage-->
     <h2 id="x6-client-to-server-interactions"><span class="secno">6. </span>客户端到服务端交互</h2>
     <p>
-      Activities as defined by [<cite><a class="bibref"
-          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] are the core
-      mechanism
-      for creating, modifying and sharing content within the social graph.
+      [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]定义的活动（Activities）是
+      在社交图谱中创建、修改和共享内容的核心机制。
     </p>
 
     <p>
-      Client to server interaction takes place through clients posting
-      Activities to an actor's <a href="https://w3c.wholetrans.org/activitypub/#outbox">outbox</a>.
-      To do this, clients <em class="rfc2119" title="MUST">MUST</em> discover the URL of the actor's outbox from
-      their <a href="https://w3c.wholetrans.org/activitypub/#actor-objects">profile</a> and then <em class="rfc2119"
-        title="MUST">MUST</em> make an HTTP
-      <code>POST</code> request to this URL with the Content-Type of
-      <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>.
-      Servers <em class="rfc2119" title="MAY">MAY</em> interpret a Content-Type or Accept header of
-      <code>application/activity+json</code> as equivalent
-      to <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>
-      for client-to-server interactions.
-      The request <em class="rfc2119" title="MUST">MUST</em> be authenticated with the credentials of the user to
-      whom the outbox belongs.
-      The body of the <code>POST</code> request <em class="rfc2119" title="MUST">MUST</em> contain a single
-      Activity (which <em class="rfc2119" title="MAY">MAY</em> contain embedded objects), or a single non-Activity
-      object which
-      <a href="https://w3c.wholetrans.org/activitypub/#object-without-create">will be wrapped in a Create activity
-        by the server</a>.
+      客户端与服务器的交互是通过客户端将活动（Activities）发布到某个行为体的
+      <a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>来完成的。
+      客户端<em class="rfc2119" title="MUST">必须</em>从行为体的
+      <a href="https://w3c.wholetrans.org/activitypub/#actor-objects">档案</a>中发现其发件箱的 URL，
+      然后通过HTTP <code>POST</code>请求将数据发送到该 URL，该 POST 请求的
+      Content-Type 应为 <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>。
+      服务端<em class="rfc2119" title="MAY">可以</em>将值为
+      <code>application/activity+json</code> 的 Content-Type 或 Accept 标头解释为等同于
+      <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>
+      的内容类型，从而支持客户端与服务器的交互。
+      请求<em class="rfc2119" title="MUST">必须</em>经过该 outbox 所属用户的凭证认证。
+      <code>POST</code>请求的正文<em class="rfc2119" title="MUST">必须</em>包含单个活动（其中<em class="rfc2119" title="MAY">可以</em>
+      包含嵌入的对象），或包含单个非活动对象，这种对象
+      <a href="https://w3c.wholetrans.org/activitypub/#object-without-create">将由服务端封装在一个 Create 活动中</a>。
     </p>
     <div class="example">
-      <div class="example-title marker"><span>Example 11</span><span style="text-transform: none">: Submitting an
-          Activity to the Outbox</span></div>
+      <div class="example-title marker"><span>示例 11</span><span style="text-transform: none">: 向发件箱提交活动</span></div>
       <pre class="hljs http" aria-busy="false" aria-live="polite"><span class="hljs-keyword">POST</span> <span class="hljs-string">/outbox/</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: dustycloud.org
 <span class="hljs-attribute">Authorization</span>: Bearer XXXXXXXXXXX
@@ -1955,7 +1949,7 @@
                {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>}],
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
   <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://dustycloud.org/chris/"</span>,
-  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Chris liked 'Minimal ActivityPub update client'"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Chris 点赞了 '最小 ActivityPub 更新客户端'"</span>,
   <span class="hljs-attr">"object"</span>: <span class="hljs-string">"https://rhiaro.co.uk/2016/05/minimal-activitypub"</span>,
   <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://rhiaro.co.uk/#amy"</span>,
          <span class="hljs-string">"https://dustycloud.org/followers"</span>,
@@ -1972,111 +1966,95 @@
       the activity is transient, <em class="rfc2119" title="MUST">MUST</em> include the new <code>id</code> in the
       <code>Location</code> header.
     </p>
+    <p>
+      如果提交的 Activity 对象的 <code>id</code> 属性有值，服务端<em class="rfc2119" title="MUST">必须</em>忽略该值并为该 Activity 生成新的 <code>id</code>。
+      服务器<em class="rfc2119" title="MUST">必须</em>返回 <code>201 Created</code> HTTP 状态码，且<em class="rfc2119" title="MUST">必须</em>在 <code>Location</code> 标头中包含新的 <code>id</code>，除非该 Activity 是瞬态的。
+    </p>
     <div class="example">
-      <div class="example-title marker"><span>Example 12</span><span style="text-transform: none">: Outbox response to
-          submitted Activity</span></div>
+      <div class="example-title marker"><span>示例 12</span><span style="text-transform: none">: 发件箱对提交的 Activity 的响应</span></div>
       <pre class="hljs http" aria-busy="false" aria-live="polite">HTTP/1.1 <span class="hljs-number">201</span> Created
 <span class="hljs-attribute">Location</span>: https://dustycloud.org/likes/345</pre>
     </div>
 
     <p id="remove-bto-bcc-before-delivery">
-      The server <em class="rfc2119" title="MUST">MUST</em> remove the <code>bto</code> and/or <code>bcc</code>
-      properties, if they exist, from the ActivityStreams object before
-      delivery, but <em class="rfc2119" title="MUST">MUST</em> utilize the addressing originally stored
-      on the <code>bto</code> / <code>bcc</code> properties for determining
-      recipients in <a href="https://w3c.wholetrans.org/activitypub/#delivery">delivery</a>.
-    </p>
+      在投递之前，服务端<em class="rfc2119" title="MUST">必须</em>从ActivityStreams对象中移除<code>bto</code>和/或<code>bcc</code>属性（只要上述属性存在），但<em class="rfc2119" title="MUST">必须</em>利用最初存储于<code>bto</code>/<code>bcc</code>属性上的地址信息来确定
+      <a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>的收件方。
+</p>
 
-    <p>
-      The server <em class="rfc2119" title="MUST">MUST</em> then add this new Activity to the
-      <a href="https://w3c.wholetrans.org/activitypub/#outbox">outbox</a> collection.
-      Depending on the type of Activity, servers may then be required to
-      carry out further side effects.
-      (However, there is no guarantee that time the Activity may appear in
-      the outbox.
-      The Activity might appear after a delay or disappear at any period).
-      These are described per individual Activity below.
-    </p>
+<p>
+      随后，服务端<em class="rfc2119" title="MUST">必须</em>将这个新的活动添加至
+      <a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱(outbox)</a>集合。
+      根据活动的类型，服务端可能需要执行额外的后续操作。
+      （然而，无法保证活动会即时出现在发件箱中。
+      活动可能会延迟显示，或在某一时间点被移除）。
+      每种类型的活动的说明参见下文。
+</p>
 
-    <p>
-      Attempts to submit objects to servers not implementing client to server
-      support <em class="rfc2119" title="SHOULD">SHOULD</em> result in a <code>405 Method Not Allowed</code> response.
-    </p>
+<p>
+      如果尝试向不支持客户端-服务端交互的服务端提交对象，
+      服务端<em class="rfc2119" title="SHOULD">应当</em>返回<code>405 Method Not Allowed</code>响应。
+</p>
 
+<p>
+      在适当情况下，HTTP缓存机制 [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-RFC7234">RFC7234</a></cite>]，
+      <em class="rfc2119" title="SHOULD">应当</em>在客户端接收服务端响应时与服务端发送响应至客户端时被遵守。
+</p>
 
-    <p>
-      HTTP caching mechanisms [<cite><a class="bibref"
-          href="https://w3c.wholetrans.org/activitypub/#bib-RFC7234">RFC7234</a></cite>] <em class="rfc2119"
-        title="SHOULD">SHOULD</em> be respected when
-      appropriate, both in clients receiving responses from servers as well
-      as servers sending responses to clients.
-    </p>
-
-    <section id="client-addressing">
-      <h3 id="x6-1-client-addressing"><span class="secno">6.1 </span>Client Addressing</h3>
+<section id="client-addressing">
+      <h3 id="x6-1-client-addressing"><span class="secno">6.1 </span>客户端寻址</h3>
       <p>
-        <strong>Clients</strong> are responsible for addressing new Activities
-        appropriately.
-        To some extent, this is dependent upon the particular client
-        implementation, but clients must be aware that the server will only
-        forward new Activities to addressees in the <code>to</code>,
-        <code>bto</code>, <code>cc</code>, <code>bcc</code>, and
-        <code>audience</code> fields.
+        <strong>客户端</strong>负责正确地为新活动设定目标地址。
+        在某种程度上，这取决于客户端的特定实现，但客户端必须注意，服务端只会将新的活动转发给<code>to</code>、
+        <code>bto</code>、<code>cc</code>、<code>bcc</code>和<code>audience</code>字段中的地址。
       </p>
       <p>
-        The <a href="https://w3c.wholetrans.org/activitypub/#followers">Followers Collection</a> and/or the
-        <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">Public Collection</a> are good
-        choices for the default addressing of new Activities.
+        <a href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合(Followers Collection)</a>和/或
+        <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共集合(Public Collection)</a>
+        是作为新活动默认目标地址的良好选择。
       </p>
       <p>
-        Clients <em class="rfc2119" title="SHOULD">SHOULD</em> look at any objects attached to the new Activity via the
-        <code>object</code>, <code>target</code>, <code>inReplyTo</code> and/or
-        <code>tag</code> fields, retrieve <em>their</em> <code>actor</code> or
-        <code>attributedTo</code> properties, and <em class="rfc2119" title="MAY">MAY</em> also retrieve their
-        addressing
-        properties, and add these to the <code>to</code> or <code>cc</code>
-        fields of the new Activity being created.
-        Clients <em class="rfc2119" title="MAY">MAY</em> recurse through attached objects, but if doing so, <em
-          class="rfc2119" title="SHOULD">SHOULD</em>
-        set a limit for this recursion.
-        (Note that this does not suggest that the client should "unpack"
-        collections of actors being addressed as individual recipients).
+        客户端<em class="rfc2119" title="SHOULD">应当</em>查看通过<code>object</code>、<code>target</code>、<code>inReplyTo</code>和/或
+        <code>tag</code>字段被附加到新活动中的任何对象，获取它们的<code>actor</code>或<code>attributedTo</code>属性，且
+        <em class="rfc2119" title="MAY">可以</em>获取它们的地址信息并将其添加到创建的新活动的
+        <code>to</code>或<code>cc</code>字段中。
+        客户端<em class="rfc2119" title="MAY">可以</em>递归处理附加对象，但如果这么做，
+        <em class="rfc2119" title="SHOULD">应当</em>设置递归层级限制。
+        （注意，这并不表示客户端应将被列为接收方的行为体集合逐一展开为独立的收件方）。
       </p>
       <p>
-        Clients <em class="rfc2119" title="MAY">MAY</em> give the user the chance to amend this addressing in the
-        UI.
+        客户端<em class="rfc2119" title="MAY">可以</em>允许用户在界面上修改该目标地址。
       </p>
       <p>
-        For example, when Chris likes the following article by Amy:
+        例如，当Chris点赞Amy撰写的以下文章时：
       </p>
 
       <div class="example">
-        <div class="example-title marker"><span>Example 13</span><span style="text-transform: none">: An Article</span>
+        <div class="example-title marker"><span>示例 13</span><span style="text-transform: none">: 单个 Article</span>
         </div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
                {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en-GB"</span>}],
   <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://rhiaro.co.uk/2016/05/minimal-activitypub"</span>,
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Article"</span>,
-  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Minimal ActivityPub update client"</span>,
-  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Today I finished morph, a client for posting ActivityStreams2..."</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"最小 ActivityPub 更新客户端"</span>,
+  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"今天我写完了 morph 这个用来发布 ActivityStreams2 内容的客户端..."</span>,
   <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://rhiaro.co.uk/#amy"</span>,
   <span class="hljs-attr">"to"</span>: <span class="hljs-string">"https://rhiaro.co.uk/followers/"</span>,
   <span class="hljs-attr">"cc"</span>: <span class="hljs-string">"https://e14n.com/evan"</span>
 }</pre>
       </div>
 
-      <p>the like is generated by the client as:</p>
+      <p>客户端可按如下所示生成点赞活动:</p>
 
       <div class="example">
-        <div class="example-title marker"><span>Example 14</span><span style="text-transform: none">: A Like of the
-            Article</span></div>
+        <div class="example-title marker"><span>示例 14</span><span style="text-transform: none">: 对某个 Article 点赞</span></div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
                {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>}],
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
   <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://dustycloud.org/chris/"</span>,
-  <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"Chris liked 'Minimal ActivityPub update client'"</span>,
+  <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"Chris 点赞了 '最小 ActivityPub 更新客户端'"</span>,
   <span class="hljs-attr">"object"</span>: <span class="hljs-string">"https://rhiaro.co.uk/2016/05/minimal-activitypub"</span>,
   <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://rhiaro.co.uk/#amy"</span>,
          <span class="hljs-string">"https://dustycloud.org/followers"</span>,
@@ -2085,86 +2063,61 @@
 }</pre>
       </div>
 
-      <p>The receiving outbox can then perform <a href="https://w3c.wholetrans.org/activitypub/#delivery">delivery</a>
-        to not only the followers of Chris (the liker), but also to Amy, and Amy's
-        followers and Evan, both of whom received the original article.</p>
+      <p>接收方的outbox可以执行<a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>操作，将活动投递给Chris（点赞者）的粉丝、Amy以及Amy的关注者和Evan，因为他们都收到了原始文章。</p>
 
       <p>
-        Clients submitting the following activities to an <code>outbox</code>
-        <em class="rfc2119" title="MUST">MUST</em> provide the <code>object</code> property in the activity:
-        <code>Create</code>, <code>Update</code>, <code>Delete</code>,
-        <code>Follow</code>, <code>Add</code>, <code>Remove</code>,
-        <code>Like</code>, <code>Block</code>, <code>Undo</code>.
-        Additionally, clients submitting the following activities to an outbox
-        <em class="rfc2119" title="MUST">MUST</em> also provide the <code>target</code> property:
-        <code>Add</code>, <code>Remove</code>.
+        在向<code>outbox</code>（发件箱）提交以下活动时，客户端<em class="rfc2119" title="MUST">必须</em>在活动中提供<code>object</code>属性：
+        <code>Create</code>、<code>Update</code>、<code>Delete</code>、
+        <code>Follow</code>、<code>Add</code>、<code>Remove</code>、
+        <code>Like</code>、<code>Block</code>、<code>Undo</code>。
+        此外，在提交以下活动时，客户端<em class="rfc2119" title="MUST">必须</em>同时向发件箱提供<code>target</code>属性：
+        <code>Add</code>、<code>Remove</code>。
       </p>
 
     </section>
 
-
     <section id="create-activity-outbox">
-      <h3 id="x6-2-create-activity"><span class="secno">6.2 </span>Create Activity</h3>
+      <h3 id="x6-2-create-activity"><span class="secno">6.2 </span>创建活动 (Create Activity)</h3>
       <p>
-        The <code>Create</code> activity is used when posting a new object.
-        This has the side effect that the object embedded within the Activity
-        (in the <code>object</code> property) is created.
+        <code>Create</code>（创建）活动用于发布新对象。
+        这会产生副作用，即创建了一个嵌入在活动中（位于<code>object</code>属性）的对象。
       </p>
       <p>
-        When a <code>Create</code> activity is posted, the <code>actor</code>
-        of the activity <em class="rfc2119" title="SHOULD">SHOULD</em> be copied onto the <code>object</code>'s
-        <code>attributedTo</code> field.
+        发布<code>Create</code>活动时，活动的<code>actor</code><em class="rfc2119" title="SHOULD">应当</em>被复制到对象的<code>attributedTo</code>字段中。
       </p>
       <p>
-        A mismatch between addressing of the Create activity and its
-        <code>object</code> is likely to lead to confusion.
-        As such, a server <em class="rfc2119" title="SHOULD">SHOULD</em> copy any recipients of the Create activity
-        to its <code>object</code> upon initial distribution, and likewise
-        with copying recipients from the <code>object</code> to the wrapping
-        Create activity.
-        Note that it is acceptable for the <code>object</code>'s addressing
-        to be changed later without changing the <code>Create</code>'s
-        addressing (for example via an <code>Update</code> activity).
+        创建活动与其<code>object</code>的寻址不匹配可能会导致混淆。
+        因此，服务端在分发开始时<em class="rfc2119" title="SHOULD">应当</em>将创建活动的所有接收方复制到其<code>object</code>，同样地，也应将<code>object</code>的接收方复制到封装的Create活动中。
+        需要注意的是，之后可以更改<code>object</code>的地址而不更改<code>Create</code>的地址（例如，通过<code>Update</code>活动更改）。
       </p>
 
       <section id="object-without-create">
-        <h4 id="x6-2-1-object-creation-without-a-create-activity"><span class="secno">6.2.1 </span>Object creation
-          without a Create Activity</h4>
+        <h4 id="x6-2-1-object-creation-without-a-create-activity"><span class="secno">6.2.1 </span>不在不发送创建活动的情况下创建对象</h4>
         <p>
-          For client to server posting, it is possible to submit an object for
-          creation without a surrounding activity.
-          The server <em class="rfc2119" title="MUST">MUST</em> accept a valid [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] object that
-          isn't a subtype of <code>Activity</code> in the POST request to the
-          outbox.
-          The server then <em class="rfc2119" title="MUST">MUST</em> attach this object as the <code>object</code>
-          of a <a href="https://w3c.wholetrans.org/activitypub/#create-activity-outbox">Create Activity</a>.
-          For non-transient objects, the server <em class="rfc2119" title="MUST">MUST</em> attach an
-          <code>id</code> to both the wrapping <code>Create</code> and its
-          wrapped <code>Object</code>.
+          客户端向服务端发布内容时，可提交一个对象以进行创建，而无需将其包装在活动中。
+          服务端<em class="rfc2119" title="MUST">必须</em>接受客户端通过POST请求向outbox发送的合法[<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]对象。该对象不能是<code>Activity</code>的子类型。
+          随后，服务端<em class="rfc2119" title="MUST">必须</em>将此对象附加到<a href="https://w3c.wholetrans.org/activitypub/#create-activity-outbox">创建活动</a>的<code>object</code>。
+          对于非临时对象，服务端<em class="rfc2119" title="MUST">必须</em>为封装的<code>Create</code>活动及其封装的<code>Object</code>都附加一个<code>id</code>。
         </p>
 
         <div class="note">
-          <div role="heading" class="note-title marker" id="h-note-7" aria-level="5"><span>Note</span></div>
+          <div role="heading" class="note-title marker" id="h-note-7" aria-level="5"><span>注意</span></div>
           <p class="">
-            The <code>Location</code> value returned by the server should be the URL of
-            the new Create activity (rather than the object).
+            服务端返回的<code>Location</code>值应该是新的Create活动的URL，而不是对象的URL。
           </p>
         </div>
 
         <p>
-          Any <code>to</code>, <code>bto</code>, <code>cc</code>, <code>bcc</code>,
-          and <code>audience</code> properties specified on the object <em class="rfc2119" title="MUST">MUST</em> be
-          copied over to the new Create activity by the server.
+          服务端<em class="rfc2119" title="MUST">必须</em>将对象中指定的所有<code>to</code>、<code>bto</code>、<code>cc</code>、<code>bcc</code>与<code>audience</code>属性复制到新的Create活动中。
         </p>
 
         <div class="example">
-          <div class="example-title marker"><span>Example 15</span><span style="text-transform: none">: Object with
-              audience targeting</span></div>
+          <div class="example-title marker"><span>示例 15</span><span style="text-transform: none">: 带目标地址的对象</span></div>
           <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
-  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"This is a note"</span>,
+  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"这是一条 note"</span>,
   <span class="hljs-attr">"published"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>,
   <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://example.org/~john/"</span>],
   <span class="hljs-attr">"cc"</span>: [<span class="hljs-string">"https://example.com/~erik/followers"</span>,
@@ -2172,10 +2125,9 @@
 }</pre>
         </div>
 
-        The above example could be converted to this:
+        上述示例可被转换为如下形式：
         <div class="example">
-          <div class="example-title marker"><span>Example 16</span><span style="text-transform: none">: Create Activity
-              wrapper generated by the server</span></div>
+          <div class="example-title marker"><span>示例 16</span><span style="text-transform: none">: 服务端包装并生成的创建活动</span></div>
           <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
@@ -2185,7 +2137,7 @@
     <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://example.com/~mallory/note/72"</span>,
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
     <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://example.net/~mallory"</span>,
-    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"This is a note"</span>,
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"这是一条 note"</span>,
     <span class="hljs-attr">"published"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>,
     <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://example.org/~john/"</span>],
     <span class="hljs-attr">"cc"</span>: [<span class="hljs-string">"https://example.com/~erik/followers"</span>,
@@ -2200,60 +2152,39 @@
       </section>
     </section>
     <section id="update-activity-outbox">
-      <h3 id="x6-3-update-activity"><span class="secno">6.3 </span>Update Activity</h3>
+      <h3 id="x6-3-update-activity"><span class="secno">6.3 </span>更新活动（Update Activity）</h3>
       <p>
-        The <code>Update</code> activity is used when updating an already
-        existing object.
-        The side effect of this is that the <code>object</code> <em class="rfc2119" title="MUST">MUST</em> be
-        modified to reflect the new structure as defined in the update
-        activity, assuming the actor has permission to update this
-        object.
+        <code>Update</code> 活动用于更新现有对象。
+        其副作用是：假设行为体有权更新目标对象，则<em class="rfc2119" title="MUST">必须</em>修改 <code>object</code> 以反映更新活动中定义的新结构。
       </p>
 
       <section id="partial-updates">
-        <h4 id="x6-3-1-partial-updates"><span class="secno">6.3.1 </span>Partial Updates</h4>
+        <h4 id="x6-3-1-partial-updates"><span class="secno">6.3.1 </span>部分更新</h4>
         <p>
-          For client to server interactions, updates are partial;
-          rather than updating the document all at once, any key value
-          pair supplied is used to replace the existing value with
-          the new value.
-          This only applies to the top-level fields of the updated
-          object.
-          A special exception is for when the value is the json
-          <code>null</code> type; this means that this field should be
-          removed from the server's representation of the object.
+          在客户端到服务端的交互中，更新只影响对象的一部分；不是一次性更新整个文档，而是使用客户端提供的任何键值对将现有值替换为新值。
+          这仅适用于更新目标对象的顶层字段。
+          一个例外情形是：当值为 JSON <code>null</code> 类型时，服务端应该从对象中移除对应的字段。
         </p>
         <p>
-          Note that this behavior is for client to server interaction where
-          the client is posting to the server only.
-          Server to server interaction and updates from the server to the client
-          should contain the entire new representation of the object, after
-          the partial update application has been applied.
-          See the description of the
-          <a href="https://w3c.wholetrans.org/activitypub/#update-activity-inbox">Update activity for server to server
-            interactions</a>
-          for more details.
+          请注意，此行为适用于客户端向服务端发送数据的交互，其中客户端仅向服务端发送数据。
+          服务器端间的交互及服务端到客户端的更新应该包含更新后的对象的完整表示。
+          有关更多详细信息，请查阅
+          <a href="https://w3c.wholetrans.org/activitypub/#update-activity-inbox">服务器端间交互情形下的更新活动</a>
+          中的描述。
         </p>
       </section>
     </section>
     <section id="delete-activity-outbox">
-      <h3 id="x6-4-delete-activity"><span class="secno">6.4 </span>Delete Activity</h3>
+      <h3 id="x6-4-delete-activity"><span class="secno">6.4 </span>删除活动（Delete Activity）</h3>
       <p>
-        The <code>Delete</code> activity is used to delete an already
-        existing object.
-        The side effect of this is that the server <em class="rfc2119" title="MAY">MAY</em> replace the
-        <code>object</code> with a <code>Tombstone</code> of the object
-        that will be displayed in activities which reference the deleted
-        object.
-        If the deleted object is requested the server <em class="rfc2119" title="SHOULD">SHOULD</em> respond with
-        either the HTTP 410 Gone status code if a <code>Tombstone</code>
-        object is presented as the response body, otherwise respond with a
-        HTTP 404 Not Found.
+        <code>Delete</code> 活动用于删除现有对象。
+        其副作用是，服务端<em class="rfc2119" title="MAY">可以</em>将 <code>object</code> 替换为其 <code>Tombstone</code>（墓碑），该墓碑将显示在引用已删除对象的活动中。
+        如果某一实体请求已删除的对象，服务端<em class="rfc2119" title="SHOULD">应当</em>在响应正文中展示了 <code>Tombstone</code> 对象的情形下使用 HTTP 410 Gone 状态码进行响应，否则使用 HTTP 404 Not Found 进行响应。
       </p>
 
-      <p>A deleted object:</p>
+      <p>一个已删除的对象示例如下:</p>
       <div class="example">
-        <div class="example-title marker"><span>Example 17</span></div>
+        <div class="example-title marker"><span>示例 17</span></div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
   <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://example.com/~alice/note/72"</span>,
@@ -2265,131 +2196,111 @@
       </div>
     </section>
     <section id="follow-activity-outbox">
-      <h3 id="x6-5-follow-activity"><span class="secno">6.5 </span>Follow Activity</h3>
+      <h3 id="x6-5-follow-activity"><span class="secno">6.5 </span>关注活动 (Follow Activity)</h3>
       <p>
-        The <code>Follow</code> activity is used to subscribe to the
-        activities of another actor.
+        <code>Follow</code> 活动用于订阅另一个行为体的活动。
       </p>
       <p>
-        The side effect of receiving this in an <strong>outbox</strong>
-        is that the server <em class="rfc2119" title="SHOULD">SHOULD</em> add the <code>object</code> to the
-        <code>actor</code>'s <a href="https://w3c.wholetrans.org/activitypub/#following"><code>following</code>
-          Collection</a>
-        when and only if an <code>Accept</code> activity is subsequently
-        received with this <code>Follow</code> activity as its object.
+        在 <strong>发件箱</strong> 中收到该活动的副作用是，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 且仅应当在随后收到以该<code>Follow</code> 活动为对象的<code>Accept</code> 活动时将 <code>object</code> 添加到
+        <code>actor</code> 的 <a href="https://w3c.wholetrans.org/activitypub/#following"><code>following</code> 集合</a>
+        中。
       </p>
     </section>
     <section id="add-activity-outbox">
-      <h3 id="x6-6-add-activity"><span class="secno">6.6 </span>Add Activity</h3>
+      <h3 id="x6-6-add-activity"><span class="secno">6.6 </span>添加活动 (Add Activity)</h3>
       <p>
-        Upon receipt of an <code>Add</code> activity into the
-        <strong>outbox</strong>, the server <em class="rfc2119" title="SHOULD">SHOULD</em>
-        add the <code>object</code> to the collection specified in the
-        <code>target</code> property, unless:
+        在<strong>发件箱</strong> 中收到 <code>Add</code> 活动时，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 将 <code>object</code> 添加到
+        <code>target</code> 属性定义的集合中，除非：
       </p>
       <ul>
         <li>
-          the <code>target</code> is not owned by the receiving
-          server, and thus they are not authorized to update it.
+          <code>target</code> 不被接收到活动的服务端所有，因而接收到活动的服务端无权更新它。
         </li>
         <li>
-          the <code>object</code> is not allowed to be added to the
-          <code>target</code> collection for some other reason, at the
-          receiving server's discretion.
+          出于某些其他原因，服务端自行决定 <code>object</code> 不允许被添加到
+          <code>target</code> 集合中。
         </li>
       </ul>
     </section>
     <section id="remove-activity-outbox">
-      <h3 id="x6-7-remove-activity"><span class="secno">6.7 </span>Remove Activity</h3>
+      <h3 id="x6-7-remove-activity"><span class="secno">6.7 </span>移除活动 (Remove Activity)</h3>
       <p>
-        Upon receipt of a <code>Remove</code> activity into the
-        <strong>outbox</strong>, the server <em class="rfc2119" title="SHOULD">SHOULD</em>
-        remove the <code>object</code> from the collection specified in the
-        <code>target</code> property, unless:
+        在 <strong>发件箱</strong> 接收到 <code>Remove</code> 活动时，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 从 <code>target</code> 属性定义的集合中移除
+        <code>object</code>，除非：
       </p>
       <ul>
         <li>
-          the <code>target</code> is not owned by the receiving server, and
-          thus they are not authorized to update it.
+          <code>target</code> 不被接收到活动的服务端所有，因而接收到活动的服务端无权更新它。
         </li>
         <li>
-          the <code>object</code> is not allowed to be removed from the
-          <code>target</code> collection for some other reason, at the
-          receiving server's discretion.
+          出于某些其他原因，服务端自行决定 <code>object</code> 不允许被从
+          <code>target</code> 集合中移除。
         </li>
       </ul>
     </section>
     <section id="like-activity-outbox">
-      <h3 id="x6-8-like-activity"><span class="secno">6.8 </span>Like Activity</h3>
+      <h3 id="x6-8-like-activity"><span class="secno">6.8 </span>点赞活动 (Like Activity)</h3>
       <p>
-        The <code>Like</code> activity indicates the <code>actor</code> likes
-        the <code>object</code>.
+        <code>Like</code> 活动表示 <code>actor</code> 对 <code>object</code> 表示喜欢。
       </p>
       <p>
-        The side effect of receiving this in an <strong>outbox</strong>
-        is that the server <em class="rfc2119" title="SHOULD">SHOULD</em> add the <code>object</code> to the
-        <code>actor</code>'s <a href="https://w3c.wholetrans.org/activitypub/#liked"><code>liked</code> Collection</a>.
+        在 <strong>发件箱</strong> 中接收到该活动的副作用是，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 将 <code>object</code> 添加到
+        <code>actor</code> 的 <a href="https://w3c.wholetrans.org/activitypub/#liked"><code>liked</code> 集合</a> 中。
       </p>
     </section>
     <section id="block-activity-outbox">
-      <h3 id="x6-9-block-activity"><span class="secno">6.9 </span>Block Activity</h3>
+      <h3 id="x6-9-block-activity"><span class="secno">6.9 </span>屏蔽活动 (Block Activity)</h3>
       <p>
-        The <code>Block</code> activity is used to indicate that the posting
-        actor does not want another actor (defined in the <code>object</code>
-        property) to be able to interact with objects posted by the actor
-        posting the <code>Block</code> activity.
-        The server <em class="rfc2119" title="SHOULD">SHOULD</em> prevent the blocked user from interacting with any
-        object
-        posted by the actor.
+        <code>Block</code> 活动用于表示发布此活动的行为体不希望另一个行为体（由
+        <code>object</code> 属性定义）能够与其发布的对象进行交互。
+        服务端 <em class="rfc2119" title="SHOULD">应当</em> 阻止被屏蔽的用户与任何由该行为体发布的对象交互。
       </p>
       <p>
-        Servers <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> deliver Block Activities to their
-        <code>object</code>.
+        服务器 <em class="rfc2119" title="SHOULD NOT">不应</em> 将屏蔽活动传递给其
+        <code>object</code>。
       </p>
     </section>
     <section id="undo-activity-outbox">
-      <h3 id="x6-10-undo-activity"><span class="secno">6.10 </span>Undo Activity</h3>
+      <h3 id="x6-10-undo-activity"><span class="secno">6.10 </span>撤销活动 (Undo Activity)</h3>
       <p>
-        The <code>Undo</code> activity is used to undo a previous activity.
-        See the Activity Vocabulary documentation on
+        <code>Undo</code> 活动用于撤销之前的活动。
+        请参阅活动术语文档中关于
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#inverse">
-          Inverse Activities and "Undo"</a>.
-        For example, <code>Undo</code> may be used to undo a previous
-        <code>Like</code>, <code>Follow</code>, or <code>Block</code>.
-        The undo activity and the activity being undone <em class="rfc2119" title="MUST">MUST</em> both have the
-        same actor.
-        Side effects should be undone, to the extent possible.
-        For example, if undoing a <code>Like</code>, any counter that had
-        been incremented previously should be decremented appropriately.
+          逆活动与“撤销”</a>的内容。
+        例如，<code>Undo</code> 可用于撤销之前的 <code>Like</code>、
+        <code>Follow</code> 或 <code>Block</code>。
+        撤销活动与被撤销的活动 <em class="rfc2119" title="MUST">必须</em> 由同一个行为体发布。
+        应尽可能撤销副作用。
+        例如，如果撤销 <code>Like</code>，应相应递减之前已递增的计数器。
       </p>
-
       <p>
-        There are some exceptions where there is an existing and explicit
-        "inverse activity" which should be used instead.
-        <code>Create</code> based activities should instead use
-        <code>Delete</code>, and <code>Add</code> activities should use
-        <code>Remove</code>.
+        在一些情况下，如果已存在明确的“逆活动”，应使用该逆活动。
+        基于 <code>Create</code> 的活动应改为使用
+        <code>Delete</code>，基于 <code>Add</code> 的活动应改为使用
+        <code>Remove</code>。
       </p>
     </section>
-
     <section id="client-to-server-outbox-delivery">
-      <h3 id="x6-11-delivery"><span class="secno">6.11 </span>Delivery</h3>
+      <h3 id="x6-11-delivery"><span class="secno">6.11 </span>投递</h3>
       <p>
-        Federated servers <em class="rfc2119" title="MUST">MUST</em> perform delivery on all Activities posted to the
-        <strong>outbox</strong> according to <a href="https://w3c.wholetrans.org/activitypub/#outbox-delivery">
-          outbox delivery</a>.
+        联合式服务端 <em class="rfc2119" title="MUST">必须</em> 根据
+        <a href="https://w3c.wholetrans.org/activitypub/#outbox-delivery">
+          发件箱投递</a> 的规定，对所有发布到 <strong>发件箱</strong> 的活动执行投递。
       </p>
     </section>
-
     <section id="uploading-media" class="informative">
-      <h3 id="x6-12-uploading-media"><span class="secno">6.12 </span>Uploading Media</h3>
-      <p><em>This section is non-normative.</em></p>
+      <h3 id="x6-12-uploading-media"><span class="secno">6.12 </span>上传媒体</h3>
+      <p><em>本节为非规范性内容。</em></p>
       <p>
-        Servers <em class="rfc2119" title="MAY">MAY</em> support uploading document types to be referenced in
-        activites, such as images, video or other binary data, but the
-        precise mechanism is out of scope for this version of ActivityPub.
-        The Social Web Community Group is refining the protocol in the
-        <a href="https://www.w3.org/wiki/SocialCG/ActivityPub/MediaUpload">ActivityPub Media Upload report</a>.
+        服务端 <em class="rfc2119" title="MAY">可以</em> 支持上传某些文档类型（如图片、视频或其他二进制数据），
+        以便在活动中引用，但具体机制不在本版本的 ActivityPub 范畴内。
+        社交网络社区讨论组正在通过
+        <a href="https://www.w3.org/wiki/SocialCG/ActivityPub/MediaUpload">ActivityPub 媒体上传报告</a>
+        细化该协议。
       </p>
     </section>
 
