@@ -573,7 +573,8 @@
           href="https://www.w3.org/TR/2018/REC-activitypub-20180123/">https://www.w3.org/TR/2018/REC-activitypub-20180123/</a>
       </dd>
       <dt>当前版本的简体中文翻译:</dt>
-      <dd><a class="u-url" href="https://w3c.wholetrans.org/activitypub/">https://w3c.wholetrans.org/activitypub/</a></dd>
+      <dd><a class="u-url" href="https://w3c.wholetrans.org/activitypub/">https://w3c.wholetrans.org/activitypub/</a>
+      </dd>
       <dt>最新发布版本:</dt>
       <dd><a href="https://www.w3.org/TR/activitypub/">https://www.w3.org/TR/activitypub/</a></dd>
       <dt>最新编辑草案:</dt>
@@ -604,9 +605,11 @@
       <dd class="p-author h-card vcard"><a class="u-url url p-name fn"
           href="https://en.wikipedia.org/wiki/Evan_Prodromou">Evan Prodromou</a></dd>
       <dt>译者:</dt>
-      <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://codeword.info/">CDN18</a> @<a href="https://wholetrans.org/">全译</a></dd>
+      <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://codeword.info/">CDN18</a> @<a
+          href="https://wholetrans.org/">全译</a></dd>
       <dt>译者声明:</dt>
-      <dd>本规范的<a href="http://www.w3.org/TR/activitypub/">英文版本</a>是其唯一标准版本。其他<a href="https://www.w3.org/2003/03/Translations/byTechnology?technology=activitypub">翻译版本</a>包括本译文仅供参考。</dd>
+      <dd>本规范的<a href="http://www.w3.org/TR/activitypub/">英文版本</a>是其唯一标准版本。其他<a
+          href="https://www.w3.org/2003/03/Translations/byTechnology?technology=activitypub">翻译版本</a>包括本译文仅供参考。</dd>
       <dd>译者力求翻译准确，但由于专业水平和时间限制，翻译难免出错。</dd>
       <dd>欢迎发送邮件至 <a href="mailto:errata@wholetrans.org">errata@wholetrans.org</a> 提出勘误与改进建议。</dd>
 
@@ -771,7 +774,8 @@
               class="tocxref"><span class="secno">6.2 </span>创建活动 (Create Activity)</a>
             <ol class="toc">
               <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#object-without-create"
-                  class="tocxref"><span class="secno">6.2.1 </span>在不发送创建活动的情况下创建对象 (Object creation without a Create Activity)</a></li>
+                  class="tocxref"><span class="secno">6.2.1 </span>在不发送创建活动的情况下创建对象 (Object creation without a Create
+                  Activity)</a></li>
             </ol>
           </li>
           <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#update-activity-outbox"
@@ -953,7 +957,8 @@
       ActivityPub使用[<cite><a class="bibref"
           href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]作为其术语表。
       这很好，因为ActivityStreams已经包含了您在社交网络中表示所有活动和内容所需的常用术语。
-      ActivityStreams很可能已经涵盖了您需要的所有术语，不过即使没有，您也可以通过[<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-JSON-LD">JSON-LD</a></cite>]扩展ActivityStreams。
+      ActivityStreams很可能已经涵盖了您需要的所有术语，不过即使没有，您也可以通过[<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-JSON-LD">JSON-LD</a></cite>]扩展ActivityStreams。
       如果您了解JSON-LD，您可以利用JSON-LD提供的优秀的关联数据方法。
       如果不了解，也不用担心，JSON-LD文档与ActivityStreams都可以按照传统的JSON来理解。
       （当你需要添加扩展时，JSON-LD会真正发挥作用）。
@@ -968,8 +973,7 @@
     </p>
 
     <p>
-      <img src="./assets/tutorial-2.png"
-        alt="行为体的消息在外部世界、收件箱与发件箱之间流动的示意图">
+      <img src="./assets/tutorial-2.png" alt="行为体的消息在外部世界、收件箱与发件箱之间流动的示意图">
     </p>
 
     <p>
@@ -1010,8 +1014,7 @@
 
     <div class="example">
       <div class="example-title marker"><span>示例 2</span></div>
-      <pre class="highlight json hljs" aria-busy="false"
-        aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
  <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
@@ -1035,8 +1038,7 @@
 
     <div class="example">
       <div class="example-title marker"><span>示例 3</span></div>
-      <pre class="highlight json hljs" aria-busy="false"
-        aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/a29a6843-9feb-4c74-a7f7-081b9c9201d3"</span>,
  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
@@ -1113,8 +1115,7 @@
 
     <div class="example">
       <div class="example-title marker"><span>示例 6</span></div>
-      <pre class="highlight json hljs" aria-busy="false"
-        aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/9282e9cc-14d0-42b3-a758-d6aeca6c876b"</span>,
  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://social.example/alyssa/followers/"</span>,
@@ -1147,10 +1148,10 @@
     <p>
       除标记为非规范性的章节外，本规范中的所有撰写指引、图表、示例和注释都是非规范性的。规范中的其他所有内容均为规范性内容。
     </p>
-    <p id="respecRFC2119">以下关键词 <em class="rfc2119">可以</em>、<em class="rfc2119">必须</em>、<em
-      class="rfc2119">禁止</em>、<em class="rfc2119">应当</em>以及<em class="rfc2119">不应当</em>，
-    应按照 [<cite><a class="bibref"
-        href="https://w3c.wholetrans.org/activitypub/#bib-RFC2119">RFC2119</a></cite>] 中的描述进行解释。
+    <p id="respecRFC2119">以下关键词 <em class="rfc2119">可以</em>、<em class="rfc2119">必须</em>、<em class="rfc2119">禁止</em>、<em
+        class="rfc2119">应当</em>以及<em class="rfc2119">不应当</em>，
+      应按照 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-RFC2119">RFC2119</a></cite>]
+      中的描述进行解释。
     </p>
 
     <section id="specification-profiles">
@@ -1226,7 +1227,8 @@
     <p>
       服务端<em class="rfc2119" title="SHOULD">应当</em>验证其接收的内容，以避免内容欺骗攻击。
       （服务端至少应该做到检查对象是否按原始状态接收，但如果可能，使用签名等机制会更好）。
-      本文档尚未权威性地指定特定的验证机制，但您可参阅<a href="https://w3c.wholetrans.org/activitypub/#security-considerations">安全注意事项</a>以获取一些建议和最佳实践。
+      本文档尚未权威性地指定特定的验证机制，但您可参阅<a
+        href="https://w3c.wholetrans.org/activitypub/#security-considerations">安全注意事项</a>以获取一些建议和最佳实践。
     </p>
     <div class="informative">
       例如，如果 example.com 收到活动
@@ -1249,13 +1251,15 @@
       </div>
       它应该解引用 <code>id</code> 以确保其存在、为有效对象，且没有错误地表示该对象。
       （在本例中，小M可能正在伪造一个据称由小A发布的对象）。
-      </div>
-      <section id="obj-id">
+    </div>
+    <section id="obj-id">
       <h3 id="x3-1-object-identifiers"><span class="secno">3.1 </span>对象标识符</h3>
       <p>
         [<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 中的所有对象都应该具有唯一的全局标识符。
-        ActivityPub 扩展了此要求；以 ActivityPub 协议分发的所有对象<em class="rfc2119" title="MUST">必须</em>具有唯一的全局标识符，除非它们是有意被设为瞬态的（例如某些类型的聊天消息或游戏通知等短生命周期且不需要能够被查找的活动）。
+            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+        中的所有对象都应该具有唯一的全局标识符。
+        ActivityPub 扩展了此要求；以 ActivityPub 协议分发的所有对象<em class="rfc2119"
+          title="MUST">必须</em>具有唯一的全局标识符，除非它们是有意被设为瞬态的（例如某些类型的聊天消息或游戏通知等短生命周期且不需要能够被查找的活动）。
         这些标识符必须属于以下类型之一：
       </p>
       <ol>
@@ -1269,7 +1273,8 @@
       </ol>
       <p>
         在服务端间通信中发布的活动<em class="rfc2119" title="MUST">必须</em>提供标识符，除非该活动是有意被设为瞬态的。
-        但是，对于客户端到服务器的通信，接收到没有指定 <code>id</code> 的对象的服务器<em class="rfc2119" title="SHOULD">应</em>在行为体的命名空间中分配一个对象 ID 并将其附加到接收到的对象之上。
+        但是，对于客户端到服务器的通信，接收到没有指定 <code>id</code> 的对象的服务器<em class="rfc2119" title="SHOULD">应</em>在行为体的命名空间中分配一个对象 ID
+        并将其附加到接收到的对象之上。
       </p>
       <p>所有对象都具有以下属性：</p>
       <dl>
@@ -1288,8 +1293,8 @@
       <h3 id="x3-2-retrieving-objects"><span class="secno">3.2 </span>检索对象</h3>
       <p>
         可以针对对象的<code>id</code>属性使用HTTP GET方法以检索活动。
-        服务器<em class="rfc2119" title="MAY">可以</em>按照[<cite><a
-            class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-RFC7231">RFC7231</a></cite>]中的定义使用HTTP内容协商机制
+        服务器<em class="rfc2119" title="MAY">可以</em>按照[<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-RFC7231">RFC7231</a></cite>]中的定义使用HTTP内容协商机制
         来选择响应请求时返回的数据类型，
         但<em class="rfc2119" title="MUST">必须</em>在响应
         <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>
@@ -1306,7 +1311,8 @@
         使用相同的URI同时提供资源的HTML和ActivityStreams格式）。
       </p>
       <p>
-        服务端<em class="rfc2119" title="MAY">可以</em>根据<a href="https://w3c.wholetrans.org/activitypub/#authorization" class="sec-ref"><span class="secno">B.1</span>
+        服务端<em class="rfc2119" title="MAY">可以</em>根据<a href="https://w3c.wholetrans.org/activitypub/#authorization"
+          class="sec-ref"><span class="secno">B.1</span>
           <span class="sec-title">身份验证和授权</span></a>中的规定要求身份验证，
         并且可以额外地实现其自身的授权规则。
         对于未通过身份验证检查的请求，服务器<em class="rfc2119" title="SHOULD">应当</em>返回适当的HTTP错误代码，
@@ -1343,23 +1349,23 @@
       </div>
       <div class="note">
         <div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>注</span><span
-          style="text-transform: none">：如何应对客户端无法有效处理媒体类型的情形？</span></div>
-      <div class="">
-        <p>
-          通常情况下，最好让用户用最初撰写内容的源格式编辑原始文章。
-          但客户端不一定能为所有源类型提供可靠的友好界面，另外，由于客户端负责将<code>source</code>转换为<code>content</code>，
-          某些客户端可能会使用其他客户端不知道如何处理的媒体类型。
-          尽管客户端理论上可以提供可编辑的<code>content</code>标记并忽略源格式，但这意味着用户在今后的修改中将丢失其首选的理想<code>source</code>格式。
-          因此，这样做的客户端应当提供一个微不足道的警告，说明原始源格式未被识别并将被忽略。
-        </p>
-        <p>
-          举例来说，小A喜欢使用自己开发的Emacs客户端，通过<a href="http://orgmode.org/">Org mode</a>在她的ActivityPub博客上发文。
-          后来她转而使用手机客户端编辑，而该客户端完全不知道<code>text/x-org</code>是什么，也不知道如何将其渲染为HTML，
-          所以它提供了一个文本框来编辑原始的<code>content</code>。
-          编辑区上方会显示一个有帮助的警告："这最初是用另一种我们无法处理的标记语言编写的。如果您进行编辑，将会丢失原始来源文本！"
-          小A认为修复小小的拼写错误不值得失去她精心制作的org-mode标记，于是决定等到回家再进行更新。
-        </p>
-      </div>
+            style="text-transform: none">：如何应对客户端无法有效处理媒体类型的情形？</span></div>
+        <div class="">
+          <p>
+            通常情况下，最好让用户用最初撰写内容的源格式编辑原始文章。
+            但客户端不一定能为所有源类型提供可靠的友好界面，另外，由于客户端负责将<code>source</code>转换为<code>content</code>，
+            某些客户端可能会使用其他客户端不知道如何处理的媒体类型。
+            尽管客户端理论上可以提供可编辑的<code>content</code>标记并忽略源格式，但这意味着用户在今后的修改中将丢失其首选的理想<code>source</code>格式。
+            因此，这样做的客户端应当提供一个微不足道的警告，说明原始源格式未被识别并将被忽略。
+          </p>
+          <p>
+            举例来说，小A喜欢使用自己开发的Emacs客户端，通过<a href="http://orgmode.org/">Org mode</a>在她的ActivityPub博客上发文。
+            后来她转而使用手机客户端编辑，而该客户端完全不知道<code>text/x-org</code>是什么，也不知道如何将其渲染为HTML，
+            所以它提供了一个文本框来编辑原始的<code>content</code>。
+            编辑区上方会显示一个有帮助的警告："这最初是用另一种我们无法处理的标记语言编写的。如果您进行编辑，将会丢失原始来源文本！"
+            小A认为修复小小的拼写错误不值得失去她精心制作的org-mode标记，于是决定等到回家再进行更新。
+          </p>
+        </div>
     </section>
   </section>
 
@@ -1414,7 +1420,7 @@
         除必须包含
         <a href="https://w3c.wholetrans.org/activitypub/#obj-id" class="sec-ref"><span class="secno">3.1</span> <span
             class="sec-title">对象标识符</span></a>规定的属性外，
-            <i>行为体</i> 对象还<em class="rfc2119" title="MUST">必须</em>包含以下属性：
+        <i>行为体</i> 对象还<em class="rfc2119" title="MUST">必须</em>包含以下属性：
       </p>
       <dl>
         <dt id="inbox-property">收件箱</dt>
@@ -1447,16 +1453,16 @@
           一个 [<cite><a class="bibref"
               href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
           包含该<i>行为体</i>关注的所有<i>行为体</i>；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span
-              class="secno">5.4</span> <span class="sec-title">关注集合</span></a>。
+          <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span class="secno">5.4</span>
+            <span class="sec-title">关注集合</span></a>。
         </dd>
         <dt id="followers-property">followers（粉丝）</dt>
         <dd>
           一个 [<cite><a class="bibref"
               href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
           包含关注该<i>行为体</i>的所有<i>行为体</i>；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span
-              class="secno">5.3</span> <span class="sec-title">粉丝集合</span></a>。
+          <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span class="secno">5.3</span>
+            <span class="sec-title">粉丝集合</span></a>。
         </dd>
       </dl>
       <p>
@@ -1468,8 +1474,8 @@
           一个 [<cite><a class="bibref"
               href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
           包含该<i>行为体</i>点赞的所有对象；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span
-              class="secno">5.5</span> <span class="sec-title">点赞集合</span></a>。
+          <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span class="secno">5.5</span> <span
+              class="sec-title">点赞集合</span></a>。
         </dd>
       </dl>
       <h3 id="x4-1-actor-objects"><span class="secno">4.1 </span><i>行为体</i> 对象</h3>
@@ -1504,13 +1510,15 @@
         <dt id="following-property">following（关注）</dt>
         <dd>
           一个指向 [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，该集合包含此行为体正在关注的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          集合的链接，该集合包含此行为体正在关注的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span
               class="secno">5.4</span> <span class="sec-title">关注集合</span></a>。
         </dd>
         <dt id="followers-property">followers（粉丝）</dt>
         <dd>
           一个指向 [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，该集合包含关注此行为体的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          集合的链接，该集合包含关注此行为体的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span
               class="secno">5.3</span> <span class="sec-title">粉丝集合</span></a>。
         </dd>
       </dl>
@@ -1521,7 +1529,8 @@
         <dt id="liked-property">liked（点赞）</dt>
         <dd>
           一个指向[<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，该集合包含此行为体点赞过的对象；参见 <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          集合的链接，该集合包含此行为体点赞过的对象；参见 <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span
               class="secno">5.5</span> <span class="sec-title">点赞集合</span></a>。
         </dd>
       </dl>
@@ -1569,22 +1578,23 @@
         <dt id="proxyUrl">proxyUrl</dt>
         <dd>
           端点 URI，该行为体的客户端可以通过此 URI 访问需要身份验证的外站 ActivityStreams 对象。
-          要使用此端点，客户端需按 <code>x-www-form-urlencoded</code> 格式提交 <code>id</code> 参数，参数值为要请求的 ActivityStreams 对象的 <code>id</code>。
+          要使用此端点，客户端需按 <code>x-www-form-urlencoded</code> 格式提交 <code>id</code> 参数，参数值为要请求的 ActivityStreams 对象的
+          <code>id</code>。
         </dd>
         <dt id="oauthAuthorizationEndpoint">oauthAuthorizationEndpoint</dt>
         <dd>
           若<a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>使用
           OAuth 2.0 不记名令牌[<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] 进行身份验证，
+              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] 进行身份验证，
           此端点指定一个 URI，通过浏览器完成认证的用户可在该 URI 上获取新的授权许可。
         </dd>
         <dt id="oauthTokenEndpoint">oauthTokenEndpoint</dt>
         <dd>
           若<a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>使用
           OAuth 2.0 不记名令牌[<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] 进行身份验证，
+              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] 进行身份验证，
           此端点指定一个 URI，客户端可以在该 URI 获取访问令牌。
         </dd>
         <dt id="provideClientKey">provideClientKey</dt>
@@ -1601,7 +1611,8 @@
           此端点为可选端点，
           <a href="https://w3c.wholetrans.org/activitypub/#shared-inbox-delivery">
             用于广泛传递公开寻址的活动及发送给粉丝的活动</a>。
-          <code>sharedInbox</code> 端点也应该是公开可读的 <code>OrderedCollection</code> 对象，其中包含寻址到<a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共</a>特殊集合的对象。
+          <code>sharedInbox</code> 端点也应该是公开可读的 <code>OrderedCollection</code> 对象，其中包含寻址到<a
+            href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共</a>特殊集合的对象。
           从 <code>sharedInbox</code> 端点读取内容时，禁止呈现未寻址到公共（<code>Public</code>）端点的对象。
         </dd>
       </dl>
@@ -1611,9 +1622,11 @@
         <div class="" id="as2-actor-properties">
           <p>
             [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 是 ActivityPub 的上游术语表，任何适用于
+                href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 是
+            ActivityPub 的上游术语表，任何适用于
             [<cite><a class="bibref"
-                href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 的属性都可以在 ActivityPub 行为体上使用。
+                href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 的属性都可以在
+            ActivityPub 行为体上使用。
             在此特别强调以下 ActivityStreams 属性，以演示它们在 ActivityPub 实现中的使用方法。
           </p>
 
@@ -1654,7 +1667,7 @@
       [<cite><a class="bibref"
           href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
       定义了集合（collection）的概念；而 ActivityPub 定义了若干具有特殊行为的集合。
-      请注意，ActivityPub 使用 
+      请注意，ActivityPub 使用
       <a href="https://www.w3.org/TR/activitystreams-core/#paging">
         ActivityStreams 的分页机制</a>
       来遍历大型对象集合。
@@ -1689,7 +1702,8 @@
     <section id="outbox">
       <h3 id="x5-1-outbox"><span class="secno">5.1 </span>发件箱（Outbox）</h3>
       <p>
-        <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>通过 <code>outbox</code> 属性在其配置文件中暴露发件箱，供 ActivityPub 服务发现。
+        <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>通过 <code>outbox</code> 属性在其配置文件中暴露发件箱，供
+        ActivityPub 服务发现。
         <code>outbox</code>
         <em class="rfc2119" title="MUST">必须</em>是一个
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
@@ -1815,7 +1829,8 @@
       <h3 id="x5-6-public-addressing"><span class="secno">5.6 </span>公共寻址</h3>
       <p>
         除 [<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合与对象之外，活动还可以被寻址到特殊的“公共”集合，其标识符为
+            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+        集合与对象之外，活动还可以被寻址到特殊的“公共”集合，其标识符为
         <code>https://www.w3.org/ns/activitystreams#Public</code>。
         例如：
       </p>
@@ -1967,41 +1982,46 @@
       <code>Location</code> header.
     </p>
     <p>
-      如果提交的 Activity 对象的 <code>id</code> 属性有值，服务端<em class="rfc2119" title="MUST">必须</em>忽略该值并为该 Activity 生成新的 <code>id</code>。
-      服务器<em class="rfc2119" title="MUST">必须</em>返回 <code>201 Created</code> HTTP 状态码，且<em class="rfc2119" title="MUST">必须</em>在 <code>Location</code> 标头中包含新的 <code>id</code>，除非该 Activity 是瞬态的。
+      如果提交的 Activity 对象的 <code>id</code> 属性有值，服务端<em class="rfc2119" title="MUST">必须</em>忽略该值并为该 Activity 生成新的
+      <code>id</code>。
+      服务器<em class="rfc2119" title="MUST">必须</em>返回 <code>201 Created</code> HTTP 状态码，且<em class="rfc2119"
+        title="MUST">必须</em>在 <code>Location</code> 标头中包含新的 <code>id</code>，除非该 Activity 是瞬态的。
     </p>
     <div class="example">
-      <div class="example-title marker"><span>示例 12</span><span style="text-transform: none">: 发件箱对提交的 Activity 的响应</span></div>
+      <div class="example-title marker"><span>示例 12</span><span style="text-transform: none">: 发件箱对提交的 Activity
+          的响应</span></div>
       <pre class="hljs http" aria-busy="false" aria-live="polite">HTTP/1.1 <span class="hljs-number">201</span> Created
 <span class="hljs-attribute">Location</span>: https://dustycloud.org/likes/345</pre>
     </div>
 
     <p id="remove-bto-bcc-before-delivery">
-      在投递之前，服务端<em class="rfc2119" title="MUST">必须</em>从ActivityStreams对象中移除<code>bto</code>和/或<code>bcc</code>属性（只要上述属性存在），但<em class="rfc2119" title="MUST">必须</em>利用最初存储于<code>bto</code>/<code>bcc</code>属性上的地址信息来确定
+      在投递之前，服务端<em class="rfc2119"
+        title="MUST">必须</em>从ActivityStreams对象中移除<code>bto</code>和/或<code>bcc</code>属性（只要上述属性存在），但<em class="rfc2119"
+        title="MUST">必须</em>利用最初存储于<code>bto</code>/<code>bcc</code>属性上的地址信息来确定
       <a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>的收件方。
-</p>
+    </p>
 
-<p>
+    <p>
       随后，服务端<em class="rfc2119" title="MUST">必须</em>将这个新的活动添加至
       <a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱(outbox)</a>集合。
       根据活动的类型，服务端可能需要执行额外的后续操作。
       （然而，无法保证活动会即时出现在发件箱中。
       活动可能会延迟显示，或在某一时间点被移除）。
       每种类型的活动的说明参见下文。
-</p>
+    </p>
 
-<p>
+    <p>
       如果尝试向不支持客户端-服务端交互的服务端提交对象，
       服务端<em class="rfc2119" title="SHOULD">应当</em>返回<code>405 Method Not Allowed</code>响应。
-</p>
+    </p>
 
-<p>
+    <p>
       在适当情况下，HTTP缓存机制 [<cite><a class="bibref"
           href="https://w3c.wholetrans.org/activitypub/#bib-RFC7234">RFC7234</a></cite>]，
       <em class="rfc2119" title="SHOULD">应当</em>在客户端接收服务端响应时与服务端发送响应至客户端时被遵守。
-</p>
+    </p>
 
-<section id="client-addressing">
+    <section id="client-addressing">
       <h3 id="x6-1-client-addressing"><span class="secno">6.1 </span>客户端寻址</h3>
       <p>
         <strong>客户端</strong>负责正确地为新活动设定目标地址。
@@ -2014,7 +2034,8 @@
         是作为新活动默认目标地址的良好选择。
       </p>
       <p>
-        客户端<em class="rfc2119" title="SHOULD">应当</em>查看通过<code>object</code>、<code>target</code>、<code>inReplyTo</code>和/或
+        客户端<em class="rfc2119"
+          title="SHOULD">应当</em>查看通过<code>object</code>、<code>target</code>、<code>inReplyTo</code>和/或
         <code>tag</code>字段被附加到新活动中的任何对象，获取它们的<code>actor</code>或<code>attributedTo</code>属性，且
         <em class="rfc2119" title="MAY">可以</em>获取它们的地址信息并将其添加到创建的新活动的
         <code>to</code>或<code>cc</code>字段中。
@@ -2048,7 +2069,8 @@
       <p>客户端可按如下所示生成点赞活动:</p>
 
       <div class="example">
-        <div class="example-title marker"><span>示例 14</span><span style="text-transform: none">: 对某个 Article 点赞</span></div>
+        <div class="example-title marker"><span>示例 14</span><span style="text-transform: none">: 对某个 Article 点赞</span>
+        </div>
         <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
                {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>}],
@@ -2063,7 +2085,9 @@
 }</pre>
       </div>
 
-      <p>接收方的outbox可以执行<a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>操作，将活动投递给Chris（点赞者）的粉丝、Amy以及Amy的粉丝和Evan，因为他们都收到了原始文章。</p>
+      <p>接收方的outbox可以执行<a
+          href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>操作，将活动投递给Chris（点赞者）的粉丝、Amy以及Amy的粉丝和Evan，因为他们都收到了原始文章。
+      </p>
 
       <p>
         在向<code>outbox</code>（发件箱）提交以下活动时，客户端<em class="rfc2119" title="MUST">必须</em>在活动中提供<code>object</code>属性：
@@ -2083,22 +2107,27 @@
         这会产生副作用，即创建了一个嵌入在活动中（位于<code>object</code>属性）的对象。
       </p>
       <p>
-        发布<code>Create</code>活动时，活动的<code>actor</code><em class="rfc2119" title="SHOULD">应当</em>被复制到对象的<code>attributedTo</code>字段中。
+        发布<code>Create</code>活动时，活动的<code>actor</code><em class="rfc2119"
+          title="SHOULD">应当</em>被复制到对象的<code>attributedTo</code>字段中。
       </p>
       <p>
         创建活动与其<code>object</code>的寻址不匹配可能会导致混淆。
-        因此，服务端在分发开始时<em class="rfc2119" title="SHOULD">应当</em>将创建活动的所有接收方复制到其<code>object</code>，同样地，也应将<code>object</code>的接收方复制到封装的Create活动中。
+        因此，服务端在分发开始时<em class="rfc2119"
+          title="SHOULD">应当</em>将创建活动的所有接收方复制到其<code>object</code>，同样地，也应将<code>object</code>的接收方复制到封装的Create活动中。
         需要注意的是，之后可以更改<code>object</code>的地址而不更改<code>Create</code>的地址（例如，通过<code>Update</code>活动更改）。
       </p>
 
       <section id="object-without-create">
-        <h4 id="x6-2-1-object-creation-without-a-create-activity"><span class="secno">6.2.1 </span>不在不发送创建活动的情况下创建对象</h4>
+        <h4 id="x6-2-1-object-creation-without-a-create-activity"><span class="secno">6.2.1 </span>不在不发送创建活动的情况下创建对象
+        </h4>
         <p>
           客户端向服务端发布内容时，可提交一个对象以进行创建，而无需将其包装在活动中。
           服务端<em class="rfc2119" title="MUST">必须</em>接受客户端通过POST请求向outbox发送的合法[<cite><a class="bibref"
-            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]对象。该对象不能是<code>Activity</code>的子类型。
-          随后，服务端<em class="rfc2119" title="MUST">必须</em>将此对象附加到<a href="https://w3c.wholetrans.org/activitypub/#create-activity-outbox">创建活动</a>的<code>object</code>。
-          对于非临时对象，服务端<em class="rfc2119" title="MUST">必须</em>为封装的<code>Create</code>活动及其封装的<code>Object</code>都附加一个<code>id</code>。
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]对象。该对象不能是<code>Activity</code>的子类型。
+          随后，服务端<em class="rfc2119" title="MUST">必须</em>将此对象附加到<a
+            href="https://w3c.wholetrans.org/activitypub/#create-activity-outbox">创建活动</a>的<code>object</code>。
+          对于非临时对象，服务端<em class="rfc2119"
+            title="MUST">必须</em>为封装的<code>Create</code>活动及其封装的<code>Object</code>都附加一个<code>id</code>。
         </p>
 
         <div class="note">
@@ -2109,7 +2138,8 @@
         </div>
 
         <p>
-          服务端<em class="rfc2119" title="MUST">必须</em>将对象中指定的所有<code>to</code>、<code>bto</code>、<code>cc</code>、<code>bcc</code>与<code>audience</code>属性复制到新的Create活动中。
+          服务端<em class="rfc2119"
+            title="MUST">必须</em>将对象中指定的所有<code>to</code>、<code>bto</code>、<code>cc</code>、<code>bcc</code>与<code>audience</code>属性复制到新的Create活动中。
         </p>
 
         <div class="example">
@@ -2127,7 +2157,8 @@
 
         上述示例可被转换为如下形式：
         <div class="example">
-          <div class="example-title marker"><span>示例 16</span><span style="text-transform: none">: 服务端包装并生成的创建活动</span></div>
+          <div class="example-title marker"><span>示例 16</span><span style="text-transform: none">: 服务端包装并生成的创建活动</span>
+          </div>
           <pre class="hljs json" aria-busy="false" aria-live="polite">{
   <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
@@ -2178,8 +2209,10 @@
       <h3 id="x6-4-delete-activity"><span class="secno">6.4 </span>删除活动（Delete Activity）</h3>
       <p>
         <code>Delete</code> 活动用于删除现有对象。
-        其副作用是，服务端<em class="rfc2119" title="MAY">可以</em>将 <code>object</code> 替换为其 <code>Tombstone</code>（墓碑），该墓碑将显示在引用已删除对象的活动中。
-        如果某一实体请求已删除的对象，服务端<em class="rfc2119" title="SHOULD">应当</em>在响应正文中展示了 <code>Tombstone</code> 对象的情形下使用 HTTP 410 Gone 状态码进行响应，否则使用 HTTP 404 Not Found 进行响应。
+        其副作用是，服务端<em class="rfc2119" title="MAY">可以</em>将 <code>object</code> 替换为其
+        <code>Tombstone</code>（墓碑），该墓碑将显示在引用已删除对象的活动中。
+        如果某一实体请求已删除的对象，服务端<em class="rfc2119" title="SHOULD">应当</em>在响应正文中展示了 <code>Tombstone</code> 对象的情形下使用 HTTP 410
+        Gone 状态码进行响应，否则使用 HTTP 404 Not Found 进行响应。
       </p>
 
       <p>一个已删除的对象示例如下:</p>
@@ -2202,7 +2235,8 @@
       </p>
       <p>
         在 <strong>发件箱</strong> 中收到该活动的副作用是，服务端
-        <em class="rfc2119" title="SHOULD">应当</em> 且仅应当在随后收到以该<code>Follow</code> 活动为对象的<code>Accept</code> 活动时将 <code>object</code> 添加到
+        <em class="rfc2119" title="SHOULD">应当</em> 且仅应当在随后收到以该<code>Follow</code> 活动为对象的<code>Accept</code> 活动时将
+        <code>object</code> 添加到
         <code>actor</code> 的 <a href="https://w3c.wholetrans.org/activitypub/#following"><code>following</code> 集合</a>
         中。
       </p>
@@ -2312,17 +2346,22 @@
     <h2 id="x7-server-to-server-interactions"><span class="secno">7. </span>服务端间交互</h2>
     <p>
       服务端通过向行为体的<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>端点发送活动来与其他服务端通信，并在社交图谱中传播信息。
-      通过网络发送的活动<em class="rfc2119" title="SHOULD">应当</em>拥有一个 <code>id</code>，除非其被有意设为临时性活动（在此情形下，它<em class="rfc2119" title="MAY">可以</em>省略 <code>id</code>）。
+      通过网络发送的活动<em class="rfc2119" title="SHOULD">应当</em>拥有一个 <code>id</code>，除非其被有意设为临时性活动（在此情形下，它<em class="rfc2119"
+        title="MAY">可以</em>省略 <code>id</code>）。
     </p>
     <p>
-      <code>POST</code> 请求（例如发送到收件箱的 POST 请求）<em class="rfc2119" title="MUST">必须</em>使用 <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 的内容类型，
+      <code>POST</code> 请求（例如发送到收件箱的 POST 请求）<em class="rfc2119" title="MUST">必须</em>使用
+      <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 的内容类型，
       而 <code>GET</code> 请求（另见 <a href="https://w3c.wholetrans.org/activitypub/#retrieving-objects"
-        class="sec-ref"><span class="secno">3.2</span> <span class="sec-title">检索对象</span></a>）则使用 <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 的 Accept 标头。
-      对于服务端间交互的情形，服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>application/activity+json</code> 的内容类型或 Accept 标头解释为等同于 <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>。
+        class="sec-ref"><span class="secno">3.2</span> <span class="sec-title">检索对象</span></a>）则使用
+      <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 的 Accept 标头。
+      对于服务端间交互的情形，服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>application/activity+json</code> 的内容类型或 Accept
+      标头解释为等同于 <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>。
     </p>
     <p>
       为了在整个社交图谱中传播更新，活动会被发送到相应的接收方。
-      服务端首先跟随对象之间的相应链接，直至到达一个行为体，将这个链接指向的行为体确定这些接收方，随后将活动插入到行为体的<em>收件箱</em>中（这就是<a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>）。
+      服务端首先跟随对象之间的相应链接，直至到达一个行为体，将这个链接指向的行为体确定这些接收方，随后将活动插入到行为体的<em>收件箱</em>中（这就是<a
+        href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>）。
       这使得接收活动的服务端可以：
     </p>
     <ul>
@@ -2330,15 +2369,15 @@
         执行与活动相关的任何副作用（例如，发送行为体点赞对象的通知，用于更新对象的点赞计数）；
       </li>
       <li>
-        将活动传递给原始对象的接收方，以确保更新传播到整个社交图谱（参见 <a
-          href="https://w3c.wholetrans.org/activitypub/#inbox-forwarding">
+        将活动传递给原始对象的接收方，以确保更新传播到整个社交图谱（参见 <a href="https://w3c.wholetrans.org/activitypub/#inbox-forwarding">
           收件箱投递</a>）。
       </li>
     </ul>
     <p>投递通常在以下情形被触发，例如：</p>
     <ul>
       <li>
-        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中创建活动，将其<a href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>作为接收方。
+        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中创建活动，将其<a
+          href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>作为接收方。
       </li>
       <li>
         在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中创建活动，并直接指定接收方。
@@ -2347,16 +2386,19 @@
         在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中创建活动，以用户自定义的集合作为接收方。
       </li>
       <li>
-        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>或<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>中创建引用其他对象的活动。
+        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>或<a
+          href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>中创建引用其他对象的活动。
       </li>
     </ul>
 
     <p>
-      向其他服务端上的行为体的 <code>inbox</code> 或 <code>sharedInbox</code> 属性执行投递的服务端<em class="rfc2119" title="MUST">必须</em>在以下活动中提供 <code>object</code> 属性：
+      向其他服务端上的行为体的 <code>inbox</code> 或 <code>sharedInbox</code> 属性执行投递的服务端<em class="rfc2119"
+        title="MUST">必须</em>在以下活动中提供 <code>object</code> 属性：
       <code>Create</code>、<code>Update</code>、<code>Delete</code>、
       <code>Follow</code>、<code>Add</code>、<code>Remove</code>、
       <code>Like</code>、<code>Block</code>、<code>Undo</code>。
-      此外，执行以下活动的服务端间投递的服务端<em class="rfc2119" title="MUST">必须</em>也提供 <code>target</code> 属性：<code>Add</code>、<code>Remove</code>。
+      此外，执行以下活动的服务端间投递的服务端<em class="rfc2119" title="MUST">必须</em>也提供 <code>target</code>
+      属性：<code>Add</code>、<code>Remove</code>。
     </p>
 
     <p>
@@ -2373,19 +2415,23 @@
 
       <p>
         通过首先查找目标的收件箱，然后将活动发布到查找到的收件箱，即可将活动投递到其目标（即<a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>）。
-        通过检查 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#audienceTargeting">ActivityStreams 目标地址</a>来确定投递目标；即活动的 <code>to</code>、<code>bto</code>、<code>cc</code>、
+        通过检查 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#audienceTargeting">ActivityStreams
+          目标地址</a>来确定投递目标；即活动的 <code>to</code>、<code>bto</code>、<code>cc</code>、
         <code>bcc</code> 和 <code>audience</code> 字段。
       </p>
 
       <p>
-        <a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>的确定方法是先<a href="https://w3c.wholetrans.org/activitypub/#retrieving-objects">检索目标行为体的 JSON-LD 表示</a>，
+        <a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>的确定方法是先<a
+          href="https://w3c.wholetrans.org/activitypub/#retrieving-objects">检索目标行为体的 JSON-LD 表示</a>，
         然后查找 <code>inbox</code> 属性。
-        如果接收方是 <code>Collection</code> 或 <code>OrderedCollection</code>，则服务端<em class="rfc2119" title="MUST">必须</em>（使用用户的凭据）解引用该集合，并发现集合中每个条目的收件箱。
+        如果接收方是 <code>Collection</code> 或 <code>OrderedCollection</code>，则服务端<em class="rfc2119"
+          title="MUST">必须</em>（使用用户的凭据）解引用该集合，并发现集合中每个条目的收件箱。
         服务端<em class="rfc2119" title="MUST">必须</em>限制通过集合执行的递归层数，该层数<em class="rfc2119" title="MAY">可以</em>为一层。
       </p>
 
       <p>
-        服务端<em class="rfc2119" title="MUST">必须</em>对最终接收方列表进行去重。服务端<em class="rfc2119" title="MUST">必须</em>从接收方列表中排除与正在发起通知的活动的 <code>actor</code>（行为体）相同的行为体。
+        服务端<em class="rfc2119" title="MUST">必须</em>对最终接收方列表进行去重。服务端<em class="rfc2119"
+          title="MUST">必须</em>从接收方列表中排除与正在发起通知的活动的 <code>actor</code>（行为体）相同的行为体。
         也就是说，行为体不应该将自己的活动投递给自己。
       </p>
 
@@ -2399,13 +2445,16 @@
       </div>
 
       <p>
-        确定接收方列表后，服务端（使用提交用户的授权）向<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>发出 HTTP POST 请求，并将活动作为请求正文。
-        接收方将此活动作为 <code>item</code> 添加到<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a> 的有序集合 (OrderedCollection) 中。
+        确定接收方列表后，服务端（使用提交用户的授权）向<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>发出 HTTP POST
+        请求，并将活动作为请求正文。
+        接收方将此活动作为 <code>item</code> 添加到<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a> 的有序集合
+        (OrderedCollection) 中。
         尝试向非联合式服务端上的收件箱进行投递<em class="rfc2119" title="SHOULD">应当</em>导致 <code>405 Method Not Allowed</code> 响应。
       </p>
 
       <p>
-        对于向第三方服务端执行投递操作的联合式服务端，投递<em class="rfc2119" title="SHOULD">应当</em>异步执行，且如果由于网络错误而投递失败，服务端<em class="rfc2119" title="SHOULD">应当</em>
+        对于向第三方服务端执行投递操作的联合式服务端，投递<em class="rfc2119" title="SHOULD">应当</em>异步执行，且如果由于网络错误而投递失败，服务端<em class="rfc2119"
+          title="SHOULD">应当</em>
         再次尝试向接收方投递。
       </p>
 
@@ -2426,11 +2475,13 @@
       </div>
 
       <section id="outbox-delivery">
-        <h4 id="x7-1-1-outbox-delivery-requirements-for-server-to-server"><span class="secno">7.1.1 </span>服务端间发件箱投递的要求</h4>
+        <h4 id="x7-1-1-outbox-delivery-requirements-for-server-to-server"><span class="secno">7.1.1 </span>服务端间发件箱投递的要求
+        </h4>
         <p>
           对同时支持
           <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>和
-          <a href="https://w3c.wholetrans.org/activitypub/#server-to-server-interactions">服务端间交互</a>的服务端而言：当在<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中接收到对象时，
+          <a href="https://w3c.wholetrans.org/activitypub/#server-to-server-interactions">服务端间交互</a>的服务端而言：当在<a
+            href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中接收到对象时，
           服务端<em class="rfc2119" title="MUST">必须</em>定位并将其投递到：
         </p>
         <ul>
@@ -2449,7 +2500,7 @@
 
         <div class="note">
           <div role="heading" class="note-title marker" id="h-note-10" aria-level="5"><span>注</span><span
-              style="text-transform: none">:  转发以避免幽灵回复问题</span></div>
+              style="text-transform: none">: 转发以避免幽灵回复问题</span></div>
           <div class="">
             <p>
               以下部分是为了缓解偶尔会在联合式网络上产生的“幽灵回复”问题。
@@ -2468,7 +2519,9 @@
 
         <p>
           当在<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>中接收到活动时，服务端需要将这些活动转发给源服务端无法投递到的接收方。
-          为此，服务端<em class="rfc2119" title="MUST">必须</em>定位并将活动<a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>到 <code>to</code>、<code>cc</code> 和/或 <code>audience</code>
+          为此，服务端<em class="rfc2119" title="MUST">必须</em>定位并将活动<a
+            href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>到 <code>to</code>、<code>cc</code> 和/或
+          <code>audience</code>
           的值，前提是以下所有条件均为真：
         </p>
         <ul>
@@ -2479,9 +2532,11 @@
           <li>
             <code>inReplyTo</code>、<code>object</code>、
             <code>target</code> 和/或 <code>tag</code> 的值是服务端拥有的对象。
-            服务端<em class="rfc2119" title="SHOULD">应当</em>递归遍历上述属性的值，以查找服务端拥有的链接对象，切<em class="rfc2119" title="SHOULD">应当</em>设置递归最大限制（即，忽略嵌套层数太深以至于接收方的粉丝可能不介意
+            服务端<em class="rfc2119" title="SHOULD">应当</em>递归遍历上述属性的值，以查找服务端拥有的链接对象，切<em class="rfc2119"
+              title="SHOULD">应当</em>设置递归最大限制（即，忽略嵌套层数太深以至于接收方的粉丝可能不介意
             他们是否不再收到不直接涉及接收方的更新的情形）。
-            服务端<em class="rfc2119" title="MUST">必须</em>仅定位正在转发的原始对象上的 <code>to</code>、<code>cc</code> 和/或 <code>audience</code> 的值，
+            服务端<em class="rfc2119" title="MUST">必须</em>仅定位正在转发的原始对象上的 <code>to</code>、<code>cc</code> 和/或
+            <code>audience</code> 的值，
             且在递归遍历链接对象时不获取任何新的收件方（以防止这些收件方被客户端有意修改）。
           </li>
         </ul>
@@ -2498,16 +2553,18 @@
           因此，ActivityPub 提供了一种可选机制来满足这两种用例。
         </p>
         <p>
-          当对象正在被投递到源行为体的粉丝时，服务端<em class="rfc2119" title="MAY">可以</em>通过识别所有共享相同 <a href="https://w3c.wholetrans.org/activitypub/#sharedInbox">sharedInbox</a> 的粉丝
+          当对象正在被投递到源行为体的粉丝时，服务端<em class="rfc2119" title="MAY">可以</em>通过识别所有共享相同 <a
+            href="https://w3c.wholetrans.org/activitypub/#sharedInbox">sharedInbox</a> 的粉丝
           来减少投递到的接收方行为体的数量，不将这些粉丝将作为单个接收方，而是将对象投递到上述 <code>sharedInbox</code>。
           因此，在这种情形下，外站/接收消息的服务端参与确定目标并将对特定收件箱执行投递操作。
         </p>
         <p>
-          此外，如果某个对象的地址被设为特殊  <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共</a> 集合，
+          此外，如果某个对象的地址被设为特殊 <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共</a> 集合，
           服务端<em class="rfc2119" title="MAY">可以</em>将该对象投递到网络上所有已知的 <code>sharedInbox</code> 端点。
         </p>
         <p>
-          将具有公共地址的活动发送到 <code>sharedInbox</code> 端点的源服务端<em class="rfc2119" title="MUST">必须</em>仍然投递到其它没有 <code>sharedInbox</code> 并且不会通过 <code>sharedInbox</code> 机制接收活动的行为体与集合地址（通过 <code>to</code>、
+          将具有公共地址的活动发送到 <code>sharedInbox</code> 端点的源服务端<em class="rfc2119" title="MUST">必须</em>仍然投递到其它没有
+          <code>sharedInbox</code> 并且不会通过 <code>sharedInbox</code> 机制接收活动的行为体与集合地址（通过 <code>to</code>、
           <code>bto</code>、<code>cc</code>、<code>bcc</code> 和 <code>audience</code> 确定）。
         </p>
       </section>
@@ -2539,7 +2596,8 @@
     <section id="delete-activity-inbox">
       <h3 id="x7-4-delete-activity"><span class="secno">7.4 </span>删除活动 (Delete Activity)</h3>
       <p>
-        接收此活动的副作用是（假设 <code>object</code> 被发送活动的行为体/服务端拥有），接收删除活动的服务端 <em class="rfc2119" title="SHOULD">应当</em>删除其对具有相同 <code>id</code>
+        接收此活动的副作用是（假设 <code>object</code> 被发送活动的行为体/服务端拥有），接收删除活动的服务端 <em class="rfc2119" title="SHOULD">应当</em>删除其对具有相同
+        <code>id</code>
         的 <code>object</code> 的表示形式，并且<em class="rfc2119" title="MAY">可以</em>用 <code>Tombstone</code> 对象替换该表示形式。
       </p>
       <p>
@@ -2551,17 +2609,21 @@
       <h3 id="x7-5-follow-activity"><span class="secno">7.5 </span>关注活动 (Follow Activity)</h3>
 
       <p>
-        在<strong>收件箱</strong>中接收此活动的副作用是，服务端<em class="rfc2119" title="SHOULD">应当</em>生成一个 <code>Accept</code> 或 <code>Reject</code> 活动，
+        在<strong>收件箱</strong>中接收此活动的副作用是，服务端<em class="rfc2119" title="SHOULD">应当</em>生成一个 <code>Accept</code> 或
+        <code>Reject</code> 活动，
         其中 Follow 作为 <code>object</code>，并将其投递到发出 Follow 的 <code>actor</code>。
-        <code>Accept</code> 或 <code>Reject</code> <em class="rfc2119" title="MAY">可以</em>自动生成，也<em class="rfc2119" title="MAY">可以</em>是用户输入的结果（可能在用户进行审核后有所延迟）。
+        <code>Accept</code> 或 <code>Reject</code> <em class="rfc2119" title="MAY">可以</em>自动生成，也<em class="rfc2119"
+          title="MAY">可以</em>是用户输入的结果（可能在用户进行审核后有所延迟）。
         尽管如此，服务端<em class="rfc2119" title="MAY">可以</em>选择不显式发送 <code>Reject</code> 以响应该 <code>Follow</code>，
         实现者应当意识到发送请求的服务端可能会处于中间状态。例如，服务端可能不会发送 <code>Reject</code> 以保护用户的隐私。
       </p>
 
       <p>
-        如果接收到引用此 <code>Follow</code> 为对象的 <code>Accept</code>，服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>actor</code>
+        如果接收到引用此 <code>Follow</code> 为对象的 <code>Accept</code>，服务端<em class="rfc2119" title="SHOULD">应当</em>将
+        <code>actor</code>
         添加到目标行为体的<a href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>中。
-        如果接收到的活动是 <code>Reject</code>，服务端<em class="rfc2119" title="MUST NOT">禁止</em>将发送Follow活动的行为体添加到目标行为体的<a href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>中。
+        如果接收到的活动是 <code>Reject</code>，服务端<em class="rfc2119" title="MUST NOT">禁止</em>将发送Follow活动的行为体添加到目标行为体的<a
+          href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>中。
       </p>
 
       <div class="note">
@@ -2586,7 +2648,8 @@
 
       <p>
         如果向<strong>收件箱</strong>接收的 <code>Accept</code> 的 <code>object</code> 是接收方先前发送的 <code>Follow</code> 活动，
-        则服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>actor</code> 添加到接收方的<a href="https://w3c.wholetrans.org/activitypub/#following">关注集合</a>。
+        则服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>actor</code> 添加到接收方的<a
+          href="https://w3c.wholetrans.org/activitypub/#following">关注集合</a>。
       </p>
     </section>
 
@@ -2598,7 +2661,8 @@
 
       <p>
         如果向<strong>收件箱</strong>接收的 <code>Reject</code> 的 <code>object</code> 是接收方先前发送的 <code>Follow</code> 活动，
-        则表示接收方未批准 <code>Follow</code> 请求。服务端<em class="rfc2119" title="MUST NOT">禁止</em>将 <code>actor</code> 添加到接收方的 <a href="https://w3c.wholetrans.org/activitypub/#following">关注集合</a>。
+        则表示接收方未批准 <code>Follow</code> 请求。服务端<em class="rfc2119" title="MUST NOT">禁止</em>将 <code>actor</code> 添加到接收方的 <a
+          href="https://w3c.wholetrans.org/activitypub/#following">关注集合</a>。
       </p>
     </section>
 
@@ -2621,7 +2685,8 @@
     <section id="remove-activity-inbox">
       <h3 id="x7-9-remove-activity"><span class="secno">7.9 </span>移除活动 (Remove Activity)</h3>
       <p>
-        在<strong>收件箱</strong>收到 <code>Remove</code> 活动后，服务端<em class="rfc2119" title="SHOULD">应当</em>从 <code>target</code> 属性中指定的集合中移除
+        在<strong>收件箱</strong>收到 <code>Remove</code> 活动后，服务端<em class="rfc2119" title="SHOULD">应当</em>从
+        <code>target</code> 属性中指定的集合中移除
         <code>object</code>，除非：
       </p>
       <ul>
@@ -2636,14 +2701,17 @@
     <section id="like-activity-inbox">
       <h3 id="x7-10-like-activity"><span class="secno">7.10 </span>点赞活动 (Like Activity)</h3>
       <p>
-        在<strong>收件箱</strong>中收到此活动的副作用是，如果存在<a href="https://w3c.wholetrans.org/activitypub/#likes"><code>likes</code></a>集合，
+        在<strong>收件箱</strong>中收到此活动的副作用是，如果存在<a
+          href="https://w3c.wholetrans.org/activitypub/#likes"><code>likes</code></a>集合，
         则服务端<em class="rfc2119" title="SHOULD">应当</em>通过将接收到的活动添加到该集合来增加目标对象的点赞计数。
       </p>
     </section>
     <section id="announce-activity-inbox">
       <h3 id="x7-11-announce-activity-sharing"><span class="secno">7.11 </span>推送（分享）活动 (Announce Activity)</h3>
       <p>
-        在<strong>收件箱</strong>中接收到 <code>Announce</code> 活动后，如果存在 <a href="https://w3c.wholetrans.org/activitypub/#shares"><code>shares</code></a>集合，则服务端<em class="rfc2119" title="SHOULD">应当</em>通过将接收到的活动添加到该集合来增加对象的分享计数。
+        在<strong>收件箱</strong>中接收到 <code>Announce</code> 活动后，如果存在 <a
+          href="https://w3c.wholetrans.org/activitypub/#shares"><code>shares</code></a>集合，则服务端<em class="rfc2119"
+          title="SHOULD">应当</em>通过将接收到的活动添加到该集合来增加对象的分享计数。
       </p>
       <div class="note">
         <div role="heading" class="note-title marker" id="h-note-12" aria-level="4"><span>注</span></div>
@@ -2685,9 +2753,9 @@
       <a href="https://www.w3.org/International/wiki/LanguageDetection">
         语言检测的指导</a>。
     </p>
-</section>
+  </section>
 
-<section id="security-considerations" class="appendix informative">
+  <section id="security-considerations" class="appendix informative">
     <!--OddPage-->
     <h2 id="b-security-considerations"><span class="secno">B. </span>安全注意事项</h2>
     <p><em>本节为非规范性内容。</em></p>
@@ -2802,15 +2870,15 @@
     <section id="security-not-displaying-bto-bcc">
       <h3 id="b-11-not-displaying-bto-and-bcc-properties"><span class="secno">B.11 </span>不显示 bto 和 bcc 属性</h3>
       <p>
-        本规范已经规定 <code>bto</code> 和 <code>bcc</code> 
+        本规范已经规定 <code>bto</code> 和 <code>bcc</code>
         <a href="https://w3c.wholetrans.org/activitypub/#remove-bto-bcc-before-delivery">必须在投递前被移除</a>，
         但服务端可以自由决定如何在其自身存储系统中表示对象。
         然而，由于 <code>bto</code> 和 <code>bcc</code> 仅为了让对象/活动的原作者知晓或看到，服务端在对外展示时也应省略这些属性。
       </p>
     </section>
-</section>
+  </section>
 
-<section class="appendix informative" id="acknowledgements">
+  <section class="appendix informative" id="acknowledgements">
     <!--OddPage-->
     <h2 id="c-acknowledgements"><span class="secno">C. </span>致谢</h2>
     <p><em>本节为非规范性内容。</em></p>
@@ -2832,13 +2900,17 @@
     </p>
 
     <p>
-      当标准移交给 <abbr title="World Wide Web Consortium">W3C</abbr> 社交网络工作组时，Jessica Tallon 和 Christine Lemmer-Webber 接手成为编辑者，并完成了从 Erin Shepherd 的文档到当前状态 ActivityPub 的大部分过渡。本规范的大部分内容是在社会工作组的长期反馈过程中重写和重新组织的。
+      当标准移交给 <abbr title="World Wide Web Consortium">W3C</abbr> 社交网络工作组时，Jessica Tallon 和 Christine Lemmer-Webber
+      接手成为编辑者，并完成了从 Erin Shepherd 的文档到当前状态 ActivityPub 的大部分过渡。本规范的大部分内容是在社会工作组的长期反馈过程中重写和重新组织的。
     </p>
 
     <p>
       ActivityPub 是在 W3C 社交网络工作组许多成员的精心投入形成的。
-      ActivityPub 特别感谢 Amy Guy，她将不同社会工作组文件的理念进行映射，例如她在 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">Social Web Protocols</a></cite>] 上的卓越工作。
-      Amy 和 Christopher Allan Webber 一起通过四天的冲刺，为 ActivityPub 规范的重大重构奠定了基础。这些修订使客户端到服务端和服务端间部分之间的分界更加清晰，同时明确了 ActivityPub 与 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-LDN">LDN</a></cite>] 的关系，以及许多其他改进。
+      ActivityPub 特别感谢 Amy Guy，她将不同社会工作组文件的理念进行映射，例如她在 [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">Social Web Protocols</a></cite>]
+      上的卓越工作。
+      Amy 和 Christopher Allan Webber 一起通过四天的冲刺，为 ActivityPub 规范的重大重构奠定了基础。这些修订使客户端到服务端和服务端间部分之间的分界更加清晰，同时明确了 ActivityPub
+      与 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-LDN">LDN</a></cite>] 的关系，以及许多其他改进。
       特别感谢 Benjamin Goering 制作了实现报告模板。
       同时感谢 mray 设计了出色的教程插图（这些插图与本文档其余部分的许可一致）。
     </p>
@@ -2870,7 +2942,7 @@
       您应享有通讯自由的权利；
       我们希望我们为之付出的努力，即使微不足道，也能有所帮助。
     </p>
-</section>
+  </section>
 
 
   <section id="references" class="appendix"><!--OddPage-->
