@@ -864,7 +864,7 @@
           <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-c2s-response-dos"
               class="tocxref"><span class="secno">B.9 </span>客户端到服务端的响应拒绝服务攻击</a></li>
           <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-sanitizing-content"
-              class="tocxref"><span class="secno">B.10 </span>内容清理</a></li>
+              class="tocxref"><span class="secno">B.10 </span>内容清洗</a></li>
           <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-not-displaying-bto-bcc"
               class="tocxref"><span class="secno">B.11 </span>不显示 bto 与 bcc 属性</a></li>
         </ol>
@@ -2668,293 +2668,215 @@
 
   <section id="i18n-concerns" class="appendix informative">
     <!--OddPage-->
-    <h2 id="a-internationalization"><span class="secno">A. </span>Internationalization</h2>
-    <p><em>This section is non-normative.</em></p>
+    <h2 id="a-internationalization"><span class="secno">A. </span>国际化</h2>
+    <p><em>本节为非规范性内容。</em></p>
     <p>
-      Building an international base of users is important in a federated
-      network.
+      在一个联邦网络中，建立一个国际化的用户群体非常重要。
       <a href="https://www.w3.org/TR/activitystreams-core/#naturalLanguageValues">
-        ActivityStreams provides tooling for internationalization of content</a>,
-      which should be used whenever possible.
-      However, it can be difficult for implementations to determine which
+        ActivityStreams 提供了内容国际化的工具</a>，
+      应尽可能使用这些工具。
+      然而，对于实现者而言，确定将哪些
       <a href="https://www.w3.org/TR/activitystreams-core/#defaultlangcontext">
-        <code>@language</code> property</a>
-      to provide for user-submitted content.
-      The
+        <code>@language</code> 属性</a>
+      用于用户提交的内容可能会很困难。
       <a href="https://www.w3.org/International/"><abbr title="World Wide Web Consortium">W3C</abbr>
-        Internationalization group</a>
-      provides some
+        国际化小组</a>
+      提供了有关
       <a href="https://www.w3.org/International/wiki/LanguageDetection">
-        guidance on language detection</a>.
+        语言检测的指导</a>。
     </p>
-  </section>
+</section>
 
-  <section id="security-considerations" class="appendix informative">
+<section id="security-considerations" class="appendix informative">
     <!--OddPage-->
-    <h2 id="b-security-considerations"><span class="secno">B. </span>Security Considerations</h2>
-    <p><em>This section is non-normative.</em></p>
+    <h2 id="b-security-considerations"><span class="secno">B. </span>安全注意事项</h2>
+    <p><em>本节为非规范性内容。</em></p>
 
     <section id="authorization">
-      <h3 id="b-1-authentication-and-authorization"><span class="secno">B.1 </span>Authentication and Authorization</h3>
+      <h3 id="b-1-authentication-and-authorization"><span class="secno">B.1 </span>身份验证与授权</h3>
       <p>
-        ActivityPub uses authentication for two purposes; first, to
-        authenticate clients to servers, and secondly in federated
-        implementations to authenticate servers to each other.
+        ActivityPub 的身份验证用于两个场景：首先，用于在服务端认证客户端，其次，在联邦实现中，用于服务端间彼此认证。
       </p>
 
       <p>
-        Unfortunately at the time of standardization, there are no strongly
-        agreed upon mechanisms for authentication.
-        Some possible directions for authentication are laid out
-        <a href="https://www.w3.org/wiki/SocialCG/ActivityPub/Authentication_Authorization">in
-          the Social Web Community Group Authentication and
-          Authorization best practices report</a>.
+        遗憾的是，在标准化过程中，没有强共识的认证机制。
+        一些可能的认证方向可以在社交网络社区讨论组的
+        <a href="https://www.w3.org/wiki/SocialCG/ActivityPub/Authentication_Authorization">《身份验证与授权最佳实践报告》</a>中找到。
       </p>
-
     </section>
 
     <section id="security-verification">
-      <h3 id="b-2-verification"><span class="secno">B.2 </span>Verification</h3>
+      <h3 id="b-2-verification"><span class="secno">B.2 </span>验证</h3>
       <p>
-        Servers should not trust client submitted content, and
-        federated servers also should not trust content received from a server
-        other than the content's origin without some form of verification.
+        服务端不应信任客户端提交的内容，联合式服务端也不应在没有某种形式验证的情况下信任由其他非内容来源服务端接收的内容。
       </p>
       <p>
-        Servers should be careful to verify that new content is really posted
-        by the actor that claims to be posting it, and that the actor has
-        permission to update the resources it claims to.
-        See also
+        服务端应谨慎验证新内容是否确由其声明的行为体发布，并验证该行为体是否有权更新其声明要更新的资源。
+        另请查阅
         <a href="https://w3c.wholetrans.org/activitypub/#obj" class="sec-ref"><span class="secno">3.</span> <span
-            class="sec-title">Objects</span></a> and <a href="https://w3c.wholetrans.org/activitypub/#authorization"
-          class="sec-ref"><span class="secno">B.1</span> <span class="sec-title">Authentication and
-            Authorization</span></a>.
+            class="sec-title">对象</span></a> 及 <a href="https://w3c.wholetrans.org/activitypub/#authorization"
+          class="sec-ref"><span class="secno">B.1</span> <span class="sec-title">身份验证与授权</span></a>。
       </p>
     </section>
 
     <section id="security-localhost">
-      <h3 id="b-3-accessing-localhost-uris"><span class="secno">B.3 </span>Accessing localhost URIs</h3>
+      <h3 id="b-3-accessing-localhost-uris"><span class="secno">B.3 </span>访问本地 URI</h3>
       <p>
-        It is often convenient while developing to test against a process
-        running on localhost.
-        However, permitting requests to localhost in a production client or
-        server instance can be dangerous.
-        Making requests to URIs on localhost which do not require
-        authorization may unintentionally access or modify resources assumed
-        to be protected to be usable by localhost-only.
+        在开发过程中，本地运行测试通常很方便。
+        然而，在生产环境中的客户端或服务端实例中允许请求本地 URI 是危险的。
+        对不需要授权的本地 URI 发出请求，可能会无意中访问或修改默认被 localhost 保护的资源。
       </p>
       <p>
-        If your ActivityPub server or client does permit making requests to
-        localhost URIs for development purposes, consider making it a
-        configuration option which defaults to off.
+        如果您的 ActivityPub 服务端或客户端允许在开发目的中对本地 URI 发出请求，请考虑使其成为一个默认关闭的配置选项。
       </p>
     </section>
 
     <section id="security-uri-schemes">
-      <h3 id="b-4-uri-schemes"><span class="secno">B.4 </span>URI Schemes</h3>
+      <h3 id="b-4-uri-schemes"><span class="secno">B.4 </span>URI 方案</h3>
       <p>
-        There are many types of URIs aside from just <code>http</code> and
-        <code>https</code>.
-        Some libraries which handle fetching requests at various URI schemes
-        may try to be smart and reference schemes which may be undesirable,
-        such as <code>file</code>.
-        Client and server authors should carefully check how their libraries
-        handle requests, and potentially whitelist only certain safe URI
-        types, such as <code>http</code> and <code>https</code>.
+        除了 <code>http</code> 与 <code>https</code>，还有许多类型的 URI。
+        某些处理不同 URI 方案请求的库可能试图进行智能化处理，并引用非预期的 URI 方案，例如 <code>file</code>。
+        客户端和服务端作者应仔细检查相关的库如何处理这些请求，并在条件允许的情况下仅放行某些安全的 URI 类型，例如 <code>http</code> 和 <code>https</code>。
       </p>
     </section>
 
     <section id="security-recursive-objects">
-      <h3 id="b-5-recursive-objects"><span class="secno">B.5 </span>Recursive Objects</h3>
+      <h3 id="b-5-recursive-objects"><span class="secno">B.5 </span>递归式对象</h3>
       <p>
-        Servers should set a limit on how deep to recurse while resolving objects,
-        or otherwise specially handle ActivityStreams objects with recursive
-        references.
-        Failure to properly do so may result in denial-of-service security
-        vulnerabilities.
+        服务端应设置解析对象时递归的深度限制，或对带有递归引用的 ActivityStreams 对象进行特别处理。
+        未能规范地处理这些对象可能导致拒绝服务（DoS）安全漏洞。
       </p>
     </section>
 
     <section id="security-spam">
-      <h3 id="b-6-spam"><span class="secno">B.6 </span>Spam</h3>
+      <h3 id="b-6-spam"><span class="secno">B.6 </span>骚扰信息</h3>
       <p>
-        Spam is a problem in any network, perhaps especially so in federated
-        networks.
-        While no specific mechanism for combating spam is provided in
-        ActivityPub, it is recommended that servers filter incoming content
-        both by local untrusted users and any remote users through some
-        sort of spam filter.
+        在任何网络中骚扰信息都是一个问题，在联合式网络中尤其如此。
+        虽然 ActivityPub 并未提供专门的骚扰防范机制，但建议服务端通过某种骚扰信息过滤机制过滤来自本站的不受信任用户和任何外站用户传入的内容。
       </p>
     </section>
 
     <section id="security-federation-dos">
-      <h3 id="b-7-federation-denial-of-service"><span class="secno">B.7 </span>Federation denial-of-service</h3>
+      <h3 id="b-7-federation-denial-of-service"><span class="secno">B.7 </span>联合式拒绝服务攻击</h3>
       <p>
-        Servers should implement protections against denial-of-service
-        attacks from other, federated servers.
-        This can be done using, for example, some kind of ratelimiting
-        mechanism.
-        Servers should be especially careful to implement this protection
-        around activities that involve side effects.
-        Servers <em class="rfc2119" title="SHOULD">SHOULD</em> also take care not to overload servers with
-        submissions, for example by using an exponential backoff strategy.
+        服务端应实现防止来自其他联邦服务端的拒绝服务攻击的保护措施。
+        例如，可以使用某种速率限制机制完成此操作。
+        特别是在涉及处理有副作用的活动时应仔细实施这一保护。
+        服务端嗨 <em class="rfc2119" title="SHOULD">应当</em> 注意不会因提交的信息量过大而导致对其他服务端的过载，例如通过使用指数退避策略规避这一点。
       </p>
     </section>
 
     <section id="security-c2s-ratelimiting">
-      <h3 id="b-8-client-to-server-ratelimiting"><span class="secno">B.8 </span>Client-to-server ratelimiting</h3>
+      <h3 id="b-8-client-to-server-ratelimiting"><span class="secno">B.8 </span>客户端到服务端的请求速率限制</h3>
       <p>
-        Servers should ratelimit API client submissions.
-        This serves two purposes:
+        服务端应对 API 客户端提交内容进行速率限制。
+        这样做有两个目的：
       </p>
       <ol>
         <li>
-          It prevents malicious clients from conducting
-          denial-of-service attacks on the server.
+          防止恶意客户端对服务端进行拒绝服务攻击。
         </li>
         <li>
-          It ensures that the server will not distribute so many
-          activities that it triggers another
-          server's <a href="https://w3c.wholetrans.org/activitypub/#security-federation-dos">denial-of-service
-            protections</a>.
+          确保服务端不会分发过多的活动，触发其他服务端的
+          <a href="https://w3c.wholetrans.org/activitypub/#security-federation-dos">拒绝服务保护</a>。
         </li>
       </ol>
       <p></p>
     </section>
 
     <section id="security-c2s-response-dos">
-      <h3 id="b-9-client-to-server-response-denial-of-service"><span class="secno">B.9 </span>Client-to-server response
-        denial-of-service</h3>
+      <h3 id="b-9-client-to-server-response-denial-of-service"><span class="secno">B.9 </span>客户端到服务端响应的拒绝服务攻击</h3>
       <p>
-        In order to prevent a client from being overloaded by oversized
-        Collections, servers should take care to limit the size of Collection
-        pages they return to clients.
-        Clients should still be prepared to limit the size of
-        responses they are willing to handle in case they connect to malicious or
-        compromised servers, for example by timing out and generating
-        an error.
+        为防止客户端因特大集合超载，服务端应注意限制返回给客户端的集合页大小。
+        客户端也应准备好限制他们可以处理的响应大小，以防连接到恶意或被入侵的服务端，例如通过超时并生成错误来缓解这一点。
       </p>
     </section>
 
     <section id="security-sanitizing-content">
-      <h3 id="b-10-sanitizing-content"><span class="secno">B.10 </span>Sanitizing Content</h3>
+      <h3 id="b-10-sanitizing-content"><span class="secno">B.10 </span>内容清洗</h3>
       <p>
-        Any activity field being rendered for browsers (or other rich
-        text enabled applications) should take care to sanitize fields
-        containing markup to prevent cross site scripting attacks.
+        任何为浏览器（或其他支持富文本应用程序）渲染的活动字段都应注意清洗包含标记的字段，以防止跨站脚本攻击。
       </p>
     </section>
 
     <section id="security-not-displaying-bto-bcc">
-      <h3 id="b-11-not-displaying-bto-and-bcc-properties"><span class="secno">B.11 </span>Not displaying bto and bcc
-        properties</h3>
+      <h3 id="b-11-not-displaying-bto-and-bcc-properties"><span class="secno">B.11 </span>不显示 bto 和 bcc 属性</h3>
       <p>
-        <code>bto</code> and <code>bcc</code> already
-        <a href="https://w3c.wholetrans.org/activitypub/#remove-bto-bcc-before-delivery">must be removed for
-          delivery</a>,
-        but servers are free to decide how to represent the object
-        in their own storage systems.
-        However, since <code>bto</code> and <code>bcc</code> are only intended
-        to be known/seen by the original author of the object/activity,
-        servers should omit these properties during display as well.
+        本规范已经规定 <code>bto</code> 和 <code>bcc</code> 
+        <a href="https://w3c.wholetrans.org/activitypub/#remove-bto-bcc-before-delivery">必须在投递前被移除</a>，
+        但服务端可以自由决定如何在其自身存储系统中表示对象。
+        然而，由于 <code>bto</code> 和 <code>bcc</code> 仅为了让对象/活动的原作者知晓或看到，服务端在对外展示时也应省略这些属性。
       </p>
     </section>
-  </section>
+</section>
 
-  <section class="appendix informative" id="acknowledgements">
+<section class="appendix informative" id="acknowledgements">
     <!--OddPage-->
-    <h2 id="c-acknowledgements"><span class="secno">C. </span>Acknowledgements</h2>
-    <p><em>This section is non-normative.</em></p>
+    <h2 id="c-acknowledgements"><span class="secno">C. </span>致谢</h2>
+    <p><em>本节为非规范性内容。</em></p>
     <p>
-      This specification comes from years of hard work and experience by a
-      number of communities exploring the space of federation on the web.
-      In particular, much of this specification is informed by
+      本规范来自许多社区在 Web 联合领域多年经验和努力的结晶。
+      特别是，本规范的许多内容受到了
       <a href="https://www.w3.org/community/ostatus/wiki/Main_Page">OStatus</a>
-      and the
-      <a href="https://github.com/pump-io/pump.io/blob/master/API.md">Pump API</a>,
-      as pioneered by StatusNet (now GNU Social) and Pump.io.
-      Both of those initiatives were the product of many developers' hard work,
-      but more than anyone, Evan Prodromou has been a constant leader in this
-      space, and it is unlikely that ActivityPub would exist in something
-      resembling its current state without his hard work.
-    </p>
-
-    <p>
-      Erin Shepherd built the initial version of this specification, borrowed
-      from the ideas in the
+      和
       <a href="https://github.com/pump-io/pump.io/blob/master/API.md">Pump API</a>
-      document, mostly as a complete rewrite of text, but sharing most of
-      the primary ideas while switching from ActivityStreams 1 to
-      ActivityStreams 2.
+      的启发，这些均由 StatusNet（现为 GNU Social）和 Pump.io 首创。
+      这些项目是许多开发人员勤奋工作的成果，而 Evan Prodromou 在这一领域起到了至关重要的领导作用。
+      如果没有他的努力，ActivityPub 很可能不会以现在的形态存在。
     </p>
 
     <p>
-      Jessica Tallon and Christine Lemmer-Webber took over as editors when
-      the standard moved to the <abbr title="World Wide Web Consortium">W3C</abbr> Social Working Group and did the
-      majority
-      of transition from Erin Shepherd's document to its current state as
-      ActivityPub.
-      Much of the document was rewritten and reorganized under the long feedback
-      process of the Social Working Group.
+      Erin Shepherd 构建了本规范的初始版本，其核心理念来源于
+      <a href="https://github.com/pump-io/pump.io/blob/master/API.md">Pump API</a>
+      文档，其中大部分文本被完全重写，同时从 ActivityStreams 1 转换到 ActivityStreams 2，但主要思想仍然保持一致。
     </p>
 
     <p>
-      ActivityPub has been shaped by the careful input of many members in the
-      <abbr title="World Wide Web Consortium">W3C</abbr> Social Working Group.
-      ActivityPub especially owes a great debt to Amy Guy, who has done more
-      than anyone to map the ideas across the different Social Working Group
-      documents through her work on [<cite><a class="bibref"
-          href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">Social-Web-Protocols</a></cite>].
-      Amy also laid out the foundations for a significant refactoring of the
-      ActivityPub spec while sprinting for four days with Christopher Allan
-      Webber.
-      These revisions lead to cleaner separation between the client to server
-      and server components, along with clarity about ActivityPub's relationship
-      to [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-LDN">LDN</a></cite>], among many
-      other
-      improvements.
-      Special thanks also goes to Benjamin Goering for putting together the
-      implementation report template.
-      We also thank mray for producing the spectacular tutorial illustrations
-      (which are licensed under the same license as the rest of this
-      document).
+      当标准移交给 <abbr title="World Wide Web Consortium">W3C</abbr> 社交网络工作组时，Jessica Tallon 和 Christine Lemmer-Webber 接手成为编辑者，并完成了从 Erin Shepherd 的文档到当前状态 ActivityPub 的大部分过渡。本规范的大部分内容是在社会工作组的长期反馈过程中重写和重新组织的。
     </p>
 
     <p>
-      Many people also helped ActivityPub along through careful review.
-      In particular, thanks to:
-      Aaron Parecki,
-      AJ Jordan,
-      Benjamin Goering,
-      Caleb Langeslag,
-      Elsa Balderrama,
-      elf Pavlik,
-      Eugen Rochko,
-      Erik Wilde,
-      Jason Robinson,
-      Manu Sporny,
-      Michael Vogel,
-      Mike Macgirvin,
-      nightpool,
-      Puck Meerburg,
-      Sandro Hawke,
-      Sarven Capadisli,
-      Tantek Çelik, and
-      Yuri Volkov.
+      ActivityPub 是在 W3C 社交网络工作组许多成员的精心投入形成的。
+      ActivityPub 特别感谢 Amy Guy，她将不同社会工作组文件的理念进行映射，例如她在 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">Social Web Protocols</a></cite>] 上的卓越工作。
+      Amy 和 Christopher Allan Webber 一起通过四天的冲刺，为 ActivityPub 规范的重大重构奠定了基础。这些修订使客户端到服务端和服务端间部分之间的分界更加清晰，同时明确了 ActivityPub 与 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-LDN">LDN</a></cite>] 的关系，以及许多其他改进。
+      特别感谢 Benjamin Goering 制作了实现报告模板。
+      同时感谢 mray 设计了出色的教程插图（这些插图与本文档其余部分的许可一致）。
     </p>
 
     <p>
-      This document is dedicated to all citizens of planet Earth.
-      You deserve freedom of communication; we hope we have contributed in
-      some part, however small, towards that goal and right.
+      许多人通过一丝不苟地审核帮助了 ActivityPub。其中，特别感谢：
+      Aaron Parecki、
+      AJ Jordan、
+      Benjamin Goering、
+      Caleb Langeslag、
+      Elsa Balderrama、
+      elf Pavlik、
+      Eugen Rochko、
+      Erik Wilde、
+      Jason Robinson、
+      Manu Sporny、
+      Michael Vogel、
+      Mike Macgirvin、
+      nightpool、
+      Puck Meerburg、
+      Sandro Hawke、
+      Sarven Capadisli、
+      Tantek Çelik，及
+      Yuri Volkov。
     </p>
-  </section>
+
+    <p>
+      谨将此文档献给地球上的所有公民。
+      您应享有通讯自由的权利；
+      我们希望我们为之付出的努力，即使微不足道，也能有所帮助。
+    </p>
+</section>
 
 
   <section id="references" class="appendix"><!--OddPage-->
-    <h2 id="d-references"><span class="secno">D. </span>References</h2>
+    <h2 id="d-references"><span class="secno">D. </span>资料引用</h2>
     <section id="normative-references">
-      <h3 id="d-1-normative-references"><span class="secno">D.1 </span>Normative references</h3>
+      <h3 id="d-1-normative-references"><span class="secno">D.1 </span>规范性引用</h3>
       <dl class="bibliography">
         <dt id="bib-Activity-Vocabulary">[Activity-Vocabulary]</dt>
         <dd><a href="https://www.w3.org/TR/activitystreams-vocabulary/"><cite>Activity Vocabulary</cite></a>. J. Snell.
@@ -2993,7 +2915,7 @@
       </dl>
     </section>
     <section id="informative-references">
-      <h3 id="d-2-informative-references"><span class="secno">D.2 </span>Informative references</h3>
+      <h3 id="d-2-informative-references"><span class="secno">D.2 </span>资料性引用</h3>
       <dl class="bibliography">
         <dt id="bib-Micropub">[Micropub]</dt>
         <dd><a href="https://www.w3.org/TR/micropub/"><cite>Micropub</cite></a>. Aaron Parecki. W3C. 23 May 2017. W3C
