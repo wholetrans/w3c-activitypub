@@ -1366,6 +1366,7 @@
             小A认为修复小小的拼写错误不值得失去她精心制作的org-mode标记，于是决定等到回家再进行更新。
           </p>
         </div>
+      </div>
     </section>
   </section>
 
@@ -1415,69 +1416,6 @@
     </div>
 
     <section id="actor-objects">
-      <h3 id="x4-1-actor-objects"><span class="secno">4.1 </span><i>行为体</i>对象</h3>
-      <p>
-        除必须包含
-        <a href="https://w3c.wholetrans.org/activitypub/#obj-id" class="sec-ref"><span class="secno">3.1</span> <span
-            class="sec-title">对象标识符</span></a>规定的属性外，
-        <i>行为体</i> 对象还<em class="rfc2119" title="MUST">必须</em>包含以下属性：
-      </p>
-      <dl>
-        <dt id="inbox-property">收件箱</dt>
-        <dd>
-          对一个 [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
-          <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-            <code>OrderedCollection</code></a>
-          的引用，包含该<i>行为体</i>接收到的所有消息；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#inbox" class="sec-ref"><span class="secno">5.2</span> <span
-              class="sec-title">收件箱</span></a>。
-        </dd>
-        <dt id="outbox-property">发件箱</dt>
-        <dd>
-          对一个 [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
-          <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
-            <code>OrderedCollection</code></a>
-          的引用，包含该<i>行为体</i>发送的所有消息；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#outbox" class="sec-ref"><span class="secno">5.1</span> <span
-              class="sec-title">发件箱</span></a>。
-        </dd>
-      </dl>
-      <p>
-        实现者 <em class="rfc2119" title="SHOULD">应当</em> 另外提供以下属性：
-      </p>
-      <dl>
-        <dt id="following-property">following（关注）</dt>
-        <dd>
-          一个 [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
-          包含该<i>行为体</i>关注的所有<i>行为体</i>；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span class="secno">5.4</span>
-            <span class="sec-title">关注集合</span></a>。
-        </dd>
-        <dt id="followers-property">followers（粉丝）</dt>
-        <dd>
-          一个 [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
-          包含关注该<i>行为体</i>的所有<i>行为体</i>；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span class="secno">5.3</span>
-            <span class="sec-title">粉丝集合</span></a>。
-        </dd>
-      </dl>
-      <p>
-        实现者 <em class="rfc2119" title="MAY">可以</em> 提供以下属性：
-      </p>
-      <dl>
-        <dt id="liked-property">liked（点赞）</dt>
-        <dd>
-          一个 [<cite><a class="bibref"
-              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 集合的链接，
-          包含该<i>行为体</i>点赞的所有对象；详见
-          <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span class="secno">5.5</span> <span
-              class="sec-title">点赞集合</span></a>。
-        </dd>
-      </dl>
       <h3 id="x4-1-actor-objects"><span class="secno">4.1 </span><i>行为体</i> 对象</h3>
       <p>
         除 <a href="https://w3c.wholetrans.org/activitypub/#obj-id" class="sec-ref"><span class="secno">3.1</span> <span
