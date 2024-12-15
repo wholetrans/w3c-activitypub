@@ -1527,3 +1527,13 @@ Possible extra rowspan handling
 		color: var(--logo-text);
 		padding: 3px 10px;
 	}
+
+/******************************************************************************/
+/*                             Custom CSS                                     */
+/******************************************************************************/
+
+.translator-section {
+  background-color: #007cff3d;
+  padding: 10px;
+  border-radius: 5px;
+}
