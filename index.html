@@ -1,0 +1,2904 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="generator" content="ReSpec 19.0.1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://assets.wholetrans.org/fonts/MiSans/include.css">
+  <style>
+    /* --- EXAMPLES --- */
+    div.example-title {
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+
+    div.example-title span {
+      text-transform: uppercase;
+    }
+
+    aside.example,
+    div.example,
+    div.illegal-example {
+      padding: 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+
+    div.illegal-example {
+      color: red
+    }
+
+    div.illegal-example p {
+      color: black
+    }
+
+    aside.example,
+    div.example {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+      border-color: #e0cb52;
+      background: #fcfaee;
+    }
+
+    aside.example div.example {
+      border-left-width: .1em;
+      border-color: #999;
+      background: #fff;
+    }
+
+    aside.example div.example div.example-title {
+      color: #999;
+    }
+  </style>
+  <style>
+    /* --- ISSUES/NOTES --- */
+    div.issue-title,
+    div.note-title,
+    div.ednote-title,
+    div.warning-title {
+      padding-right: 1em;
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+
+    div.issue-title {
+      color: #e05252;
+    }
+
+    div.note-title,
+    div.ednote-title {
+      color: #2b2;
+    }
+
+    div.warning-title {
+      color: #f22;
+    }
+
+    div.issue-title span,
+    div.note-title span,
+    div.ednote-title span,
+    div.warning-title span {
+      text-transform: uppercase;
+    }
+
+    div.note,
+    div.issue,
+    div.ednote,
+    div.warning {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    .note>p:first-child,
+    .ednote>p:first-child,
+    .issue>p:first-child,
+    .warning>p:first-child {
+      margin-top: 0
+    }
+
+    .issue,
+    .note,
+    .ednote,
+    .warning {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+    }
+
+    div.issue,
+    div.note,
+    div.ednote,
+    div.warning {
+      padding: 1em 1.2em 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+
+    span.note,
+    span.ednote,
+    span.issue,
+    span.warning {
+      padding: .1em .5em .15em;
+    }
+
+    .issue {
+      border-color: #e05252;
+      background: #fbe9e9;
+    }
+
+    .note,
+    .ednote {
+      border-color: #52e052;
+      background: #e9fbe9;
+    }
+
+    .warning {
+      border-color: #f11;
+      border-width: .2em;
+      border-style: solid;
+      background: #fbe9e9;
+    }
+
+    .warning-title:before {
+      content: "⚠";
+      /*U+26A0 WARNING SIGN*/
+      font-size: 3em;
+      float: left;
+      height: 100%;
+      padding-right: .3em;
+      vertical-align: top;
+      margin-top: -0.5em;
+    }
+
+    li.task-list-item {
+      list-style: none;
+    }
+
+    input.task-list-item-checkbox {
+      margin: 0 0.35em 0.25em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <title>ActivityPub</title>
+
+
+
+  <style>
+    img {
+      max-width: 100%;
+    }
+  </style>
+  <style id="respec-mainstyle">
+    /*****************************************************************
+     * ReSpec 3 CSS
+     * Robin Berjon - http://berjon.com/
+     *****************************************************************/
+
+    /* Override code highlighter background */
+    .hljs {
+      background: transparent !important;
+    }
+
+    /* --- INLINES --- */
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+
+    dfn {
+      font-weight: bold;
+    }
+
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+
+    a.bibref {
+      text-decoration: none;
+    }
+
+    cite .bibref {
+      font-style: normal;
+    }
+
+    code {
+      color: #c83500;
+    }
+
+    th code {
+      color: inherit;
+    }
+
+    /* --- TOC --- */
+
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+
+    /* --- TABLE --- */
+
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+
+    /* --- DL --- */
+
+    .section dd>p:first-child {
+      margin-top: 0;
+    }
+
+    .section dd>p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section dd {
+      margin-bottom: 1em;
+    }
+
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+
+    #issue-summary>ul,
+    .respec-dfn-list {
+      column-count: 2;
+    }
+
+    #issue-summary li,
+    .respec-dfn-list li {
+      list-style: none;
+    }
+
+    details.respec-tests-details {
+      margin-left: 1em;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    details.respec-tests-details>* {
+      padding-right: 2em;
+    }
+
+    details.respec-tests-details[open] {
+      z-index: 999999;
+      position: absolute;
+      border: thin solid #cad3e2;
+      border-radius: .3em;
+      background-color: white;
+      padding-bottom: .5em;
+    }
+
+    details.respec-tests-details[open]>summary {
+      border-bottom: thin solid #cad3e2;
+      padding-left: 1em;
+      margin-bottom: 1em;
+      line-height: 2em;
+    }
+
+    details.respec-tests-details>ul {
+      width: 100%;
+      margin-top: -0.3em;
+    }
+
+    details.respec-tests-details>li {
+      padding-left: 1em;
+    }
+
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+  </style>
+  <style>
+    /*
+
+    github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+    */
+
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+      color: #998;
+      font-style: italic;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+      color: #333;
+      font-weight: bold;
+    }
+
+    .hljs-number,
+    .hljs-literal,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag .hljs-attr {
+      color: #008080;
+    }
+
+    .hljs-string,
+    .hljs-doctag {
+      color: #d14;
+    }
+
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      color: #900;
+      font-weight: bold;
+    }
+
+    .hljs-subst {
+      font-weight: normal;
+    }
+
+    .hljs-type,
+    .hljs-class .hljs-title {
+      color: #458;
+      font-weight: bold;
+    }
+
+    .hljs-tag,
+    .hljs-name,
+    .hljs-attribute {
+      color: #000080;
+      font-weight: normal;
+    }
+
+    .hljs-regexp,
+    .hljs-link {
+      color: #009926;
+    }
+
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #990073;
+    }
+
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: #0086b3;
+    }
+
+    .hljs-meta {
+      color: #999;
+      font-weight: bold;
+    }
+
+    .hljs-deletion {
+      background: #fdd;
+    }
+
+    .hljs-addition {
+      background: #dfd;
+    }
+
+    .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+  <link rel="stylesheet" href="./assets/W3C-REC.css">
+  <link rel="canonical" href="https://w3c.wholetrans.org/activitypub/">
+  <script id="initialUserConfig" type="application/json">{
+    "specStatus": "REC",
+    "publishDate": "2018-01-23",
+    "previousPublishDate": "2017-12-05",
+    "previousMaturity": "PR",
+    "license": "w3c-software-doc",
+    "shortName": "activitypub",
+    "wg": "Social Web Working Group",
+    "wgURI": "https://www.w3.org/Social/WG",
+    "wgPublicList": "public-socialweb",
+    "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/72531/status",
+    "edDraftURI": "https://w3c.github.io/activitypub/",
+    "testSuiteURI": "https://test.activitypub.rocks/",
+    "errata": "https://www.w3.org/wiki/ActivityPub_errata",
+    "implementationReportURI": "https://activitypub.rocks/implementation-report",
+    "otherLinks": [
+      {
+        "key": "Repository",
+        "data": [
+          {
+            "value": "Git repository",
+            "href": "https://github.com/w3c/activitypub"
+          },
+          {
+            "value": "Issues",
+            "href": "https://github.com/w3c/activitypub/issues"
+          },
+          {
+            "value": "Commits",
+            "href": "https://github.com/w3c/activitypub/commits/gh-pages"
+          }
+        ]
+      }
+    ],
+    "editors": [
+      {
+        "name": "Christine Lemmer-Webber",
+        "url": "https://dustycloud.org/",
+        "w3cid": "57007"
+      },
+      {
+        "name": "Jessica Tallon",
+        "url": "https://tsyesika.se",
+        "w3cid": "72695"
+      }
+    ],
+    "authors": [
+      {
+        "name": "Christine Lemmer-Webber",
+        "url": "https://dustycloud.org/"
+      },
+      {
+        "name": "Jessica Tallon",
+        "url": "https://tsyesika.se"
+      },
+      {
+        "name": "Erin Shepherd",
+        "url": "http://erinshepherd.net/"
+      },
+      {
+        "name": "Amy Guy",
+        "url": "https://rhiaro.co.uk/"
+      },
+      {
+        "name": "Evan Prodromou",
+        "url": "https://en.wikipedia.org/wiki/Evan_Prodromou"
+      }
+    ],
+    "localBiblio": {
+      "ActivityStreams": {
+        "title": "Activity Streams 2.0",
+        "href": "https://www.w3.org/TR/activitystreams-core/",
+        "authors": [
+          "J. Snell"
+        ],
+        "status": "Editors Draft",
+        "publisher": "ActivityStreams Working Group"
+      },
+      "Activity-Vocabulary": {
+        "title": "Activity Vocabulary",
+        "href": "https://www.w3.org/TR/activitystreams-vocabulary/",
+        "authors": [
+          "J. Snell"
+        ],
+        "status": "Editors Draft",
+        "publisher": "ActivityStreams Working Group"
+      },
+      "OAuth-Server-Metadata": {
+        "title": "OAuth 2.0 Authorization Server Metadata",
+        "href": "https://tools.ietf.org/html/draft-ietf-oauth-discovery-06",
+        "authors": [
+          "M. Jones",
+          "N. Sakimura",
+          "J. Bradley"
+        ],
+        "status": "Internet-Draft",
+        "publisher": "OAuth Working Group"
+      }
+    },
+    "publishISODate": "2018-01-23T00:00:00.000Z",
+    "generatedSubtitle": "Recommendation 23 January 2018"
+  }</script>
+  <script defer src="https://analytics.owu.one/script.js" data-website-id="d0fbc5a4-ddcd-4e89-91e5-06c07082edf7"></script>
+  <meta name="description" content="ActivityPub 协议是一个基于 [ActivityStreams] 2.0 
+        数据格式的去中心化社交网络协议。它提供一套客户端到服务端的 API，用于创建、更新和删除内容，以及一套服务端间的联合 API，用于投递通知和
+        内容。">
+</head>
+
+<body aria-busy="false" class="h-entry toc-sidebar">
+  <div class="translator-section">
+    <dl>
+      <dt>译者声明:</dt>
+      <dd>本规范的<a href="https://www.w3.org/TR/2018/REC-activitypub-20180123/">英文版本</a>是其唯一标准版本。其他<a
+          href="https://www.w3.org/Translations/#s-activitypub ">翻译版本</a>包括本译文仅供参考。</dd>
+      <dd>译者力求翻译准确，但由于专业水平和时间限制，翻译难免出错。</dd>
+      <dd>欢迎通过以下方式提出意见建议:<br/>a. 在<a href="https://github.com/wholetrans/w3c-activitypub">翻译 Git 存储库</a>创建 Issue。<br/>b. 向 <a
+          href="mailto:errata@wholetrans.org">errata@wholetrans.org</a> 发送邮件。</dd>
+      <dt>译者:</dt>
+      <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://cdn0x12.dev/">cdn0x12</a> @<a
+          href="https://wholetrans.org/">全译</a></dd>
+    </dl>
+  </div>
+  <div class="head">
+    <p>
+      <a class="logo" href="https://www.w3.org/"><img src="./assets/W3C.svg" alt="W3C" width="72" height="48"></a>
+    </p>
+    <p><!--_hyper: 682859076;--></p>
+    <h1 class="title p-name" id="title">ActivityPub</h1>
+    <h2 id="w3c-recommendation-23-january-2018"><abbr title="World Wide Web Consortium">W3C</abbr> 推荐规范 <time
+        class="dt-published" datetime="2018-01-23">2018年1月23日</time></h2>
+    <dl>
+      <dt>当前版本:</dt>
+      <dd><a class="u-url"
+          href="https://www.w3.org/TR/2018/REC-activitypub-20180123/">https://www.w3.org/TR/2018/REC-activitypub-20180123/</a>
+      </dd>
+      <dt>最新发布版本:</dt>
+      <dd><a href="https://www.w3.org/TR/activitypub/">https://www.w3.org/TR/activitypub/</a></dd>
+      <dt>最新编辑草案:</dt>
+      <dd><a href="https://w3c.github.io/activitypub/">https://w3c.github.io/activitypub/</a></dd>
+      <dt>测试套件:</dt>
+      <dd><a href="https://test.activitypub.rocks/">https://test.activitypub.rocks/</a></dd>
+      <dt>实现报告:</dt>
+      <dd><a href="https://activitypub.rocks/implementation-report">https://activitypub.rocks/implementation-report</a>
+      </dd>
+      <dt>上一版本:</dt>
+      <dd><a
+          href="https://www.w3.org/TR/2017/PR-activitypub-20171205/">https://www.w3.org/TR/2017/PR-activitypub-20171205/</a>
+      </dd>
+      <dt>编者:</dt>
+      <dd class="p-author h-card vcard" data-editor-id="57007"><a class="u-url url p-name fn"
+          href="https://dustycloud.org/">Christine Lemmer-Webber</a></dd>
+      <dd class="p-author h-card vcard" data-editor-id="72695"><a class="u-url url p-name fn"
+          href="https://tsyesika.se/">Jessica Tallon</a></dd>
+
+      <dt>作者:</dt>
+      <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://dustycloud.org/">Christine
+          Lemmer-Webber</a></dd>
+      <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://tsyesika.se/">Jessica Tallon</a>
+      </dd>
+      <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="http://erinshepherd.net/">Erin Shepherd</a>
+      </dd>
+      <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://rhiaro.co.uk/">Amy Guy</a></dd>
+      <dd class="p-author h-card vcard"><a class="u-url url p-name fn"
+          href="https://en.wikipedia.org/wiki/Evan_Prodromou">Evan Prodromou</a></dd>
+      <dt>存储库:</dt>
+      <dd>
+        <a href="https://github.com/w3c/activitypub">
+          Git 存储库
+        </a>
+      </dd>
+      <dd>
+        <a href="https://github.com/w3c/activitypub/issues">
+          问题追踪
+        </a>
+      </dd>
+      <dd>
+        <a href="https://github.com/w3c/activitypub/commits/gh-pages">
+          提交历史
+        </a>
+      </dd>
+    </dl>
+    <p>
+      要了解自发布以来报告的任何错误或问题，请查阅
+      <a href="https://www.w3.org/wiki/ActivityPub_errata"><strong>勘误表
+        </strong></a>。
+    </p>
+    <p>
+      另可参阅 <a href="https://www.w3.org/2003/03/Translations/byTechnology?technology=activitypub">
+        <strong>翻译</strong></a>。
+    </p>
+    <p class="copyright">
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> ©
+      2018
+
+      <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup>
+      (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+      <a href="https://www.ercim.eu/"><abbr
+          title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+      <a href="https://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>).
+      <abbr title="World Wide Web Consortium">W3C</abbr> <a
+        href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+      <a rel="license" href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive
+        document license</a>
+      rules apply.
+    </p>
+    <hr title="标题分隔栏">
+  </div>
+  <section id="abstract" class="introductory">
+    <h2 id="abstract-0">摘要</h2>
+    <p>
+      ActivityPub 协议是一个基于
+      [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 2.0
+      数据格式的去中心化社交网络协议。它提供一套客户端到服务端的 API，用于创建、更新和删除内容，以及一套服务端间的联合 API，用于投递通知和
+      内容。
+    </p>
+  </section>
+
+  <section id="sotd" class="introductory">
+    <h2 id="status-of-this-document">本文档状态</h2>
+    <p>
+      <em>本节描述了本文档在发布时的状态。其它文档可能会取代本文档。当前 <abbr title="World Wide Web Consortium">W3C</abbr> 发布的文档列表以及本技术报告的最新版本参见 <a
+          href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr>
+          技术报告索引</a> (https://www.w3.org/TR/)。</em>
+    </p>
+    <p>
+      本文档由 <a href="https://www.w3.org/Social/WG">社交网络工作组</a> 作为推荐规范发布。
+    </p>
+    <p>
+      欢迎所有相关方通过工作组的 <a href="https://github.com/w3c/activitypub/issues">问题追踪看板</a> 提供实施情况、错误报告和其他意见。这些内容将由 <a
+        href="https://www.w3.org/wiki/SocialCG">社交网络社区组</a> 进行讨论，并由小组成员考虑决定是否加入到本规范的未来版本。
+    </p>
+    <p>
+      请参阅工作组的 <a href="https://activitypub.rocks/implementation-report">实现报告</a>。
+    </p>
+    <p>
+      本文档已经过 <abbr title="World Wide Web Consortium">W3C</abbr> 会员、软件开发人员以及其他 <abbr
+        title="World Wide Web Consortium">W3C</abbr> 小组和利益相关方的审核，并获指导组批准，成为 <abbr
+        title="World Wide Web Consortium">W3C</abbr> 推荐规范。它是一份处于稳定版本的文档，可以作为参考资料或在其他文档中引用。<abbr
+        title="World Wide Web Consortium">W3C</abbr> 在制定本推荐规范中的作用是引起大众对本规范的注意，并促进其广泛的部署。这提高了网络的功能与互操作性。
+    </p>
+    <p>
+      本文档由遵循 <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr>
+        专利政策</a> 的工作组编制。<abbr title="World Wide Web Consortium">W3C</abbr> 维护了一个与本小组交付成果相关的所有专利披露的<a
+        href="https://www.w3.org/2004/01/pp-impl/72531/status"
+        rel="disclosure">公开列表</a>；该页面还包含披露专利的说明。任何实际知晓某项专利，并认为此专利中含有其 <a
+        href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">基本权利要求</a> 的个人，必须依照 <a
+        href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">《W3C 专利政策》第6节</a> 进行信息披露。
+    </p>
+    <p>本文档受 <a id="w3c_process_revision" href="https://www.w3.org/2017/Process-20170301/">2017年3月1日的 <abbr
+          title="World Wide Web Consortium">W3C</abbr> 过程文档</a> 约束。
+    </p>
+  </section>
+
+  <nav id="toc">
+    <h2 class="introductory" id="table-of-contents">目录</h2>
+    <ol class="toc">
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#Overview" class="tocxref"><span
+            class="secno">1.
+          </span>概述</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#social-web-working-group"
+              class="tocxref"><span class="secno">1.1 </span>社交网络工作组</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#conformance" class="tocxref"><span
+            class="secno">2. </span>规范性</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#specification-profiles"
+              class="tocxref"><span class="secno">2.1 </span>规范概述</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#obj" class="tocxref"><span class="secno">3.
+          </span>对象</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#obj-id" class="tocxref"><span
+                class="secno">3.1 </span>对象标识符</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#retrieving-objects" class="tocxref"><span
+                class="secno">3.2 </span>检索对象</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#source-property" class="tocxref"><span
+                class="secno">3.3 </span>源属性 (Source property)</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#actors" class="tocxref"><span
+            class="secno">4.
+          </span>行为体 (Actors)</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#actor-objects" class="tocxref"><span
+                class="secno">4.1 </span><i>行为体</i>对象 (<i>Actor</i> objects)</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#collections" class="tocxref"><span
+            class="secno">5. </span>集合</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#outbox" class="tocxref"><span
+                class="secno">5.1 </span>发件箱 (Outbox)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#inbox" class="tocxref"><span
+                class="secno">5.2
+              </span>收件箱 (Inbox)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#followers" class="tocxref"><span
+                class="secno">5.3 </span>粉丝集合 (Followers Collection)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#following" class="tocxref"><span
+                class="secno">5.4 </span>关注集合 (Following Collection)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#liked" class="tocxref"><span
+                class="secno">5.5
+              </span>点赞集合 (Liked Collection)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#public-addressing" class="tocxref"><span
+                class="secno">5.6 </span>公共寻址</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#likes" class="tocxref"><span
+                class="secno">5.7
+              </span>点赞列表集合 (Likes Collection)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#shares" class="tocxref"><span
+                class="secno">5.8 </span>分享集合 (Shares Collection)</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions"
+          class="tocxref"><span class="secno">6. </span>客户端到服务端交互</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#client-addressing" class="tocxref"><span
+                class="secno">6.1 </span>客户端寻址</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#create-activity-outbox"
+              class="tocxref"><span class="secno">6.2 </span>创建活动 (Create Activity)</a>
+            <ol class="toc">
+              <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#object-without-create"
+                  class="tocxref"><span class="secno">6.2.1 </span>在不发送创建活动的情况下创建对象</a></li>
+            </ol>
+          </li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#update-activity-outbox"
+              class="tocxref"><span class="secno">6.3 </span>更新活动 (Update Activity)</a>
+            <ol class="toc">
+              <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#partial-updates"
+                  class="tocxref"><span class="secno">6.3.1 </span>部分更新</a></li>
+            </ol>
+          </li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#delete-activity-outbox"
+              class="tocxref"><span class="secno">6.4 </span>删除活动 (Delete Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#follow-activity-outbox"
+              class="tocxref"><span class="secno">6.5 </span>关注活动 (Follow Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#add-activity-outbox"
+              class="tocxref"><span class="secno">6.6 </span>添加活动 (Add Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#remove-activity-outbox"
+              class="tocxref"><span class="secno">6.7 </span>移除活动 (Remove Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#like-activity-outbox"
+              class="tocxref"><span class="secno">6.8 </span>点赞活动 (Like Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#block-activity-outbox"
+              class="tocxref"><span class="secno">6.9 </span>屏蔽活动 (Block Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#undo-activity-outbox"
+              class="tocxref"><span class="secno">6.10 </span>撤销活动 (Undo Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#client-to-server-outbox-delivery"
+              class="tocxref"><span class="secno">6.11 </span>投递</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#uploading-media" class="tocxref"><span
+                class="secno">6.12 </span>上传媒体</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#server-to-server-interactions"
+          class="tocxref"><span class="secno">7. </span>服务端间交互</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#delivery" class="tocxref"><span
+                class="secno">7.1 </span>信息投递</a>
+            <ol class="toc">
+              <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#outbox-delivery"
+                  class="tocxref"><span class="secno">7.1.1 </span>服务端间发件箱投递的要求</a>
+              </li>
+              <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#inbox-forwarding"
+                  class="tocxref"><span class="secno">7.1.2 </span>从收件箱转发</a></li>
+              <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#shared-inbox-delivery"
+                  class="tocxref"><span class="secno">7.1.3 </span>共享收件箱投递</a></li>
+            </ol>
+          </li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#create-activity-inbox"
+              class="tocxref"><span class="secno">7.2 </span>创建活动 (Create Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#update-activity-inbox"
+              class="tocxref"><span class="secno">7.3 </span>更新活动 (Update Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#delete-activity-inbox"
+              class="tocxref"><span class="secno">7.4 </span>删除活动 (Delete Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#follow-activity-inbox"
+              class="tocxref"><span class="secno">7.5 </span>关注活动 (Follow Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#accept-activity-inbox"
+              class="tocxref"><span class="secno">7.6 </span>接受活动 (Accept Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#reject-activity-inbox"
+              class="tocxref"><span class="secno">7.7 </span>拒绝活动 (Reject Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#add-activity-inbox" class="tocxref"><span
+                class="secno">7.8 </span>添加活动 (Add Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#remove-activity-inbox"
+              class="tocxref"><span class="secno">7.9 </span>移除活动 (Remove Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#like-activity-inbox"
+              class="tocxref"><span class="secno">7.10 </span>点赞活动 (Like Activity)</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#announce-activity-inbox"
+              class="tocxref"><span class="secno">7.11 </span>推送（分享）活动 (Announce Activity (sharing))</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#undo-activity-inbox"
+              class="tocxref"><span class="secno">7.12 </span>撤销活动 (Undo Activity)</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#i18n-concerns" class="tocxref"><span
+            class="secno">A. </span>国际化</a></li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-considerations"
+          class="tocxref"><span class="secno">B. </span>安全注意事项</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#authorization" class="tocxref"><span
+                class="secno">B.1 </span>身份验证与授权</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-verification"
+              class="tocxref"><span class="secno">B.2 </span>验证</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-localhost" class="tocxref"><span
+                class="secno">B.3 </span>访问本地 URI</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-uri-schemes"
+              class="tocxref"><span class="secno">B.4 </span>URI 方案</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-recursive-objects"
+              class="tocxref"><span class="secno">B.5 </span>递归式对象</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-spam" class="tocxref"><span
+                class="secno">B.6 </span>骚扰信息</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-federation-dos"
+              class="tocxref"><span class="secno">B.7 </span>联合式拒绝服务攻击</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-c2s-ratelimiting"
+              class="tocxref"><span class="secno">B.8 </span>客户端到服务端的请求速率限制</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-c2s-response-dos"
+              class="tocxref"><span class="secno">B.9 </span>客户端到服务端的响应拒绝服务攻击</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-sanitizing-content"
+              class="tocxref"><span class="secno">B.10 </span>内容清洗</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#security-not-displaying-bto-bcc"
+              class="tocxref"><span class="secno">B.11 </span>不显示 bto 与 bcc 属性</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#acknowledgements" class="tocxref"><span
+            class="secno">C. </span>致谢</a></li>
+      <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#references" class="tocxref"><span
+            class="secno">D.
+          </span>资料引用</a>
+        <ol class="toc">
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#normative-references"
+              class="tocxref"><span class="secno">D.1 </span>规范性引用</a></li>
+          <li class="tocline"><a href="https://w3c.wholetrans.org/activitypub/#informative-references"
+              class="tocxref"><span class="secno">D.2 </span>资料性引用</a></li>
+        </ol>
+      </li>
+    </ol>
+  </nav>
+
+  <section id="Overview">
+    <!--OddPage-->
+    <h2 id="x1-overview"><span class="secno">1. </span>概述</h2>
+
+    <p>ActivityPub 协议有两部分：</p>
+
+    <ul>
+      <li>
+        <b>服务端之间进行联合的协议</b>
+        （以便去中心化的网站相互共享信息）
+      </li>
+      <li>
+        <b>客户端到服务端的协议</b>
+        （以便用户，包括真实用户、机器人以及其他自动化进程，
+        通过其在服务器上的账户，使用手机、桌面端或网页应用等
+        采用 ActivityPub 进行通信）
+      </li>
+    </ul>
+
+    <p>
+      ActivityPub 的实现可以只实现其中一种，也可以两种都实现。
+      不过，一旦实现了其中一种，实现另一种并不会太复杂，
+      两者都有诸多好处（使你的网站成为去中心化社交网络的一部分，
+      并能够使用能在各种社交网站上运行的客户端和客户端库）。
+    </p>
+
+    <p>
+      在 ActivityPub 中，用户通过其在服务器上的帐户以“<a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>”的形式表示。
+      用户在不同服务器上的帐户对应于不同的行为体。
+      每个行为体都具有：
+    </p>
+
+    <ul>
+      <li><b>一个 <code>inbox</code> （收件箱）：</b>用于接收来自外界的消息</li>
+      <li><b>一个 <code>outbox</code> （发件箱）：</b>用于向外界发送消息</li>
+    </ul>
+
+    <p>
+      <img src="./assets/tutorial-1.png" alt="具有收件箱与发件箱的行为体示意图">
+    </p>
+
+    <p>
+      它们都是端点，或者说，是在 ActivityPub 行为体的 ActivityStreams 描述中列出的 URL。
+      （稍后详细讨论 ActivityStreams）。
+    </p>
+
+    <p>
+      以下是我们的朋友小A的记录示例：
+    </p>
+
+    <div class="example">
+      <div class="example-title marker"><span>示例 1</span></div>
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+ <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Person"</span>,
+ <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
+ <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Alyssa P. Hacker"</span>,
+ <span class="hljs-attr">"preferredUsername"</span>: <span class="hljs-string">"alyssa"</span>,
+ <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"一枚来自 MIT 的 Lisp 爱好者"</span>,
+ <span class="hljs-attr">"inbox"</span>: <span class="hljs-string">"https://social.example/alyssa/inbox/"</span>,
+ <span class="hljs-attr">"outbox"</span>: <span class="hljs-string">"https://social.example/alyssa/outbox/"</span>,
+ <span class="hljs-attr">"followers"</span>: <span class="hljs-string">"https://social.example/alyssa/followers/"</span>,
+ <span class="hljs-attr">"following"</span>: <span class="hljs-string">"https://social.example/alyssa/following/"</span>,
+ <span class="hljs-attr">"liked"</span>: <span class="hljs-string">"https://social.example/alyssa/liked/"</span>}</pre>
+    </div>
+
+    <p>
+      ActivityPub 使用 [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 作为其术语表。
+      这很好，因为 ActivityStreams 已经包含了您在社交网络中表示所有活动和内容所需的常用术语。
+      ActivityStreams 很可能已经涵盖了您需要的所有术语，不过即使没有，您也可以通过[<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-JSON-LD">JSON-LD</a></cite>]扩展 ActivityStreams。
+      如果您了解 JSON-LD，您可以利用JSON-LD提供的优秀的关联数据方法。
+      如果不了解，也不用担心，JSON-LD 文档与 ActivityStreams 都可以按照传统的JSON来理解。
+      （当你需要添加扩展时，JSON-LD 会真正发挥作用）。
+    </p>
+
+    <p>
+      好的，我们考虑以下场景：
+      小A想和她的朋友们聊天，她的朋友们也想和她聊天。
+      此时，“收件箱”与“发件箱”可以帮助我们实现这一需求。
+      它们在 GET 和 POST 请求中的行为不同。
+      我们看一下它们是如何运作的：
+    </p>
+
+    <p>
+      <img src="./assets/tutorial-2.png" alt="行为体的消息在外部世界、收件箱与发件箱之间流动的示意图">
+    </p>
+
+    <p>
+      总结一下：
+    </p>
+
+    <ul>
+      <li>
+        您可以通过向某人的收件箱发送 POST 请求来向他们发送消息
+        （仅限服务端间通信/联合...这种行为<em>就是</em>联合！）
+      </li>
+      <li>
+        您可以向自己的收件箱发送 GET 请求以读取最新消息
+        （客户端到服务端；这相当于读取您的社交网络信息流）
+      </li>
+      <li>
+        您可以向自己的发件箱发送 POST 请求，将消息发送给全世界
+        （客户端到服务端）
+      </li>
+      <li>
+        您可以发送 GET 请求阅读某人的发件箱内容，查看他们发布了哪些消息
+        （或至少查看您有权限查看的消息内容）。
+        （客户端到服务端和/或服务端间均可执行）
+      </li>
+    </ul>
+
+    <p>
+      当然，如果最后一种情况（向某人的发件箱发送 GET 请求）是查看别人发送消息的唯一方式，这就不是一个高效的联合协议了！
+      实际上，联合通常由服务端进行，服务端将行为体要发送的消息发送到其他服务器上行为体的收件箱中。
+    </p>
+
+    <p>
+      让我们看一个例子。
+      假设小A想和她的朋友小B叙旧。
+      她最近借给他一本书，想让他读完后还给她。
+      以下是她撰写的消息，以 ActivityStreams 对象的形式呈现：
+    </p>
+
+    <div class="example">
+      <div class="example-title marker"><span>示例 2</span></div>
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+ <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
+ <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
+ <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
+ <span class="hljs-attr">"content"</span>: <span class="hljs-string">"话说，我借你那本书你读完了没？"</span>}</pre>
+    </div>
+
+    <p>
+      这是一条发给小B的消息（note）。
+      小A将这条消息 POST 到自己的发件箱。
+    </p>
+
+    <p>
+      <img src="./assets/tutorial-3.png" alt="行为体向自身发件箱发送消息的示意图">
+    </p>
+
+    <p>
+      由于这是一个非活动对象，服务器会识别出这是一个新创建的对象，并将其包装在一个创建活动（Create actiivty）中。
+      （在 ActivityPub 中传递的活动通常遵循某个行为体对某个对象执行某种活动的模式。
+      在本例中，此活动是由一个 Person 发布的针对消息对象的创建活动）。
+    </p>
+
+    <div class="example">
+      <div class="example-title marker"><span>示例 3</span></div>
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+ <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
+ <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/a29a6843-9feb-4c74-a7f7-081b9c9201d3"</span>,
+ <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
+ <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
+ <span class="hljs-attr">"object"</span>: {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/49e2d03d-b53a-4c4c-a95c-94a6abf45a19"</span>,
+            <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
+            <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
+            <span class="hljs-attr">"content"</span>: <span class="hljs-string">"话说，我借你那本书你读完了没？"</span>}}</pre>
+    </div>
+
+    <p>
+      小A的服务器查找小B的 ActivityStreams 行为体对象，找到他的收件箱端点后，将小A的消息对象 POST 到他的收件箱。
+    </p>
+
+    <p>
+      <img src="./assets/tutorial-4.png" alt="服务端向外站行为体收件箱发送消息的示意图">
+    </p>
+
+    <p>
+      严格来说，这分为两个独立的步骤……一个是从客户端到服务端的通信，
+      另一个是服务端之间的通信（联合）。但是，在本例中我们同时使用了这两种方式，
+      因此可以抽象地将其理解为一个消息从发件箱到收件箱的传递端过程：
+    </p>
+
+    <p>
+      <img src="./assets/tutorial-5.png" alt="消息从一个行为体的发件箱流向另一行为体的收件箱的示意图">
+    </p>
+
+    <p>
+      很好，我们继续上面的场景示例。
+      一段时间后，小A检查了她收到的新消息。
+      她的手机通过 GET 请求轮询她的收件箱，结果在一堆朋友发布的猫咪视频
+      和她姐姐发的侄子的照片中，她看到了如下内容：
+    </p>
+
+    <div class="example">
+      <div class="example-title marker"><span>示例 4</span></div>
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{"@context": "https://www.w3.org/ns/activitystreams",
+ "type": "Create",
+ "id": "https://chatty.example/ben/p/51086",
+ "to": ["https://social.example/alyssa/"],
+ "actor": "https://chatty.example/ben/",
+ "object": {"type": "Note",
+            "id": "https://chatty.example/ben/p/51085",
+            "attributedTo": "https://chatty.example/ben/",
+            "to": ["https://social.example/alyssa/"],
+            "inReplyTo": "https://social.example/alyssa/posts/49e2d03d-b53a-4c4c-a95c-94a6abf45a19",
+            "content": "&lt;p&gt;哦哦, 不好意思, 我明天就还你。&lt;/p&gt;
+                        &lt;p&gt;我在看注册机那一部分，我很久没写过这个了。&lt;/p&gt;"}}</pre>
+    </div>
+
+    <p>小A松了一口气，点赞了小B的帖文：</p>
+
+    <div class="example">
+      <div class="example-title marker"><span>示例 5</span></div>
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+ <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
+ <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/5312e10e-5110-42e5-a09b-934882b3ecec"</span>,
+ <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://chatty.example/ben/"</span>],
+ <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
+ <span class="hljs-attr">"object"</span>: <span class="hljs-string">"https://chatty.example/ben/p/51086"</span>}</pre>
+    </div>
+
+    <p>
+      她将此消息 POST 到她的发件箱。
+      （由于这是一个活动，她的服务器不需要将其封装在创建对象中）。
+    </p>
+
+    <p>
+      由于感到很高兴，小A决定向她的粉丝发布一条公开消息。
+      很快，以下消息被发送给她粉丝集合中的所有成员，并且由于消息的目标地址包含特殊的公共（Public）组，任何人都可以读取这条消息。
+    </p>
+
+    <div class="example">
+      <div class="example-title marker"><span>示例 6</span></div>
+      <pre class="highlight json hljs" aria-busy="false" aria-live="polite">{<span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+ <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
+ <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/9282e9cc-14d0-42b3-a758-d6aeca6c876b"</span>,
+ <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://social.example/alyssa/followers/"</span>,
+        <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>],
+ <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
+ <span class="hljs-attr">"object"</span>: {<span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://social.example/alyssa/posts/d18c55d4-8a63-4181-9745-4e6cf7938fa1"</span>,
+            <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://social.example/alyssa/"</span>,
+            <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://social.example/alyssa/followers/"</span>,
+                   <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>],
+            <span class="hljs-attr">"content"</span>: <span class="hljs-string">"有借有还，再借不难 :)"</span>}}</pre>
+    </div>
+
+    <section id="social-web-working-group" inlist="" rel="schema:hasPart" resource="#social-web-working-group">
+      <h3 property="schema:name" id="x1-1-social-web-working-group"><span class="secno">1.1 </span>社交网络工作组</h3>
+      <div datatype="rdf:HTML" property="schema:description">
+        <p>
+          <a href="https://w3c.wholetrans.org/activitypub/#Overview">ActivityPub</a> 是社交网络工作组正在制定的几个相关规范之一。
+          对其他方法与补充协议感兴趣的实现者应查阅 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-Micropub">Micropub</a></cite>] 及其概述文档
+          [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">社交网络协议</a></cite>]。
+        </p>
+      </div>
+    </section>
+  </section>
+
+  <section id="conformance"><!--OddPage-->
+    <h2 id="x2-conformance"><span class="secno">2. </span>规范性</h2>
+    <p>
+      除标记为非规范性的章节外，本规范中的所有撰写指引、图表、示例和注释都是非规范性的。规范中的其他所有内容均为规范性内容。
+    </p>
+    <p id="respecRFC2119">以下关键词 <em class="rfc2119">可以</em>、<em class="rfc2119">必须</em>、<em class="rfc2119">禁止</em>、<em
+        class="rfc2119">应当</em>以及<em class="rfc2119">不应当</em>，
+      应按照 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-RFC2119">RFC2119</a></cite>]
+      中的描述进行解释。
+    </p>
+
+    <section id="specification-profiles">
+      <h3 id="x2-1-specification-profiles"><span class="secno">2.1 </span>规范概述</h3>
+      <p>
+        本规范定义了两套紧密相关且相互作用的协议：
+      </p>
+      <dl>
+        <dt>客户端到服务端的协议，或称"社交 API"</dt>
+        <dd>
+          该协议允许客户端<i>代表</i>用户执行操作。例如，移动设备应用程序使用此协议与用户的行为体的社交信息流互动。
+        </dd>
+        <dt>服务端到服务端到协议，或称"联合协议"</dt>
+        <dd>
+          该协议用于在不同服务器上的行为体之间分发活动，将它们连接到同一份社交图谱中。
+        </dd>
+      </dl>
+      <p>
+        ActivityPub 规范的设计使得实现了这些协议中的一个后，支持另一个协议所需的额外工作将非常少。
+        但是，服务端仍可以仅实现其中一个协议。
+        这带来了三个一致性类别：
+      </p>
+      <dl>
+        <dt>符合 ActivityPub 标准的客户端</dt>
+        <dd>
+          此称号适用于实现了客户端到服务端协议客户端部分的全部内容的任何实现。
+        </dd>
+        <dt>符合 ActivityPub 标准的服务端</dt>
+        <dd>
+          此称号适用于实现了客户端到服务端协议服务端部分的全部内容的任何实现。
+        </dd>
+        <dt>符合 ActivityPub 标准的联合式服务端</dt>
+        <dd>
+          此称号适用于实现了联合协议的全部内容的任何实现。
+        </dd>
+      </dl>
+      <p>
+        规范的某个部分仅适用于联合协议的实现时，均会明确指出。
+        此外，在指定要求时，会明确说明这些要求是针对客户端还是服务端（对于客户端到服务端协议而言），或是指服务端到服务端协议中的发送方或接收方服务器。
+      </p>
+    </section>
+  </section>
+
+  <section id="obj">
+    <!--OddPage-->
+    <h2 id="x3-objects"><span class="secno">3. </span>对象</h2>
+    <p>
+      对象是 [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 和 ActivityPub
+      两者构建的核心概念。
+      对象通常嵌套在活动中，包含在集合（Collections）的流中，而集合本身是对象的子类。
+      请参阅[<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-Activity-Vocabulary">活动术语表</a></cite>]
+      文档，
+      特别是
+      <a href="https://www.w3.org/TR/activitystreams-vocabulary/#types">核心类</a>部分；
+      ActivityPub严格遵从该术语表的映射。
+    </p>
+    <p>
+      除 ActivityStreams 提供的术语外，ActivityPub 定义了一些额外的术语。
+      这些额外术语在 ActivityPub 的<a href="https://www.w3.org/TR/json-ld/#the-context"> JSON-LD 上下文</a>
+      中定义，地址为 <code>https://www.w3.org/ns/activitystreams</code>。
+      实现者<em class="rfc2119" title="SHOULD">应当</em>在其对象定义中包含ActivityPub上下文。
+      实现者<em class="rfc2119" title="MAY">可以</em>根据需要添加附加上下文。
+    </p>
+    <p>
+      ActivityPub 沿用了与 ActivityStreams 相同的
+      <a href="https://www.w3.org/TR/activitystreams-core/#urls">
+        URI / IRI 约定</a>。
+    </p>
+    <p>
+      服务端<em class="rfc2119" title="SHOULD">应当</em>验证其接收的内容，以避免内容欺骗攻击。
+      （服务端至少应该做到检查对象是否按原始状态接收，但如果可能，使用签名等机制会更好）。
+      本文档尚未权威性地指定特定的验证机制，但您可参阅<a
+        href="https://w3c.wholetrans.org/activitypub/#security-considerations">安全注意事项</a>以获取一些建议和最佳实践。
+    </p>
+    <div class="informative">
+      例如，如果 example.com 收到活动
+      <div class="example">
+        <div class="example-title marker"><span>示例 7</span></div>
+        <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
+  <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://example.net/~mallory"</span>,
+  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://hatchat.example/sarah/"</span>,
+         <span class="hljs-string">"https://example.com/peeps/john/"</span>],
+  <span class="hljs-attr">"object"</span>: {
+    <span class="hljs-attr">"@context"</span>: {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>},
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://example.org/~alice/note/23"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
+    <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://example.org/~alice"</span>,
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"我是一只羊"</span>
+  }
+}</pre>
+      </div>
+      它应该解引用 <code>id</code> 以确保其存在、为有效对象，且没有错误地表示该对象。
+      （在本例中，小M可能正在伪造一个据称由小A发布的对象）。
+    </div>
+    <section id="obj-id">
+      <h3 id="x3-1-object-identifiers"><span class="secno">3.1 </span>对象标识符</h3>
+      <p>
+        [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+        中的所有对象都应该具有唯一的全局标识符。
+        ActivityPub 扩展了此要求；以 ActivityPub 协议分发的所有对象<em class="rfc2119"
+          title="MUST">必须</em>具有唯一的全局标识符，除非它们是有意被设为瞬态的（例如某些类型的聊天消息或游戏通知等短生命周期且不需要能够被查找的活动）。
+        这些标识符必须属于以下类型之一：
+      </p>
+      <ol>
+        <li>
+          可公开解引用的 URI，如 HTTPS URI，其权限属于其源服务器。
+          （面向公众的内容<em class="rfc2119" title="SHOULD">应</em>使用 HTTPS URI）。
+        </li>
+        <li>
+          显式指定为 JSON <code>null</code> 对象的 ID，这意味着该对象是一个匿名对象（作为其上级上下文的一部分）
+        </li>
+      </ol>
+      <p>
+        在服务端间通信中发布的活动<em class="rfc2119" title="MUST">必须</em>提供标识符，除非该活动是有意被设为瞬态的。
+        但是，对于客户端到服务器的通信，接收到没有指定 <code>id</code> 的对象的服务器<em class="rfc2119" title="SHOULD">应</em>在行为体的命名空间中分配一个对象 ID
+        并将其附加到接收到的对象之上。
+      </p>
+      <p>所有对象都具有以下属性：</p>
+      <dl>
+        <dt>id</dt>
+        <dd>
+          对象的唯一全局标识符（除非对象是瞬态的，在此情形下 <code>id</code> <em class="rfc2119" title="MAY">可以</em>省略）。
+        </dd>
+        <dt>type</dt>
+        <dd>
+          对象的类型。
+        </dd>
+      </dl>
+    </section>
+
+    <section id="retrieving-objects">
+      <h3 id="x3-2-retrieving-objects"><span class="secno">3.2 </span>检索对象</h3>
+      <p>
+        可以针对对象的 <code>id</code> 属性使用 HTTP GET 方法以检索活动。
+        服务器<em class="rfc2119" title="MAY">可以</em>按照 [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-RFC7231">RFC7231</a></cite>] 中的定义使用HTTP内容协商机制
+        来选择响应请求时返回的数据类型，
+        但<em class="rfc2119" title="MUST">必须</em>在响应
+        <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 时给出ActivityStreams对象表示格式，
+        并<em class="rfc2119" title="SHOULD">应当</em>在响应 <code>application/activity+json</code> 时也给出ActivityStreams表示格式。
+        客户端在检索活动时<em class="rfc2119" title="MUST">必须</em>指定一个带有
+        <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 媒体类型的 <code>Accept</code> 标头。
+      </p>
+      <p>
+        服务端<em class="rfc2119" title="MAY">可以</em>对不符合上述要求的请求实施其他行为。
+        （例如，服务器可能会实现额外的遗留协议，或
+        使用相同的URI同时提供资源的HTML和ActivityStreams格式）。
+      </p>
+      <p>
+        服务端<em class="rfc2119" title="MAY">可以</em>根据<a href="https://w3c.wholetrans.org/activitypub/#authorization"
+          class="sec-ref"><span class="secno">B.1</span>
+          <span class="sec-title">身份验证和授权</span></a>中的规定要求身份验证，
+        并且可以额外地实现其自身的授权规则。
+        对于未通过身份验证检查的请求，服务器<em class="rfc2119" title="SHOULD">应当</em>返回适当的HTTP错误代码，
+        或者在对象的存在被认为是私密的情况下返回 403 Forbidden 错误码。
+        如果源服务器不希望披露私密目标的存在，<em class="rfc2119" title="MAY">可以</em>改为返回 404 Not Found 状态码。
+      </p>
+    </section>
+
+    <section id="source-property">
+      <h3 id="x3-3-the-source-property"><span class="secno">3.3 </span>源属性（Source property）</h3>
+      <p>
+        在 [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-Activity-Vocabulary">Activity-Vocabulary</a></cite>]
+        中定义的所有属性之外，ActivityPub 通过源属性（<code>source</code> 属性）扩展了对象（<code>Object</code>）。
+        <code>source</code>属性作为一种出处形式，旨在传达某种来源，用于派生 <code>content</code> 标记，或支持客户端的后续编辑。
+        通常情况下，客户端会从 <code>source</code> 转换到 <code>content</code> ，而不是从 <code>content</code> 转换为 <code>source</code>。
+      </p>
+      <p>
+        <code>source</code> 的值本身就是一个对象，
+        使用其自身的 <code>content</code> 和 <code>mediaType</code> 字段提供来源信息。
+      </p>
+      <div class="example">
+        <div class="example-title marker"><span>示例 8</span></div>
+        <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+               {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>}],
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"http://postparty.example/p/2415"</span>,
+  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;草莓 &lt;em&gt;十分地&lt;/em&gt; 美味！&lt;/p&gt;"</span>,
+  <span class="hljs-attr">"source"</span>: {
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"草莓 *十分地* 美味！"</span>,
+    <span class="hljs-attr">"mediaType"</span>: <span class="hljs-string">"text/markdown"</span>}
+}</pre>
+      </div>
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>注</span><span
+            style="text-transform: none">：如何应对客户端无法有效处理媒体类型的情形？</span></div>
+        <div class="">
+          <p>
+            通常情况下，最好让用户用最初撰写内容的源格式编辑原始文章。
+            但客户端不一定能为所有源类型提供可靠的友好界面，另外，由于客户端负责将 <code>source</code> 转换为 <code>content</code>，
+            某些客户端可能会使用其他客户端不知道如何处理的媒体类型。
+            尽管客户端理论上可以提供可编辑的 <code>content</code> 标记并忽略源格式，但这意味着用户在今后的修改中将丢失其首选的理想 <code>source</code> 格式。
+            因此，这样做的客户端应当提供一个微不足道的警告，说明原始源格式未被识别并将被忽略。
+          </p>
+          <p>
+            举例来说，小A喜欢使用自己开发的Emacs客户端，通过 <a href="http://orgmode.org/">Org mode</a> 在她的ActivityPub博客上发文。
+            后来她转而使用手机客户端编辑，而该客户端完全不知道 <code>text/x-org</code> 是什么，也不知道如何将其渲染为HTML，
+            所以它提供了一个文本框来编辑原始的 <code>content</code>。
+            编辑区上方会显示一个有帮助的警告："这最初是用另一种我们无法处理的标记语言编写的。如果您进行编辑，将会丢失原始来源文本！"
+            小A认为修复小小的拼写错误不值得失去她精心制作的org-mode标记，于是决定等到回家再进行更新。
+          </p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section id="actors">
+    <!--OddPage-->
+    <h2 id="x4-actors"><span class="secno">4. </span>行为体</h2>
+    <p>
+      ActivityPub 行为体通常是
+      <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">
+        ActivityStreams 行为体类型</a> 之一，
+      但并非必须如此。例如，
+      <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-profile">
+        账户</a> 对象
+      可以作为行为体，也可作为一个从 ActivityStreams 扩展的类型。
+      <a href="https://w3c.wholetrans.org/activitypub/#retrieving-objects">检索</a>行为体的方式与检索 ActivityPub 中的任何其他对象相同。
+      与其他 ActivityStreams 对象一样，行为体拥有一个 <code>id</code>，
+      它是一个 URI。
+      当直接输入到用户界面（例如登录表单）时，最好支持简化的命名方式。
+      为此，<em class="rfc2119" title="SHOULD">应当</em> 执行以下 ID 规范化操作：
+    </p>
+    <ol>
+      <li>
+        如果输入的 ID 是有效的 URI，则直接使用它。
+      </li>
+      <li>
+        如果用户似乎没有为一个本来有效的 URI 添加协议头，例如
+        <code>example.org/alice/</code>，客户端<em class="rfc2119" title="MAY">可以</em>尝试回落到
+        一个默认协议，最好是 <code>https</code>。
+      </li>
+      <li>
+        否则，输入的值应视为无效。
+      </li>
+    </ol>
+
+    <p>
+      确定了行为体的 URI 后，应当对其进行解引用。
+    </p>
+
+    <div class="note">
+      <div role="heading" class="note-title marker" id="h-note-0" aria-level="3"><span>注意</span></div>
+      <div class="">
+        ActivityPub 没有明确规定“用户”与行为体之间的特定关系；可以采取多种配置方式。
+        可以有多个人类用户或组织用户控制一个行为体，也可以是一个人类或组织控制多个行为体。
+        同样地，行为体也可以代表一个软件，例如机器人，或一个自动化流程。
+        更详细的“用户”建模，例如关联由同一实体控制的行为体，或允许同一行为体以多个账户或面貌呈现，由具体实现自行决定。
+      </div>
+    </div>
+
+    <section id="actor-objects">
+      <h3 id="x4-1-actor-objects"><span class="secno">4.1 </span><i>行为体</i> 对象</h3>
+      <p>
+        除 <a href="https://w3c.wholetrans.org/activitypub/#obj-id" class="sec-ref"><span class="secno">3.1</span> <span
+            class="sec-title">对象标识符</span></a> 中强制要求的属性外，行为体对象<em class="rfc2119" title="MUST">必须</em> 具有以下属性：
+      </p>
+      <dl>
+        <dt id="inbox-property">inbox （收件箱）</dt>
+        <dd>
+          对 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] <a
+            href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection"><code>OrderedCollection</code></a>
+          （有序集合）的引用，该集合包含行为体接收到的所有消息；参见
+          <a href="https://w3c.wholetrans.org/activitypub/#inbox" class="sec-ref"><span class="secno">5.2</span> <span
+              class="sec-title">收件箱</span></a>。
+        </dd>
+        <dt id="outbox-property">outbox （发件箱）</dt>
+        <dd>
+          一个 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] <a
+            href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+            <code>OrderedCollection</code> （有序集合）</a>，包含行为体创建的所有消息；参见
+          <a href="https://w3c.wholetrans.org/activitypub/#outbox" class="sec-ref"><span class="secno">5.1</span> <span
+              class="sec-title">发件箱</span></a>。
+        </dd>
+      </dl>
+      <p>
+        此外，ActivityPub 实现<em class="rfc2119" title="SHOULD">应当</em>提供以下属性：
+      </p>
+      <dl>
+        <dt id="following-property">following （关注）</dt>
+        <dd>
+          一个指向 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          集合的链接，该集合包含此行为体正在关注的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#following" class="sec-ref"><span
+              class="secno">5.4</span> <span class="sec-title">关注集合</span></a>。
+        </dd>
+        <dt id="followers-property">followers （粉丝）</dt>
+        <dd>
+          一个指向 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          集合的链接，该集合包含关注此行为体的行为体；参见 <a href="https://w3c.wholetrans.org/activitypub/#followers" class="sec-ref"><span
+              class="secno">5.3</span> <span class="sec-title">粉丝集合</span></a>。
+        </dd>
+      </dl>
+      <p>
+        实现<em class="rfc2119" title="MAY">可以</em> 提供以下属性：
+      </p>
+      <dl>
+        <dt id="liked-property">liked（点赞）</dt>
+        <dd>
+          一个指向 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+          集合的链接，该集合包含此行为体点赞过的对象；参见 <a href="https://w3c.wholetrans.org/activitypub/#liked" class="sec-ref"><span
+              class="secno">5.5</span> <span class="sec-title">点赞集合</span></a>。
+        </dd>
+      </dl>
+      <div class="example">
+        <div class="example-title marker"><span>示例 9</span></div>
+        <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+               {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"ja"</span>}],
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Person"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://kenzoishii.example.com/"</span>,
+  <span class="hljs-attr">"following"</span>: <span class="hljs-string">"https://kenzoishii.example.com/following.json"</span>,
+  <span class="hljs-attr">"followers"</span>: <span class="hljs-string">"https://kenzoishii.example.com/followers.json"</span>,
+  <span class="hljs-attr">"liked"</span>: <span class="hljs-string">"https://kenzoishii.example.com/liked.json"</span>,
+  <span class="hljs-attr">"inbox"</span>: <span class="hljs-string">"https://kenzoishii.example.com/inbox.json"</span>,
+  <span class="hljs-attr">"outbox"</span>: <span class="hljs-string">"https://kenzoishii.example.com/feed.json"</span>,
+  <span class="hljs-attr">"preferredUsername"</span>: <span class="hljs-string">"kenzoishii"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"石井健蔵"</span>,
+  <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"この方はただの例です"</span>,
+  <span class="hljs-attr">"icon"</span>: [
+    <span class="hljs-string">"https://kenzoishii.example.com/image/165987aklre4"</span>
+  ]
+}</pre>
+      </div>
+      <p>实现<em class="rfc2119" title="MAY">可以</em>额外提供以下属性：</p>
+      <dl>
+        <dt id="streams-property">streams</dt>
+        <dd>
+          可能感兴趣的补充集合列表。
+        </dd>
+        <dt id="preferredUsername">preferredUsername</dt>
+        <dd>
+          可用于指代行为体的简短用户名，不提供唯一性保证。
+        </dd>
+        <dt id="endpoints">endpoints</dt>
+        <dd>
+          一个映射额外（通常为服务端/域级别的）端点的 JSON 对象，这些端点可能对该行为体或引用该行为体的其他人有用。
+          此映射可以作为值嵌套在行为体文档中，也可以是指向包含这些属性的 JSON-LD 文档的链接。
+        </dd>
+      </dl>
+
+      <p>
+        <code>endpoints</code> 映射<em class="rfc2119" title="MAY">可以</em>包含以下属性：
+      </p>
+      <dl>
+        <dt id="proxyUrl">proxyUrl</dt>
+        <dd>
+          端点 URI，该行为体的客户端可以通过此 URI 访问需要身份验证的外站 ActivityStreams 对象。
+          要使用此端点，客户端需按 <code>x-www-form-urlencoded</code> 格式提交 <code>id</code> 参数，参数值为要请求的 ActivityStreams 对象的
+          <code>id</code>。
+        </dd>
+        <dt id="oauthAuthorizationEndpoint">oauthAuthorizationEndpoint</dt>
+        <dd>
+          若<a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>使用
+          OAuth 2.0 不记名令牌[<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>] [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>] 进行身份验证，
+          此端点指定一个 URI，通过浏览器完成认证的用户可在该 URI 上获取新的授权许可。
+        </dd>
+        <dt id="oauthTokenEndpoint">oauthTokenEndpoint</dt>
+        <dd>
+          若<a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>使用 OAuth 2.0
+          不记名令牌 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-RFC6749">RFC6749</a></cite>]
+          [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-RFC6750">RFC6750</a></cite>]
+          进行身份验证，
+          此端点指定一个 URI，客户端可以在该 URI 获取访问令牌。
+        </dd>
+        <dt id="provideClientKey">provideClientKey</dt>
+        <dd>
+          若身份验证和授权使用链接数据签名和 HTTP 签名，此端点指定一个 URI，通过浏览器完成认证的用户可在此 URI 上将授权客户端的公钥用于
+          <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端的交互</a>。
+        </dd>
+        <dt id="signClientKey">signClientKey</dt>
+        <dd>
+          若身份验证和授权使用链接数据签名和 HTTP 签名，则此端点指定一个 URI，在一段时间内，行为体的密钥可以在该 URI 上对客户端密钥进行签名，以代表行为体与外部服务器进行交互。
+        </dd>
+        <dt id="sharedInbox">sharedInbox</dt>
+        <dd>
+          此端点为可选端点，
+          <a href="https://w3c.wholetrans.org/activitypub/#shared-inbox-delivery">
+            用于广泛传递公开寻址的活动及发送给粉丝的活动</a>。
+          <code>sharedInbox</code> 端点也应该是公开可读的 <code>OrderedCollection</code> 对象，其中包含寻址到<a
+            href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共</a>特殊集合的对象。
+          从 <code>sharedInbox</code> 端点读取内容时，禁止呈现未寻址到公共（<code>Public</code>）端点的对象。
+        </dd>
+      </dl>
+
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>注</span></div>
+        <div class="" id="as2-actor-properties">
+          <p>
+            [<cite><a class="bibref"
+                href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 是
+            ActivityPub 的上游术语表，任何适用于 [<cite><a class="bibref"
+                href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 的属性都可以在
+            ActivityPub 行为体上使用。
+            在此特别强调以下 ActivityStreams 属性，以演示它们在 ActivityPub 实现中的使用方法。
+          </p>
+
+          <dl>
+            <dt id="url-property">url</dt>
+            <dd>
+              若该属性的值不等于 <code>id</code>，则指向行为体“账户页面”的链接。
+            </dd>
+            <dt id="name-property">name</dt>
+            <dd>
+              行为体设置的“昵称”或“显示名称”。
+            </dd>
+            <dt id="summary-property">summary</dt>
+            <dd>用户关于自身的简介或简要总结。</dd>
+            <dt id="icon-property">icon</dt>
+            <dd>
+              指向代表用户头像图片或图片对象的链接（可以是一个缩略图）。
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-2" aria-level="4"><span>注</span></div>
+        <p class="" id="actor-text-direction">
+          包含自然语言值的属性（如 <code>name</code>、<code>preferredUsername</code> 或 <code>summary</code>）使用在
+          <a href="https://www.w3.org/TR/activitystreams-core/#naturalLanguageValues">
+            ActivityStreams 中定义的自然语言支持</a>。
+        </p>
+      </div>
+    </section>
+
+  </section>
+
+  <section id="collections">
+    <!--OddPage-->
+    <h2 id="x5-collections"><span class="secno">5. </span>集合</h2>
+    <p>
+      [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+      定义了集合（collection）的概念；而 ActivityPub 定义了若干具有特殊行为的集合。
+      请注意，ActivityPub 使用<a href="https://www.w3.org/TR/activitystreams-core/#paging"> ActivityStreams 的分页机制</a>
+      来遍历大型对象集合。
+    </p>
+
+    <p>
+      请注意，这些集合中，部分集合被明确规定为 <a
+        href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection"><code>OrderedCollection</code></a>
+      类型，而另一些则可以是 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection"><code>Collection</code></a>
+      或者 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+        <code>OrderedCollection</code></a>。
+      <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+        <code>OrderedCollection</code></a> <em class="rfc2119" title="MUST">必须</em>统一以时间倒序（从新到旧）呈现。
+    </p>
+
+    <div class="note">
+      <div role="heading" class="note-title marker" id="h-note-3" aria-level="3"><span>注意</span></div>
+      <p class="">
+        用于确定时间倒序的属性特意被留作实现细节处理。
+        例如，许多 SQL 风格的数据库使用递增整数作为标识符，这在大多数情况下可以合理地处理插入顺序。
+        对于其他数据库，使用插入时间戳可能更为合适。
+        所使用的属性本身并不重要，但元素的顺序必须保持原样，即新的条目在前。
+        不应使用会被经常更改的字段，例如“上次更新”时间戳。
+      </p>
+    </div>
+
+    <section id="outbox">
+      <h3 id="x5-1-outbox"><span class="secno">5.1 </span>发件箱 (Outbox)</h3>
+      <p>
+        <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>通过 <code>outbox</code> 属性在其配置文件中暴露发件箱，供
+        ActivityPub 服务发现。
+        <code>outbox</code> <em class="rfc2119" title="MUST">必须</em>是一个 <a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection"><code>OrderedCollection</code></a>（有序集合）。
+      </p>
+      <p>
+        发件箱流包含用户已发布的活动，但具体包含的内容取决于发起请求的用户获取活动的权限（即，outbox 的内容会根据读取者的权限进行过滤）。
+        如果用户提交了一个未进行
+        <a href="https://w3c.wholetrans.org/activitypub/#authorization">身份验证</a>
+        的请求，服务端应返回用户所有的
+        <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公开</a>
+        帖文。
+        这可能包括用户发布的所有相关对象，但可用条目的数量由软件实现与服务器管理员自行决定。
+      </p>
+      <p>
+        发件箱接受 HTTP POST 请求，其行为参见
+        <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>
+        部分。
+      </p>
+    </section>
+
+    <section id="inbox">
+      <h3 id="x5-2-inbox"><span class="secno">5.2 </span>收件箱 (Inbox)</h3>
+
+      <p>
+        行为体通过 <code>inbox</code> 属性在其配置文件中暴露收件箱，供 ActivityPub 服务发现。
+        <code>inbox</code> <em class="rfc2119" title="MUST">必须</em>是一个 <a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection"><code>OrderedCollection</code></a>
+        （有序集合）。
+      </p>
+
+      <p>
+        收件箱流包含行为体接收到的所有活动。
+        服务端<em class="rfc2119" title="SHOULD">应当</em>根据请求者的权限筛选内容。
+        通常情况下，收件箱的拥有者可以访问收件箱的全部内容。
+        根据访问控制规则，某些其他内容可能公开，若其它不拥有收件箱的用户也可以在特定条件下访问收件箱，则可能需要进行身份验证。
+      </p>
+
+      <p>
+        服务端<em class="rfc2119" title="MUST">必须</em>对通过收件箱返回的活动进行去重。
+        若同一活动既发送给行为体的粉丝，也直接发送给特定的关联行为体，但服务端未能对收件方列表进行去重，则可能产生重复。
+        此类去重<em class="rfc2119" title="MUST">必须</em>通过比较活动的 <code>id</code> 实现，并去除任何已存在的活动。
+      </p>
+
+      <p>
+        能够进行联合的服务端上的行为体的收件箱可接受 HTTP POST 请求，其行为参见
+        <a href="https://w3c.wholetrans.org/activitypub/#delivery">信息投递</a>
+        部分。
+        不进行联合的服务端<em class="rfc2119" title="SHOULD">应当</em>在接收到 POST 请求时返回 405 Method Not Allowed。
+      </p>
+    </section>
+
+    <section id="followers">
+      <h3 id="x5-3-followers-collection"><span class="secno">5.3 </span>粉丝集合 (Followers Collection)</h3>
+      <p>
+        每个<a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a><em class="rfc2119" title="SHOULD">应当</em>拥有一个
+        <code>followers</code> （粉丝）集合。
+        这是一个包含所有对该行为体发送过<a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-follow">关注</a>活动的行为体的列表，行为体被添加到粉丝集合是收到关注活动的一个
+        <a href="https://w3c.wholetrans.org/activitypub/#follow-activity-outbox">副作用（side effect）</a>。
+        可以通过该集合找到所有关注当前行为体的用户的列表。
+        <code>followers</code> （粉丝）集合<em class="rfc2119" title="MUST">必须</em> 是 <a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+          <code>OrderedCollection</code></a> （有序集合）
+        或 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
+          <code>Collection</code></a> （集合）
+        类型，且 <em class="rfc2119" title="MAY">可以</em>根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
+      </p>
+
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>注意</span><span
+            style="text-transform: none">：通知目标默认设置</span></div>
+        <p class="">
+          关注活动通常可被理解为查看某个行为体创建的对象的请求。
+          这使粉丝集合成为接收
+          <a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>的合适默认目标。
+        </p>
+      </div>
+    </section>
+
+    <section id="following">
+      <h3 id="x5-4-following-collection"><span class="secno">5.4 </span>关注集合 (Following Collection)</h3>
+      <p>
+        每个 <a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>都
+        <em class="rfc2119" title="SHOULD">应当</em> 拥有一个 <code>following</code> （关注）集合。
+        这是该行为体关注的所有人的列表，行为体被添加到关注集合是发送关注活动的一个
+        <a href="https://w3c.wholetrans.org/activitypub/#follow-activity-outbox">副作用</a>。
+        <code>following</code> （关注）集合 <em class="rfc2119" title="MUST">必须</em> 是
+        <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+          <code>OrderedCollection</code></a> （有序集合）
+        或
+        <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">
+          <code>Collection</code></a> （集合）
+        类型，且 <em class="rfc2119" title="MAY">可以</em>根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
+      </p>
+    </section>
+
+    <section id="liked">
+      <h3 id="x5-5-liked-collection"><span class="secno">5.5 </span>点赞集合 (Liked Collection)</h3>
+      <p>
+        每个<a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a><em class="rfc2119" title="MAY">可以</em> 拥有一个
+        <code>liked</code> （点赞）集合。
+        这是该行为体产生的所有 <code>Like</code> （点赞）活动中所有对象的列表，这些对象被添加到点赞集合是
+        产生点赞活动的一个
+        <a href="https://w3c.wholetrans.org/activitypub/#like-activity-outbox">副作用</a>。
+        <code>liked</code> （点赞）集合 <em class="rfc2119" title="MUST">必须</em> 是 <a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+          <code>OrderedCollection</code></a> （有序集合）
+        或 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection"><code>Collection</code></a> （集合）
+        类型，并且<em class="rfc2119" title="MAY">可以</em>根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
+      </p>
+    </section>
+
+    <section id="public-addressing">
+      <h3 id="x5-6-public-addressing"><span class="secno">5.6 </span>公共寻址</h3>
+      <p>
+        除 [<cite><a class="bibref"
+            href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>]
+        集合与对象之外，活动还可以被寻址到特殊的“公共”集合，其标识符为 <code>https://www.w3.org/ns/activitystreams#Public</code>。
+        例如：
+      </p>
+      <div class="example">
+        <div class="example-title marker"><span>示例 10</span></div>
+        <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Collection"</span>
+}</pre>
+      </div>
+      <p>
+        寻址到此特殊 URI 的活动应可供所有用户访问，无需身份验证。
+        实现<em class="rfc2119" title="MUST NOT">不得</em>将活动传递到“公共”集合；它无法接收实际的活动。
+        然而，行为体 <em class="rfc2119" title="MAY">可以</em> 拥有一个 <a
+          href="https://w3c.wholetrans.org/activitypub/#sharedInbox"><code>sharedInbox</code></a>
+        端点，用于高效共享与传递公开帖文（以及仅对粉丝可见的帖文）；请参阅
+        <a href="https://w3c.wholetrans.org/activitypub/#shared-inbox-delivery" class="sec-ref"><span
+            class="secno">7.1.3</span> <span class="sec-title">共享收件箱投递</span></a>。
+      </p>
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>注意</span></div>
+        <div class="">
+          <p>
+            使用 ActivityStreams JSON-LD 上下文压缩 ActivityStreams 对象可能会导致
+            <code>https://www.w3.org/ns/activitystreams#Public</code>
+            被简单表示为 <code>Public</code> 或 <code>as:Public</code>，它们都是公共集合的有效表示形式。
+            若实现将 ActivityStreams 对象简单视为 JSON，而非使用 JSON-LD 工具将传入的活动转换为本站上下文，则应当意识到这一点，且应该准备好接受全部三种表示形式。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="likes">
+      <h3 id="x5-7-likes-collection"><span class="secno">5.7 </span>点赞列表集合 (Likes Collection)</h3>
+      <p>
+        每个对象 <em class="rfc2119" title="MAY">可以</em> 拥有一个 <code>likes</code> （点赞列表）集合。
+        这是所有以该对象作为 <code>object</code> 属性的 <code>Like</code> （点赞）活动的列表，这些活动被添加到点赞列表集合是处理过程中的一种
+        <a href="https://w3c.wholetrans.org/activitypub/#like-activity-inbox">副作用</a> 。
+        <code>likes</code> （点赞列表）集合 <em class="rfc2119" title="MUST">必须</em> 是 <a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection"><code>OrderedCollection</code></a>
+        （有序集合）
+        或 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection"><code>Collection</code></a> （集合）
+        类型，并且 <em class="rfc2119" title="MAY">可以</em> 根据执行身份验证的用户的权限或在未进行身份验证时进行适当过滤。
+      </p>
+
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-6" aria-level="4"><span>注意</span></div>
+        <div class="">
+          <p>
+            应注意不要将 <a href="https://w3c.wholetrans.org/activitypub/#likes"><code>likes</code></a> （点赞列表）集合与名称相似但不同的 <a
+              href="https://w3c.wholetrans.org/activitypub/#liked"><code>liked</code></a> （点赞）集合混淆。
+            总而言之：
+          </p>
+
+          <ul>
+            <li>
+              <b>liked: （点赞）</b>
+              是行为体专有的属性。
+              这是<em>由行为体执行 </em>的 <code>Like</code> （点赞）活动的集合，
+              点赞活动被添加到点赞集合是其
+              <a href="https://w3c.wholetrans.org/activitypub/#like-activity-outbox">被投递到发件箱的副作用</a>。
+            </li>
+
+            <li>
+              <b>likes: （点赞列表）</b>
+              可以是任何对象的属性。
+              这是引用了此对象的 <code>Like</code> （点赞）活动的集合，
+              点赞活动被添加到点赞列表集合是其
+              <a href="https://w3c.wholetrans.org/activitypub/#like-activity-inbox">被投递到收件箱的副作用</a>。
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="shares">
+      <h3 id="x5-8-shares-collection"><span class="secno">5.8 </span>分享集合 (Shares Collection)</h3>
+      <p>
+        每个对象<em class="rfc2119" title="MAY">可以</em>拥有一个 <code>shares</code> （分享）集合。
+        这是所有以该对象作为 <code>object</code> 属性的 <code>Announce</code> （推送）活动的列表，这些活动被添加到分享集合是处理过程中的一种
+        <a href="https://w3c.wholetrans.org/activitypub/#announce-activity-inbox">副作用</a>。
+        <code>shares</code> （分享）集合 <em class="rfc2119" title="MUST">必须</em> 是<a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+          <code>OrderedCollection</code></a> （有序集合）或 <a
+          href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection"><code>Collection</code></a> （集合）
+        类型，且<em class="rfc2119" title="MAY">可以</em>根据已认证用户的权限或在未进行身份验证时的适当情况进行过滤。
+      </p>
+    </section>
+  </section>
+
+  <section id="client-to-server-interactions">
+    <!--OddPage-->
+    <h2 id="x6-client-to-server-interactions"><span class="secno">6. </span>客户端到服务端交互</h2>
+    <p>
+      [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 定义的活动是
+      在社交图谱中创建、修改和共享内容的核心机制。
+    </p>
+
+    <p>
+      客户端与服务器的交互是通过客户端将活动发布到某个行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>来完成的。
+      客户端<em class="rfc2119" title="MUST">必须</em>从行为体的
+      <a href="https://w3c.wholetrans.org/activitypub/#actor-objects">档案</a>中发现其发件箱的 URL，
+      然后通过 HTTP <code>POST</code> 请求将数据发送到该 URL，该 POST 请求的 Content-Type 应为
+      <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>。
+      服务端<em class="rfc2119" title="MAY">可以</em>将值为 <code>application/activity+json</code> 的 Content-Type 或 Accept
+      标头解释为等同于 <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 的内容类型，从而支持客户端与服务器的交互。
+      请求<em class="rfc2119" title="MUST">必须</em>经过该 outbox 所属用户的凭证认证。
+      <code>POST</code> 请求的正文<em class="rfc2119" title="MUST">必须</em>包含单个活动（其中<em class="rfc2119" title="MAY">可以</em>
+      包含嵌入的对象），或包含单个非活动对象，这种对象
+      <a href="https://w3c.wholetrans.org/activitypub/#object-without-create">将由服务端封装在一个创建活动中</a>。
+    </p>
+    <div class="example">
+      <div class="example-title marker"><span>示例 11</span><span style="text-transform: none">: 向发件箱提交活动</span></div>
+      <pre class="hljs http" aria-busy="false" aria-live="polite"><span class="hljs-keyword">POST</span> <span class="hljs-string">/outbox/</span> HTTP/1.1
+<span class="hljs-attribute">Host</span>: dustycloud.org
+<span class="hljs-attribute">Authorization</span>: Bearer XXXXXXXXXXX
+<span class="hljs-attribute">Content-Type</span>: application/ld+json; profile="https://www.w3.org/ns/activitystreams"
+
+<span class="json">{
+  <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+               {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>}],
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
+  <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://dustycloud.org/chris/"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Chris 点赞了 '最小 ActivityPub 更新客户端'"</span>,
+  <span class="hljs-attr">"object"</span>: <span class="hljs-string">"https://rhiaro.co.uk/2016/05/minimal-activitypub"</span>,
+  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://rhiaro.co.uk/#amy"</span>,
+         <span class="hljs-string">"https://dustycloud.org/followers"</span>,
+         <span class="hljs-string">"https://rhiaro.co.uk/followers/"</span>],
+  <span class="hljs-attr">"cc"</span>: <span class="hljs-string">"https://e14n.com/evan"</span>
+}</span></pre>
+    </div>
+
+    <p>
+      如果提交的 Activity 对象的 <code>id</code> 属性有值，服务端<em class="rfc2119" title="MUST">必须</em>忽略该值并为该 Activity 生成新的
+      <code>id</code>。
+      服务器<em class="rfc2119" title="MUST">必须</em>返回 <code>201 Created</code> HTTP 状态码，且<em class="rfc2119"
+        title="MUST">必须</em>在 <code>Location</code> 标头中包含新的 <code>id</code>，除非该活动是瞬态的。
+    </p>
+    <div class="example">
+      <div class="example-title marker"><span>示例 12</span><span style="text-transform: none">: 发件箱对提交的 Activity
+          的响应</span></div>
+      <pre class="hljs http" aria-busy="false" aria-live="polite">HTTP/1.1 <span class="hljs-number">201</span> Created
+<span class="hljs-attribute">Location</span>: https://dustycloud.org/likes/345</pre>
+    </div>
+
+    <p id="remove-bto-bcc-before-delivery">
+      在投递之前，服务端<em class="rfc2119" title="MUST">必须</em>从 ActivityStreams 对象中移除 <code>bto</code> 和/或 <code>bcc</code>
+      属性（只要上述属性存在），但<em class="rfc2119" title="MUST">必须</em>利用最初存储于 <code>bto</code>/<code>bcc</code> 属性上的地址信息来确定
+      <a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>的收件方。
+    </p>
+
+    <p>
+      随后，服务端<em class="rfc2119" title="MUST">必须</em>将这个新的活动添加至
+      <a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>集合。
+      根据活动的类型，服务端可能需要执行额外的后续操作。
+      （然而，无法保证活动会即时出现在发件箱中。
+      活动可能会延迟显示，或在某一时间点被移除）。
+      每种类型的活动的说明参见下文。
+    </p>
+
+    <p>
+      如果尝试向不支持客户端-服务端交互的服务端提交对象，
+      服务端<em class="rfc2119" title="SHOULD">应当</em>返回 <code>405 Method Not Allowed</code> 响应。
+    </p>
+
+    <p>
+      在适当情况下，HTTP 缓存机制 [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-RFC7234">RFC7234</a></cite>]，
+      <em class="rfc2119" title="SHOULD">应当</em>在客户端接收服务端响应时与服务端发送响应至客户端时被遵守。
+    </p>
+
+    <section id="client-addressing">
+      <h3 id="x6-1-client-addressing"><span class="secno">6.1 </span>客户端寻址</h3>
+      <p>
+        <strong>客户端</strong>负责正确地为新活动设定目标地址。
+        在某种程度上，这取决于客户端的特定实现，但客户端必须注意，服务端只会将新的活动转发给 <code>to</code>、
+        <code>bto</code>、<code>cc</code>、<code>bcc</code>和<code>audience</code> 字段中的地址。
+      </p>
+      <p>
+        <a href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>和/或
+        <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共集合</a>
+        是作为新活动默认目标地址的良好选择。
+      </p>
+      <p>
+        客户端<em class="rfc2119" title="SHOULD">应当</em>查看通过 <code>object</code>、<code>target</code>、<code>inReplyTo</code>
+        和/或 <code>tag</code> 字段被附加到新活动中的任何对象，获取它们的 <code>actor</code> 或 <code>attributedTo</code> 属性，且
+        <em class="rfc2119" title="MAY">可以</em>获取它们的地址信息并将其添加到创建的新活动的 <code>to</code> 或 <code>cc</code> 字段中。
+        客户端<em class="rfc2119" title="MAY">可以</em>递归处理附加对象，但如果这么做，
+        <em class="rfc2119" title="SHOULD">应当</em>设置递归层级限制。
+        （注意，这并不表示客户端应将被列为接收方的行为体集合逐一展开为独立的收件方）。
+      </p>
+      <p>
+        客户端<em class="rfc2119" title="MAY">可以</em>允许用户在界面上修改该目标地址。
+      </p>
+      <p>
+        例如，当 Chris 点赞 Amy 撰写的以下文章时：
+      </p>
+
+      <div class="example">
+        <div class="example-title marker"><span>示例 13</span><span style="text-transform: none">: 单个 Article</span>
+        </div>
+        <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+               {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en-GB"</span>}],
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://rhiaro.co.uk/2016/05/minimal-activitypub"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Article"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"最小 ActivityPub 更新客户端"</span>,
+  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"今天我写完了 morph 这个用来发布 ActivityStreams2 内容的客户端..."</span>,
+  <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://rhiaro.co.uk/#amy"</span>,
+  <span class="hljs-attr">"to"</span>: <span class="hljs-string">"https://rhiaro.co.uk/followers/"</span>,
+  <span class="hljs-attr">"cc"</span>: <span class="hljs-string">"https://e14n.com/evan"</span>
+}</pre>
+      </div>
+
+      <p>客户端可按如下所示生成点赞活动:</p>
+
+      <div class="example">
+        <div class="example-title marker"><span>示例 14</span><span style="text-transform: none">: 对某个 Article 点赞</span>
+        </div>
+        <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: [<span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+               {<span class="hljs-attr">"@language"</span>: <span class="hljs-string">"en"</span>}],
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Like"</span>,
+  <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://dustycloud.org/chris/"</span>,
+  <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"Chris 点赞了 '最小 ActivityPub 更新客户端'"</span>,
+  <span class="hljs-attr">"object"</span>: <span class="hljs-string">"https://rhiaro.co.uk/2016/05/minimal-activitypub"</span>,
+  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://rhiaro.co.uk/#amy"</span>,
+         <span class="hljs-string">"https://dustycloud.org/followers"</span>,
+         <span class="hljs-string">"https://rhiaro.co.uk/followers/"</span>],
+  <span class="hljs-attr">"cc"</span>: <span class="hljs-string">"https://e14n.com/evan"</span>
+}</pre>
+      </div>
+
+      <p>接收方的发件箱可以执行<a href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>操作，将活动投递给 Chris （点赞者）的粉丝、Amy 以及 Amy
+        的粉丝和 Evan，因为他们都收到了原始文章。
+      </p>
+
+      <p>
+        在向 <code>outbox</code> （发件箱）提交以下活动时，客户端<em class="rfc2119" title="MUST">必须</em>在活动中提供 <code>object</code> 属性：
+        <code>Create</code>、<code>Update</code>、<code>Delete</code>、
+        <code>Follow</code>、<code>Add</code>、<code>Remove</code>、
+        <code>Like</code>、<code>Block</code>、<code>Undo</code>。
+        此外，在提交以下活动时，客户端<em class="rfc2119" title="MUST">必须</em>同时向发件箱提供 <code>target</code> 属性：
+        <code>Add</code>、<code>Remove</code>。
+      </p>
+
+    </section>
+
+    <section id="create-activity-outbox">
+      <h3 id="x6-2-create-activity"><span class="secno">6.2 </span>创建活动 (Create Activity)</h3>
+      <p>
+        <code>Create</code> （创建）活动用于发布新对象。
+        这会产生副作用，即创建了一个嵌入在活动中（位于 <code>object</code> 属性）的对象。
+      </p>
+      <p>
+        发布 <code>Create</code> 活动时，活动的 <code>actor</code> <em class="rfc2119" title="SHOULD">应当</em>被复制到对象的
+        <code>attributedTo</code> 字段中。
+      </p>
+      <p>
+        创建活动与其 <code>object</code> 的寻址不匹配可能会导致混淆。
+        因此，服务端在分发开始时<em class="rfc2119" title="SHOULD">应当</em>将创建活动的所有接收方复制到其 <code>object</code>，同样地，也应将
+        <code>object</code> 的接收方复制到封装的创建活动中。
+        需要注意的是，之后可以更改 <code>object</code> 的地址而不更改 <code>Create</code> 的地址（例如，通过 <code>Update</code> 活动进行更改）。
+      </p>
+
+      <section id="object-without-create">
+        <h4 id="x6-2-1-object-creation-without-a-create-activity"><span class="secno">6.2.1 </span>不在不发送创建活动的情况下创建对象
+        </h4>
+        <p>
+          客户端向服务端发布内容时，可提交一个对象以进行创建，而无需将其包装在活动中。
+          服务端<em class="rfc2119" title="MUST">必须</em>接受客户端通过 POST 请求向发件箱发送的合法 [<cite><a class="bibref"
+              href="https://w3c.wholetrans.org/activitypub/#bib-ActivityStreams">ActivityStreams</a></cite>] 对象。该对象不能是
+          <code>Activity</code> 的子类型。
+          随后，服务端<em class="rfc2119" title="MUST">必须</em>将此对象附加到<a
+            href="https://w3c.wholetrans.org/activitypub/#create-activity-outbox">创建活动</a>的 <code>object</code>。
+          对于非临时对象，服务端<em class="rfc2119" title="MUST">必须</em>为封装的 <code>Create</code> 活动及其封装的 <code>Object</code> 都附加一个
+          <code>id</code>。
+        </p>
+
+        <div class="note">
+          <div role="heading" class="note-title marker" id="h-note-7" aria-level="5"><span>注意</span></div>
+          <p class="">
+            服务端返回的 <code>Location</code> 值应该是新的创建活动的 URL，而不是对象的 URL。
+          </p>
+        </div>
+
+        <p>
+          服务端<em class="rfc2119" title="MUST">必须</em>将对象中指定的所有
+          <code>to</code>、<code>bto</code>、<code>cc</code>、<code>bcc</code>与<code>audience</code> 属性复制到新的创建活动中。
+        </p>
+
+        <div class="example">
+          <div class="example-title marker"><span>示例 15</span><span style="text-transform: none">: 带目标地址的对象</span></div>
+          <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
+  <span class="hljs-attr">"content"</span>: <span class="hljs-string">"这是一条 note"</span>,
+  <span class="hljs-attr">"published"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>,
+  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://example.org/~john/"</span>],
+  <span class="hljs-attr">"cc"</span>: [<span class="hljs-string">"https://example.com/~erik/followers"</span>,
+         <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>]
+}</pre>
+        </div>
+
+        上述示例可被转换为如下形式：
+        <div class="example">
+          <div class="example-title marker"><span>示例 16</span><span style="text-transform: none">: 服务端包装并生成的创建活动</span>
+          </div>
+          <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Create"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://example.net/~mallory/87374"</span>,
+  <span class="hljs-attr">"actor"</span>: <span class="hljs-string">"https://example.net/~mallory"</span>,
+  <span class="hljs-attr">"object"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://example.com/~mallory/note/72"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Note"</span>,
+    <span class="hljs-attr">"attributedTo"</span>: <span class="hljs-string">"https://example.net/~mallory"</span>,
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"这是一条 note"</span>,
+    <span class="hljs-attr">"published"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>,
+    <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://example.org/~john/"</span>],
+    <span class="hljs-attr">"cc"</span>: [<span class="hljs-string">"https://example.com/~erik/followers"</span>,
+           <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>]
+  },
+  <span class="hljs-attr">"published"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>,
+  <span class="hljs-attr">"to"</span>: [<span class="hljs-string">"https://example.org/~john/"</span>],
+  <span class="hljs-attr">"cc"</span>: [<span class="hljs-string">"https://example.com/~erik/followers"</span>,
+         <span class="hljs-string">"https://www.w3.org/ns/activitystreams#Public"</span>]
+}</pre>
+        </div>
+      </section>
+    </section>
+    <section id="update-activity-outbox">
+      <h3 id="x6-3-update-activity"><span class="secno">6.3 </span>更新活动 (Update Activity)</h3>
+      <p>
+        <code>Update</code> 活动用于更新现有对象。
+        其副作用是：假设行为体有权更新目标对象，则<em class="rfc2119" title="MUST">必须</em>修改 <code>object</code> 以反映更新活动中定义的新结构。
+      </p>
+
+      <section id="partial-updates">
+        <h4 id="x6-3-1-partial-updates"><span class="secno">6.3.1 </span>部分更新</h4>
+        <p>
+          在客户端到服务端的交互中，更新只影响对象的一部分；不是一次性更新整个文档，而是使用客户端提供的任何键值对将现有值替换为新值。
+          这仅适用于更新目标对象的顶层字段。
+          一个例外情形是：当值为 JSON <code>null</code> 类型时，服务端应该从对象中移除对应的字段。
+        </p>
+        <p>
+          请注意，此行为适用于客户端向服务端发送数据的交互，其中客户端仅向服务端发送数据。
+          服务器端间的交互及服务端到客户端的更新应该包含更新后的对象的完整表示。
+          有关更多详细信息，请查阅
+          <a href="https://w3c.wholetrans.org/activitypub/#update-activity-inbox">服务器端间交互情形下的更新活动</a>
+          中的描述。
+        </p>
+      </section>
+    </section>
+    <section id="delete-activity-outbox">
+      <h3 id="x6-4-delete-activity"><span class="secno">6.4 </span>删除活动 (Delete Activity)</h3>
+      <p>
+        <code>Delete</code> 活动用于删除现有对象。
+        其副作用是，服务端<em class="rfc2119" title="MAY">可以</em>将 <code>object</code> 替换为其 <code>Tombstone</code>
+        （墓碑），该墓碑将显示在引用已删除对象的活动中。
+        如果某一实体请求已删除的对象，服务端<em class="rfc2119" title="SHOULD">应当</em>在响应正文中展示了 <code>Tombstone</code> 对象的情形下使用 HTTP 410
+        Gone 状态码进行响应，否则使用 HTTP 404 Not Found 进行响应。
+      </p>
+
+      <p>一个已删除的对象示例如下:</p>
+      <div class="example">
+        <div class="example-title marker"><span>示例 17</span></div>
+        <pre class="hljs json" aria-busy="false" aria-live="polite">{
+  <span class="hljs-attr">"@context"</span>: <span class="hljs-string">"https://www.w3.org/ns/activitystreams"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://example.com/~alice/note/72"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Tombstone"</span>,
+  <span class="hljs-attr">"published"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>,
+  <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>,
+  <span class="hljs-attr">"deleted"</span>: <span class="hljs-string">"2015-02-10T15:04:55Z"</span>
+}</pre>
+      </div>
+    </section>
+    <section id="follow-activity-outbox">
+      <h3 id="x6-5-follow-activity"><span class="secno">6.5 </span>关注活动 (Follow Activity)</h3>
+      <p>
+        <code>Follow</code> 活动用于订阅另一个行为体的活动。
+      </p>
+      <p>
+        在 <strong>发件箱</strong> 中收到该活动的副作用是，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 且仅应当在随后收到以该 <code>Follow</code> 活动为对象的 <code>Accept</code> 活动时将
+        <code>object</code> 添加到 <code>actor</code> 的 <a
+          href="https://w3c.wholetrans.org/activitypub/#following"><code>following</code> 集合</a>
+        中。
+      </p>
+    </section>
+    <section id="add-activity-outbox">
+      <h3 id="x6-6-add-activity"><span class="secno">6.6 </span>添加活动 (Add Activity)</h3>
+      <p>
+        在<strong>发件箱</strong> 中收到 <code>Add</code> 活动时，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 将 <code>object</code> 添加到 <code>target</code> 属性定义的集合中，除非：
+      </p>
+      <ul>
+        <li>
+          <code>target</code> 不被接收到活动的服务端所有，因而接收到活动的服务端无权更新它。
+        </li>
+        <li>
+          出于某些其他原因，服务端自行决定 <code>object</code> 不允许被添加到 <code>target</code> 集合中。
+        </li>
+      </ul>
+    </section>
+    <section id="remove-activity-outbox">
+      <h3 id="x6-7-remove-activity"><span class="secno">6.7 </span>移除活动 (Remove Activity)</h3>
+      <p>
+        在 <strong>发件箱</strong> 接收到 <code>Remove</code> 活动时，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 从 <code>target</code> 属性定义的集合中移除 <code>object</code>，除非：
+      </p>
+      <ul>
+        <li>
+          <code>target</code> 不被接收到活动的服务端所有，因而接收到活动的服务端无权更新它。
+        </li>
+        <li>
+          出于某些其他原因，服务端自行决定 <code>object</code> 不允许被从 <code>target</code> 集合中移除。
+        </li>
+      </ul>
+    </section>
+    <section id="like-activity-outbox">
+      <h3 id="x6-8-like-activity"><span class="secno">6.8 </span>点赞活动 (Like Activity)</h3>
+      <p>
+        <code>Like</code> 活动表示 <code>actor</code> 对 <code>object</code> 表示喜欢。
+      </p>
+      <p>
+        在 <strong>发件箱</strong> 中接收到该活动的副作用是，服务端
+        <em class="rfc2119" title="SHOULD">应当</em> 将 <code>object</code> 添加到
+        <code>actor</code> 的 <a href="https://w3c.wholetrans.org/activitypub/#liked"><code>liked</code> 集合</a> 中。
+      </p>
+    </section>
+    <section id="block-activity-outbox">
+      <h3 id="x6-9-block-activity"><span class="secno">6.9 </span>屏蔽活动 (Block Activity)</h3>
+      <p>
+        <code>Block</code> 活动用于表示发布此活动的行为体不希望另一个行为体（由 <code>object</code> 属性定义）能够与其发布的对象进行交互。
+        服务端 <em class="rfc2119" title="SHOULD">应当</em> 阻止被屏蔽的用户与任何由该行为体发布的对象交互。
+      </p>
+      <p>
+        服务器 <em class="rfc2119" title="SHOULD NOT">不应</em> 将屏蔽活动传递给其
+        <code>object</code>。
+      </p>
+    </section>
+    <section id="undo-activity-outbox">
+      <h3 id="x6-10-undo-activity"><span class="secno">6.10 </span>撤销活动 (Undo Activity)</h3>
+      <p>
+        <code>Undo</code> 活动用于撤销之前的活动。
+        请参阅活动术语文档中关于
+        <a href="https://www.w3.org/TR/activitystreams-vocabulary/#inverse">
+          逆活动与“撤销”</a>的内容。
+        例如，<code>Undo</code> 可用于撤销之前的 <code>Like</code>、
+        <code>Follow</code> 或 <code>Block</code>。
+        撤销活动与被撤销的活动<em class="rfc2119" title="MUST">必须</em>由同一个行为体发布。
+        应尽可能撤销副作用。
+        例如，如果撤销 <code>Like</code>，应相应递减之前已递增的计数器。
+      </p>
+      <p>
+        在一些情况下，如果已存在明确的“逆活动”，应使用该逆活动。
+        基于 <code>Create</code> 的活动应改为使用 <code>Delete</code>，基于 <code>Add</code> 的活动应改为使用 <code>Remove</code>。
+      </p>
+    </section>
+    <section id="client-to-server-outbox-delivery">
+      <h3 id="x6-11-delivery"><span class="secno">6.11 </span>投递</h3>
+      <p>
+        联合式服务端 <em class="rfc2119" title="MUST">必须</em> 根据
+        <a href="https://w3c.wholetrans.org/activitypub/#outbox-delivery">
+          发件箱投递</a> 的规定，对所有发布到 <strong>发件箱</strong> 的活动执行投递。
+      </p>
+    </section>
+    <section id="uploading-media" class="informative">
+      <h3 id="x6-12-uploading-media"><span class="secno">6.12 </span>上传媒体</h3>
+      <p><em>本节为非规范性内容。</em></p>
+      <p>
+        服务端<em class="rfc2119" title="MAY">可以</em>支持上传某些文档类型（如图片、视频或其他二进制数据），
+        以便在活动中引用，但具体机制不在本版 ActivityPub 规范的范畴内。
+        社交网络社区讨论组正在通过 <a href="https://www.w3.org/wiki/SocialCG/ActivityPub/MediaUpload">ActivityPub 媒体上传报告</a> 细化该协议。
+      </p>
+    </section>
+
+
+  </section>
+
+  <section id="server-to-server-interactions">
+    <!--OddPage-->
+    <h2 id="x7-server-to-server-interactions"><span class="secno">7. </span>服务端间交互</h2>
+    <p>
+      服务端通过向行为体的<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>端点发送活动来与其他服务端通信，并在社交图谱中传播信息。
+      通过网络发送的活动<em class="rfc2119" title="SHOULD">应当</em>拥有一个 <code>id</code>，除非其被有意设为临时性活动（在此情形下，它<em class="rfc2119"
+        title="MAY">可以</em>省略 <code>id</code>）。
+    </p>
+    <p>
+      <code>POST</code> 请求（例如发送到收件箱的 POST 请求）<em class="rfc2119" title="MUST">必须</em>使用
+      <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 的内容类型，
+      而 <code>GET</code> 请求（另见 <a href="https://w3c.wholetrans.org/activitypub/#retrieving-objects"
+        class="sec-ref"><span class="secno">3.2</span> <span class="sec-title">检索对象</span></a>）则使用
+      <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code> 的 Accept 标头。
+      对于服务端间交互的情形，服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>application/activity+json</code> 的内容类型或 Accept
+      标头解释为等同于 <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>。
+    </p>
+    <p>
+      为了在整个社交图谱中传播更新，活动会被发送到相应的接收方。
+      服务端首先跟随对象之间的相应链接，直至到达一个行为体，将这个链接指向的行为体确定这些接收方，随后将活动插入到行为体的<em>收件箱</em>中（这就是<a
+        href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>）。
+      这使得接收活动的服务端可以：
+    </p>
+    <ul>
+      <li>
+        执行与活动相关的任何副作用（例如，发送行为体点赞对象的通知，用于更新对象的点赞计数）；
+      </li>
+      <li>
+        将活动传递给原始对象的接收方，以确保更新传播到整个社交图谱（参见 <a href="https://w3c.wholetrans.org/activitypub/#inbox-forwarding">
+          收件箱投递</a>）。
+      </li>
+    </ul>
+    <p>投递通常在以下情形被触发，例如：</p>
+    <ul>
+      <li>
+        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中创建活动，将其<a
+          href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>作为接收方。
+      </li>
+      <li>
+        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中创建活动，并直接指定接收方。
+      </li>
+      <li>
+        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中创建活动，以用户自定义的集合作为接收方。
+      </li>
+      <li>
+        在行为体的<a href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>或<a
+          href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>中创建引用其他对象的活动。
+      </li>
+    </ul>
+
+    <p>
+      向其他服务端上的行为体的 <code>inbox</code> 或 <code>sharedInbox</code> 属性执行投递的服务端<em class="rfc2119"
+        title="MUST">必须</em>在以下活动中提供 <code>object</code> 属性：
+      <code>Create</code>、<code>Update</code>、<code>Delete</code>、
+      <code>Follow</code>、<code>Add</code>、<code>Remove</code>、
+      <code>Like</code>、<code>Block</code>、<code>Undo</code>。
+      此外，执行以下活动的服务端间投递的服务端<em class="rfc2119" title="MUST">必须</em>也提供 <code>target</code>
+      属性：<code>Add</code>、<code>Remove</code>。
+    </p>
+
+    <p>
+      在从其他服务端接收响应，以及向其他服务端发送响应时，<em class="rfc2119" title="SHOULD">应当</em>酌情遵守 HTTP 缓存机制[<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-RFC7234">RFC7234</a></cite>]。
+    </p>
+
+    <section id="delivery">
+      <h3 id="x7-1-delivery"><span class="secno">7.1 </span>信息投递</h3>
+
+      <p><i>
+          以下内容仅适用于相互通信的联合式服务端。
+        </i></p>
+
+      <p>
+        通过首先查找目标的收件箱，然后将活动发布到查找到的收件箱，即可将活动投递到其目标（即<a href="https://w3c.wholetrans.org/activitypub/#actors">行为体</a>）。
+        通过检查 <a href="https://www.w3.org/TR/activitystreams-vocabulary/#audienceTargeting">ActivityStreams
+          目标地址</a>来确定投递目标；即活动的 <code>to</code>、<code>bto</code>、<code>cc</code>、
+        <code>bcc</code> 和 <code>audience</code> 字段。
+      </p>
+
+      <p>
+        <a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>的确定方法是先<a
+          href="https://w3c.wholetrans.org/activitypub/#retrieving-objects">检索目标行为体的 JSON-LD 表示</a>，
+        然后查找 <code>inbox</code> 属性。
+        如果接收方是 <code>Collection</code> 或 <code>OrderedCollection</code>，则服务端<em class="rfc2119"
+          title="MUST">必须</em>（使用用户的凭据）解引用该集合，并发现集合中每个条目的收件箱。
+        服务端<em class="rfc2119" title="MUST">必须</em>限制通过集合执行的递归层数，该层数<em class="rfc2119" title="MAY">可以</em>为一层。
+      </p>
+
+      <p>
+        服务端<em class="rfc2119" title="MUST">必须</em>对最终接收方列表进行去重。服务端<em class="rfc2119"
+          title="MUST">必须</em>从接收方列表中排除与正在发起通知的活动的 <code>actor</code>（行为体）相同的行为体。
+        也就是说，行为体不应该将自己的活动投递给自己。
+      </p>
+
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-8" aria-level="4"><span>注</span><span
+            style="text-transform: none">: 静默与私有活动</span></div>
+        <p class="">
+          在活动未指定接收方时应如何操作暂未定义，但目前的建议是：如果未指定接收方，则对象保持完全私有，且访问控制应限制对对象的访问。
+          如果发送到的对象仅为“public”集合，则该对象不会投递给任何行为体，但可以在行为体的发件箱中公开查看。
+        </p>
+      </div>
+
+      <p>
+        确定接收方列表后，服务端（使用提交用户的授权）向<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>发出 HTTP POST
+        请求，并将活动作为请求正文。
+        接收方将此活动作为 <code>item</code> 添加到<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a> 的有序集合
+        (OrderedCollection) 中。
+        尝试向非联合式服务端上的收件箱进行投递<em class="rfc2119" title="SHOULD">应当</em>导致 <code>405 Method Not Allowed</code> 响应。
+      </p>
+
+      <p>
+        对于向第三方服务端执行投递操作的联合式服务端，投递<em class="rfc2119" title="SHOULD">应当</em>异步执行，且如果由于网络错误而投递失败，服务端<em class="rfc2119"
+          title="SHOULD">应当</em>
+        再次尝试向接收方投递。
+      </p>
+
+      <p>
+        <strong>注意：</strong>在同一来源的行为体之间分发的活动可以使用任何内部机制，并且不需要使用 HTTP。
+      </p>
+
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-9" aria-level="4"><span>注</span><span
+            style="text-transform: none">: 与链接数据通知 (Linked Data Notification) 的关系</span></div>
+        <p class="" id="ldn-relationship">
+          虽然理解本规范不需要阅读以下内容，但值得注意的是，ActivityPub 的定位和投递机制与
+          <a href="https://www.w3.org/TR/ldn/">链接数据通知</a>规范重叠，且二者可以以可互操作的方式进行组合。
+          特别地，ActivityPub 与链接数据通知之间的 <code>inbox</code> 属性相同，并且本文档中描述的定位和投递系统也受链接数据通知支持。
+          除 JSON-LD 格式的压缩 ActivityStreams 文档外，链接数据通知还支持 ActivityPub 实现不需要的许多 RDF 序列化方法。
+          但是，希望与链接数据通知实现更广泛兼容的 ActivityPub 实现可能希望支持其他 RDF 表示。
+        </p>
+      </div>
+
+      <section id="outbox-delivery">
+        <h4 id="x7-1-1-outbox-delivery-requirements-for-server-to-server"><span class="secno">7.1.1 </span>服务端间发件箱投递的要求
+        </h4>
+        <p>
+          对同时支持
+          <a href="https://w3c.wholetrans.org/activitypub/#client-to-server-interactions">客户端到服务端交互</a>和
+          <a href="https://w3c.wholetrans.org/activitypub/#server-to-server-interactions">服务端间交互</a>的服务端而言：当在<a
+            href="https://w3c.wholetrans.org/activitypub/#outbox">发件箱</a>中接收到对象时，
+          服务端<em class="rfc2119" title="MUST">必须</em>定位并将其投递到：
+        </p>
+        <ul>
+          <li>
+            <code>to</code>、<code>bto</code>、<code>cc</code>、
+            <code>bcc</code> 或 <code>audience</code> 字段的值（只要上述字段的值为由个人或行为体拥有的集合）。
+          </li>
+        </ul>
+        <p>
+          这些字段由将活动发往发件箱的客户端<a href="https://w3c.wholetrans.org/activitypub/#client-addressing">适当地填充</a>。
+        </p>
+      </section>
+
+      <section id="inbox-forwarding">
+        <h4 id="x7-1-2-forwarding-from-inbox"><span class="secno">7.1.2 </span>从收件箱转发</h4>
+
+        <div class="note">
+          <div role="heading" class="note-title marker" id="h-note-10" aria-level="5"><span>注</span><span
+              style="text-transform: none">: 转发以避免幽灵回复问题</span></div>
+          <div class="">
+            <p>
+              以下部分是为了缓解偶尔会在联合式网络上产生的“幽灵回复”问题。
+              我们最好用一个例子来解释这个问题。
+            </p>
+
+            <p>
+              小A 发布了一篇关于她成功在会议上发表论文的帖文，并将其发送到她的粉丝集合，其中包括她的朋友 小B。
+              小B 回复 小A 的消息祝贺她，并在接收方中包含了 小A 的粉丝集合。
+              但是，小B 无法查看 小A 的粉丝集合的成员，因此他的服务端不会将他的消息转发到他们的收件箱。
+              如果没有以下机制，如果 小A 随后回复 小B，她的粉丝会看到 小A 回复 小B，但从未见过 小B 互动。
+              这会非常令人困惑！
+            </p>
+          </div>
+        </div>
+
+        <p>
+          当在<a href="https://w3c.wholetrans.org/activitypub/#inbox">收件箱</a>中接收到活动时，服务端需要将这些活动转发给源服务端无法投递到的接收方。
+          为此，服务端<em class="rfc2119" title="MUST">必须</em>定位并将活动<a
+            href="https://w3c.wholetrans.org/activitypub/#delivery">投递</a>到 <code>to</code>、<code>cc</code> 和/或
+          <code>audience</code>
+          的值，前提是以下所有条件均为真：
+        </p>
+        <ul>
+          <li>这是服务端第一次收到此活动。</li>
+          <li>
+            <code>to</code>、<code>cc</code> 和/或 <code>audience</code> 的值包含由服务端拥有的集合。
+          </li>
+          <li>
+            <code>inReplyTo</code>、<code>object</code>、
+            <code>target</code> 和/或 <code>tag</code> 的值是服务端拥有的对象。
+            服务端<em class="rfc2119" title="SHOULD">应当</em>递归遍历上述属性的值，以查找服务端拥有的链接对象，切<em class="rfc2119"
+              title="SHOULD">应当</em>设置递归最大限制（即，忽略嵌套层数太深以至于接收方的粉丝可能不介意
+            他们是否不再收到不直接涉及接收方的更新的情形）。
+            服务端<em class="rfc2119" title="MUST">必须</em>仅定位正在转发的原始对象上的 <code>to</code>、<code>cc</code> 和/或
+            <code>audience</code> 的值，
+            且在递归遍历链接对象时不获取任何新的收件方（以防止这些收件方被客户端有意修改）。
+          </li>
+        </ul>
+        <p>
+          服务端<em class="rfc2119" title="MAY">可以</em>根据特定于实现的规则（例如，骚扰信息过滤）过滤其投递目标。
+        </p>
+      </section>
+
+      <section id="shared-inbox-delivery">
+        <h4 id="x7-1-3-shared-inbox-delivery"><span class="secno">7.1.3 </span>共享收件箱投递</h4>
+        <p>
+          对于托管许多行为体的服务端，向所有粉丝投递可能会导致发送大量消息。
+          某些服务端还希望展示发布到“已知网络”的所有消息的列表。
+          因此，ActivityPub 提供了一种可选机制来满足这两种用例。
+        </p>
+        <p>
+          当对象正在被投递到源行为体的粉丝时，服务端<em class="rfc2119" title="MAY">可以</em>通过识别所有共享相同 <a
+            href="https://w3c.wholetrans.org/activitypub/#sharedInbox">sharedInbox</a> 的粉丝
+          来减少投递到的接收方行为体的数量，不将这些粉丝将作为单个接收方，而是将对象投递到上述 <code>sharedInbox</code>。
+          因此，在这种情形下，外站/接收消息的服务端参与确定目标并将对特定收件箱执行投递操作。
+        </p>
+        <p>
+          此外，如果某个对象的地址被设为特殊 <a href="https://w3c.wholetrans.org/activitypub/#public-addressing">公共</a> 集合，
+          服务端<em class="rfc2119" title="MAY">可以</em>将该对象投递到网络上所有已知的 <code>sharedInbox</code> 端点。
+        </p>
+        <p>
+          将具有公共地址的活动发送到 <code>sharedInbox</code> 端点的源服务端<em class="rfc2119" title="MUST">必须</em>仍然投递到其它没有
+          <code>sharedInbox</code> 并且不会通过 <code>sharedInbox</code> 机制接收活动的行为体与集合地址（通过 <code>to</code>、
+          <code>bto</code>、<code>cc</code>、<code>bcc</code> 和 <code>audience</code> 确定）。
+        </p>
+      </section>
+    </section>
+
+    <section id="create-activity-inbox">
+      <h3 id="x7-2-create-activity"><span class="secno">7.2 </span>创建活动 (Create Activity)</h3>
+      <p>
+        在 <code>inbox</code> 中接收 <code>Create</code> 活动几乎没有副作用；该活动应当出现在行为体的
+        <code>inbox</code> 中，且服务端可能会希望在本地存储此活动及其附带对象的表示形式。
+        然而，这通常在处理投递到 <code>inbox</code> 的活动时也会发生。
+      </p>
+    </section>
+
+    <section id="update-activity-inbox">
+      <h3 id="x7-3-update-activity"><span class="secno">7.3 </span>更新活动 (Update Activity)</h3>
+      <p>
+        对于服务端间交互，<code>Update</code> 活动意味着接收活动的服务端<em class="rfc2119" title="SHOULD">应当</em>将其具有相同 <code>id</code>
+        的 <code>object</code> 副本更新为 <code>Update</code> 活动中提供的副本。
+        与 <a href="https://w3c.wholetrans.org/activitypub/#update-activity-outbox">客户端到服务端处理更新活动</a> 不同，
+        这不是部分更新，而是对象的完全替换。
+      </p>
+      <p>
+        接收服务端<em class="rfc2119" title="MUST">必须</em>注意确保发起 <code>Update</code> 活动的行为体被授权修改目标 <code>object</code>。
+        这至少可以通过确保 <code>Update</code> 及其 <code>object</code> 具有相同的来源来完成。
+      </p>
+    </section>
+
+    <section id="delete-activity-inbox">
+      <h3 id="x7-4-delete-activity"><span class="secno">7.4 </span>删除活动 (Delete Activity)</h3>
+      <p>
+        接收此活动的副作用是（假设 <code>object</code> 被发送活动的行为体/服务端拥有），接收删除活动的服务端 <em class="rfc2119" title="SHOULD">应当</em>删除其对具有相同
+        <code>id</code>
+        的 <code>object</code> 的表示形式，并且<em class="rfc2119" title="MAY">可以</em>用 <code>Tombstone</code> 对象替换该表示形式。
+      </p>
+      <p>
+        （请注意，在活动从源服务端传输到外站服务端后，ActivityPub 协议中没有任何内容可以<em>强制</em>远程删除对象的表示形式）。
+      </p>
+    </section>
+
+    <section id="follow-activity-inbox">
+      <h3 id="x7-5-follow-activity"><span class="secno">7.5 </span>关注活动 (Follow Activity)</h3>
+
+      <p>
+        在<strong>收件箱</strong>中接收此活动的副作用是，服务端<em class="rfc2119" title="SHOULD">应当</em>生成一个 <code>Accept</code> 或
+        <code>Reject</code> 活动，
+        其中 Follow 作为 <code>object</code>，并将其投递到发出 Follow 的 <code>actor</code>。
+        <code>Accept</code> 或 <code>Reject</code> <em class="rfc2119" title="MAY">可以</em>自动生成，也<em class="rfc2119"
+          title="MAY">可以</em>是用户输入的结果（可能在用户进行审核后有所延迟）。
+        尽管如此，服务端<em class="rfc2119" title="MAY">可以</em>选择不显式发送 <code>Reject</code> 以响应该 <code>Follow</code>，
+        实现者应当意识到发送请求的服务端可能会处于中间状态。例如，服务端可能不会发送 <code>Reject</code> 以保护用户的隐私。
+      </p>
+
+      <p>
+        如果接收到引用此 <code>Follow</code> 为对象的 <code>Accept</code>，服务端<em class="rfc2119" title="SHOULD">应当</em>将
+        <code>actor</code>
+        添加到目标行为体的<a href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>中。
+        如果接收到的活动是 <code>Reject</code>，服务端<em class="rfc2119" title="MUST NOT">禁止</em>将发送Follow活动的行为体添加到目标行为体的<a
+          href="https://w3c.wholetrans.org/activitypub/#followers">粉丝集合</a>中。
+      </p>
+
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-11" aria-level="4"><span>注</span></div>
+        <div class="">
+          <p>
+            有时可能会发生成功的 <code>Follow</code> 订阅，但在之后的某个时间点，向该名粉丝进行投递会失败很长一段时间。
+            实现者应当意识到无法保证网络上的行为体始终可被访问，并且应当进行相应的实现。
+            例如，如果尝试向一个行为体投递长达六个月，而粉丝仍然无法访问，则进行投递的服务端可以将这个无法访问的行为体从 <code>followers</code> 列表中移除。
+            处理无法访问的行为体的时间范围和行为由投递服务端自行决定。
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="accept-activity-inbox">
+      <h3 id="x7-6-accept-activity"><span class="secno">7.6 </span>接受活动 (Accept Activity)</h3>
+      <p>
+        在<strong>收件箱</strong>中接收此活动的副作用取决于接收到的 <code>object</code> 的类型，并且可以接受本文档中未描述的类型（例如，<code>Offer</code>）。
+      </p>
+
+      <p>
+        如果向<strong>收件箱</strong>接收的 <code>Accept</code> 的 <code>object</code> 是接收方先前发送的 <code>Follow</code> 活动，
+        则服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>actor</code> 添加到接收方的<a
+          href="https://w3c.wholetrans.org/activitypub/#following">关注集合</a>。
+      </p>
+    </section>
+
+    <section id="reject-activity-inbox">
+      <h3 id="x7-7-reject-activity"><span class="secno">7.7 </span>拒绝活动 (Reject Activity)</h3>
+      <p>
+        在<strong>收件箱</strong>中接收此活动的副作用取决于接收到的 <code>object</code> 的类型，并且可以拒绝本文档中未描述的类型（例如， <code>Offer</code>）。
+      </p>
+
+      <p>
+        如果向<strong>收件箱</strong>接收的 <code>Reject</code> 的 <code>object</code> 是接收方先前发送的 <code>Follow</code> 活动，
+        则表示接收方未批准 <code>Follow</code> 请求。服务端<em class="rfc2119" title="MUST NOT">禁止</em>将 <code>actor</code> 添加到接收方的<a
+          href="https://w3c.wholetrans.org/activitypub/#following">关注集合</a>。
+      </p>
+    </section>
+
+    <section id="add-activity-inbox">
+      <h3 id="x7-8-add-activity"><span class="secno">7.8 </span>添加活动 (Add Activity)</h3>
+      <p>
+        在<strong>收件箱</strong>收到 <code>Add</code> 活动后，服务端<em class="rfc2119" title="SHOULD">应当</em>将 <code>object</code>
+        添加到 <code>target</code> 属性中指定的集合，除非：
+      </p>
+      <ul>
+        <li>
+          <code>target</code> 不由接收服务端所有，因此服务端无法更新 <code>target</code>。
+        </li>
+        <li>
+          由于某种其他原因，不允许将 <code>object</code> 添加到 <code>target</code> 集合，
+          这由接收方自行决定。
+        </li>
+      </ul>
+    </section>
+    <section id="remove-activity-inbox">
+      <h3 id="x7-9-remove-activity"><span class="secno">7.9 </span>移除活动 (Remove Activity)</h3>
+      <p>
+        在<strong>收件箱</strong>收到 <code>Remove</code> 活动后，服务端<em class="rfc2119" title="SHOULD">应当</em>从
+        <code>target</code> 属性中指定的集合中移除
+        <code>object</code>，除非：
+      </p>
+      <ul>
+        <li>
+          <code>target</code> 不由接收服务端所有，因此服务端无法更新 <code>target</code>。
+        </li>
+        <li>
+          由于某种其他原因，不允许从 <code>target</code> 集合中移除 <code>object</code>，这由接收方自行决定。
+        </li>
+      </ul>
+    </section>
+    <section id="like-activity-inbox">
+      <h3 id="x7-10-like-activity"><span class="secno">7.10 </span>点赞活动 (Like Activity)</h3>
+      <p>
+        在<strong>收件箱</strong>中收到此活动的副作用是，如果存在 <a
+          href="https://w3c.wholetrans.org/activitypub/#likes"><code>likes</code></a> 集合，
+        则服务端<em class="rfc2119" title="SHOULD">应当</em>通过将接收到的活动添加到该集合来增加目标对象的点赞计数。
+      </p>
+    </section>
+    <section id="announce-activity-inbox">
+      <h3 id="x7-11-announce-activity-sharing"><span class="secno">7.11 </span>推送（分享）活动 (Announce Activity)</h3>
+      <p>
+        在<strong>收件箱</strong>中接收到 <code>Announce</code> 活动后，如果存在 <a
+          href="https://w3c.wholetrans.org/activitypub/#shares"><code>shares</code></a>集合，则服务端<em class="rfc2119"
+          title="SHOULD">应当</em>通过将接收到的活动添加到该集合来增加对象的分享计数。
+      </p>
+      <div class="note">
+        <div role="heading" class="note-title marker" id="h-note-12" aria-level="4"><span>注</span></div>
+        <div class="">
+          <code>Announce</code> 活动实际上就是其他社交网络中所说的“分享”、“转发”或“推荐”。
+        </div>
+      </div>
+    </section>
+    <section id="undo-activity-inbox">
+      <h3 id="x7-12-undo-activity"><span class="secno">7.12 </span>撤销活动 (Undo Activity)</h3>
+      <p>
+        <code>Undo</code> 活动用于撤销先前活动的副作用。
+        请参阅 ActivityStreams 文档中关于
+        <a href="https://www.w3.org/TR/activitystreams-vocabulary/#inverse">
+          逆活动与“撤销”</a>的内容。
+        <code>Undo</code> 活动的范围和限制与
+        <a href="https://w3c.wholetrans.org/activitypub/#undo-activity-outbox">
+          客户端到服务端交互场景下的撤销活动</a>相同，但应用于联合上下文。
+      </p>
+    </section>
+  </section>
+
+  <section id="i18n-concerns" class="appendix informative">
+    <!--OddPage-->
+    <h2 id="a-internationalization"><span class="secno">A. </span>国际化</h2>
+    <p><em>本节为非规范性内容。</em></p>
+    <p>
+      在一个联邦网络中，建立一个国际化的用户群体非常重要。
+      <a href="https://www.w3.org/TR/activitystreams-core/#naturalLanguageValues">
+        ActivityStreams 提供了内容国际化的工具</a>，
+      应尽可能使用这些工具。
+      然而，对于实现者而言，确定将哪些
+      <a href="https://www.w3.org/TR/activitystreams-core/#defaultlangcontext">
+        <code>@language</code> 属性</a>
+      用于用户提交的内容可能会很困难。
+      <a href="https://www.w3.org/International/"><abbr title="World Wide Web Consortium">W3C</abbr>
+        国际化小组</a>
+      提供了有关
+      <a href="https://www.w3.org/International/wiki/LanguageDetection">
+        语言检测的指导</a>。
+    </p>
+  </section>
+
+  <section id="security-considerations" class="appendix informative">
+    <!--OddPage-->
+    <h2 id="b-security-considerations"><span class="secno">B. </span>安全注意事项</h2>
+    <p><em>本节为非规范性内容。</em></p>
+
+    <section id="authorization">
+      <h3 id="b-1-authentication-and-authorization"><span class="secno">B.1 </span>身份验证与授权</h3>
+      <p>
+        ActivityPub 的身份验证用于两个场景：首先，用于在服务端认证客户端，其次，在联邦实现中，用于服务端间彼此认证。
+      </p>
+
+      <p>
+        遗憾的是，在标准化过程中，没有强共识的认证机制。
+        一些可能的认证方向可以在社交网络社区讨论组的
+        <a href="https://www.w3.org/wiki/SocialCG/ActivityPub/Authentication_Authorization">《身份验证与授权最佳实践报告》</a>中找到。
+      </p>
+    </section>
+
+    <section id="security-verification">
+      <h3 id="b-2-verification"><span class="secno">B.2 </span>验证</h3>
+      <p>
+        服务端不应信任客户端提交的内容，联合式服务端也不应在没有某种形式验证的情况下信任由其他非内容来源服务端接收的内容。
+      </p>
+      <p>
+        服务端应谨慎验证新内容是否确由其声明的行为体发布，并验证该行为体是否有权更新其声明要更新的资源。
+        另请查阅
+        <a href="https://w3c.wholetrans.org/activitypub/#obj" class="sec-ref"><span class="secno">3.</span> <span
+            class="sec-title">对象</span></a> 及 <a href="https://w3c.wholetrans.org/activitypub/#authorization"
+          class="sec-ref"><span class="secno">B.1</span> <span class="sec-title">身份验证与授权</span></a>。
+      </p>
+    </section>
+
+    <section id="security-localhost">
+      <h3 id="b-3-accessing-localhost-uris"><span class="secno">B.3 </span>访问本地 URI</h3>
+      <p>
+        在开发过程中，本地运行测试通常很方便。
+        然而，在生产环境中的客户端或服务端实例中允许请求本地 URI 是危险的。
+        对不需要授权的本地 URI 发出请求，可能会无意中访问或修改默认被 localhost 保护的资源。
+      </p>
+      <p>
+        如果您的 ActivityPub 服务端或客户端允许在开发目的中对本地 URI 发出请求，请考虑使其成为一个默认关闭的配置选项。
+      </p>
+    </section>
+
+    <section id="security-uri-schemes">
+      <h3 id="b-4-uri-schemes"><span class="secno">B.4 </span>URI 方案</h3>
+      <p>
+        除了 <code>http</code> 与 <code>https</code>，还有许多类型的 URI。
+        某些处理不同 URI 方案请求的库可能试图进行智能化处理，并引用非预期的 URI 方案，例如 <code>file</code>。
+        客户端和服务端作者应仔细检查相关的库如何处理这些请求，并在条件允许的情况下仅放行某些安全的 URI 类型，例如 <code>http</code> 和 <code>https</code>。
+      </p>
+    </section>
+
+    <section id="security-recursive-objects">
+      <h3 id="b-5-recursive-objects"><span class="secno">B.5 </span>递归式对象</h3>
+      <p>
+        服务端应设置解析对象时递归的深度限制，或对带有递归引用的 ActivityStreams 对象进行特别处理。
+        未能规范地处理这些对象可能导致拒绝服务（DoS）安全漏洞。
+      </p>
+    </section>
+
+    <section id="security-spam">
+      <h3 id="b-6-spam"><span class="secno">B.6 </span>骚扰信息</h3>
+      <p>
+        在任何网络中骚扰信息都是一个问题，在联合式网络中尤其如此。
+        虽然 ActivityPub 并未提供专门的骚扰防范机制，但建议服务端通过某种骚扰信息过滤机制过滤来自本站的不受信任用户和任何外站用户传入的内容。
+      </p>
+    </section>
+
+    <section id="security-federation-dos">
+      <h3 id="b-7-federation-denial-of-service"><span class="secno">B.7 </span>联合式拒绝服务攻击</h3>
+      <p>
+        服务端应实现防止来自其他联邦服务端的拒绝服务攻击的保护措施。
+        例如，可以使用某种速率限制机制完成此操作。
+        特别是在涉及处理有副作用的活动时应仔细实施这一保护。
+        服务端嗨 <em class="rfc2119" title="SHOULD">应当</em> 注意不会因提交的信息量过大而导致对其他服务端的过载，例如通过使用指数退避策略规避这一点。
+      </p>
+    </section>
+
+    <section id="security-c2s-ratelimiting">
+      <h3 id="b-8-client-to-server-ratelimiting"><span class="secno">B.8 </span>客户端到服务端的请求速率限制</h3>
+      <p>
+        服务端应对 API 客户端提交内容进行速率限制。
+        这样做有两个目的：
+      </p>
+      <ol>
+        <li>
+          防止恶意客户端对服务端进行拒绝服务攻击。
+        </li>
+        <li>
+          确保服务端不会分发过多的活动，触发其他服务端的
+          <a href="https://w3c.wholetrans.org/activitypub/#security-federation-dos">拒绝服务保护</a>。
+        </li>
+      </ol>
+      <p></p>
+    </section>
+
+    <section id="security-c2s-response-dos">
+      <h3 id="b-9-client-to-server-response-denial-of-service"><span class="secno">B.9 </span>客户端到服务端响应的拒绝服务攻击</h3>
+      <p>
+        为防止客户端因特大集合超载，服务端应注意限制返回给客户端的集合页大小。
+        客户端也应准备好限制他们可以处理的响应大小，以防连接到恶意或被入侵的服务端，例如通过超时并生成错误来缓解这一点。
+      </p>
+    </section>
+
+    <section id="security-sanitizing-content">
+      <h3 id="b-10-sanitizing-content"><span class="secno">B.10 </span>内容清洗</h3>
+      <p>
+        任何为浏览器（或其他支持富文本应用程序）渲染的活动字段都应注意清洗包含标记的字段，以防止跨站脚本攻击。
+      </p>
+    </section>
+
+    <section id="security-not-displaying-bto-bcc">
+      <h3 id="b-11-not-displaying-bto-and-bcc-properties"><span class="secno">B.11 </span>不显示 bto 和 bcc 属性</h3>
+      <p>
+        本规范已经规定 <code>bto</code> 和 <code>bcc</code> <a
+          href="https://w3c.wholetrans.org/activitypub/#remove-bto-bcc-before-delivery">必须在投递前被移除</a>，
+        但服务端可以自由决定如何在其自身存储系统中表示对象。
+        然而，由于 <code>bto</code> 和 <code>bcc</code> 仅为了让对象/活动的原作者知晓或看到，服务端在对外展示时也应省略这些属性。
+      </p>
+    </section>
+  </section>
+
+  <section class="appendix informative" id="acknowledgements">
+    <!--OddPage-->
+    <h2 id="c-acknowledgements"><span class="secno">C. </span>致谢</h2>
+    <p><em>本节为非规范性内容。</em></p>
+    <p>
+      本规范来自许多社区在 Web 联合领域多年经验和努力的结晶。
+      特别是，本规范的许多内容受到了 <a href="https://www.w3.org/community/ostatus/wiki/Main_Page">OStatus</a> 和 <a
+        href="https://github.com/pump-io/pump.io/blob/master/API.md">Pump API</a> 的启发，这些均由 StatusNet （现为 GNU Social）和
+      Pump.io 首创。
+      这些项目是许多开发人员勤奋工作的成果，而 Evan Prodromou 在这一领域起到了至关重要的领导作用。
+      如果没有他的努力，ActivityPub 很可能不会以现在的形态存在。
+    </p>
+
+    <p>
+      Erin Shepherd 构建了本规范的初始版本，其核心理念来源于 <a href="https://github.com/pump-io/pump.io/blob/master/API.md">Pump API</a>
+      文档，其中大部分文本被完全重写，同时从 ActivityStreams 1 转换到 ActivityStreams 2，但主要思想仍然保持一致。
+    </p>
+
+    <p>
+      当标准移交给 <abbr title="World Wide Web Consortium">W3C</abbr> 社交网络工作组时，Jessica Tallon 和 Christine Lemmer-Webber
+      接手成为编辑者，并完成了从 Erin Shepherd 的文档到当前状态 ActivityPub 的大部分过渡。本规范的大部分内容是在社交网络工作组的长期反馈过程中重写和重新组织的。
+    </p>
+
+    <p>
+      ActivityPub 是在 W3C 社交网络工作组许多成员的精心投入形成的。
+      ActivityPub 特别感谢 Amy Guy，她将不同社交网络工作组文件的理念进行映射，例如她在 [<cite><a class="bibref"
+          href="https://w3c.wholetrans.org/activitypub/#bib-Social-Web-Protocols">Social Web Protocols</a></cite>]
+      上的卓越工作。
+      Amy 和 Christopher Allan Webber 一起通过四天的冲刺，为 ActivityPub 规范的重大重构奠定了基础。这些修订使客户端到服务端和服务端间部分之间的分界更加清晰，同时明确了 ActivityPub
+      与 [<cite><a class="bibref" href="https://w3c.wholetrans.org/activitypub/#bib-LDN">LDN</a></cite>] 的关系，以及许多其他改进。
+      特别感谢 Benjamin Goering 制作了实现报告模板。
+      同时感谢 mray 设计了出色的教程插图（这些插图与本文档其余部分的许可一致）。
+    </p>
+
+    <p>
+      许多人通过一丝不苟地审阅帮助了 ActivityPub。其中，特别感谢：
+      Aaron Parecki、
+      AJ Jordan、
+      Benjamin Goering、
+      Caleb Langeslag、
+      Elsa Balderrama、
+      elf Pavlik、
+      Eugen Rochko、
+      Erik Wilde、
+      Jason Robinson、
+      Manu Sporny、
+      Michael Vogel、
+      Mike Macgirvin、
+      nightpool、
+      Puck Meerburg、
+      Sandro Hawke、
+      Sarven Capadisli、
+      Tantek Çelik，及
+      Yuri Volkov。
+    </p>
+
+    <p>
+      谨将此文档献给地球上的所有公民。
+      您应享有通讯自由的权利；
+      我们希望我们为之付出的努力，即使微不足道，也能有所帮助。
+    </p>
+  </section>
+
+
+  <section id="references" class="appendix"><!--OddPage-->
+    <h2 id="d-references"><span class="secno">D. </span>资料引用</h2>
+    <section id="normative-references">
+      <h3 id="d-1-normative-references"><span class="secno">D.1 </span>规范性引用</h3>
+      <dl class="bibliography">
+        <dt id="bib-Activity-Vocabulary">[Activity-Vocabulary]</dt>
+        <dd><a href="https://www.w3.org/TR/activitystreams-vocabulary/"><cite>Activity Vocabulary</cite></a>. J. Snell.
+          ActivityStreams Working Group. 编辑草案。 URL: <a
+            href="https://www.w3.org/TR/activitystreams-vocabulary/">https://www.w3.org/TR/activitystreams-vocabulary/</a>
+        </dd>
+        <dt id="bib-ActivityStreams">[ActivityStreams]</dt>
+        <dd><a href="https://www.w3.org/TR/activitystreams-core/"><cite>Activity Streams 2.0</cite></a>. J. Snell.
+          ActivityStreams Working Group. 编辑草案。 URL: <a
+            href="https://www.w3.org/TR/activitystreams-core/">https://www.w3.org/TR/activitystreams-core/</a>
+        </dd>
+        <dt id="bib-JSON-LD">[JSON-LD]</dt>
+        <dd><a href="https://www.w3.org/TR/json-ld/"><cite>JSON-LD 1.0</cite></a>. Manu Sporny; Gregg Kellogg; Markus
+          Lanthaler. W3C. 16 January 2014. W3C 推荐规范。 URL: <a
+            href="https://www.w3.org/TR/json-ld/">https://www.w3.org/TR/json-ld/</a>
+        </dd>
+        <dt id="bib-LDN">[LDN]</dt>
+        <dd><a href="https://www.w3.org/TR/ldn/"><cite>Linked Data Notifications</cite></a>. Sarven Capadisli; Amy Guy.
+          W3C. 2 May 2017. W3C 推荐规范。 URL: <a href="https://www.w3.org/TR/ldn/">https://www.w3.org/TR/ldn/</a>
+        </dd>
+        <dt id="bib-RFC2119">[RFC2119]</dt>
+        <dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement
+              Levels</cite></a>. S. Bradner. IETF. March 1997. 当前最佳实践。 URL: <a
+            href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+        </dd>
+        <dt id="bib-RFC7231">[RFC7231]</dt>
+        <dd><a href="https://tools.ietf.org/html/rfc7231"><cite>Hypertext Transfer Protocol (HTTP/1.1): Semantics and
+              Content</cite></a>. R. Fielding, Ed.; J. Reschke, Ed.. IETF. June 2014. 标准提案。 URL: <a
+            href="https://tools.ietf.org/html/rfc7231">https://tools.ietf.org/html/rfc7231</a>
+        </dd>
+        <dt id="bib-RFC7234">[RFC7234]</dt>
+        <dd><a href="https://tools.ietf.org/html/rfc7234"><cite>Hypertext Transfer Protocol (HTTP/1.1):
+              Caching</cite></a>. R. Fielding, Ed.; M. Nottingham, Ed.; J. Reschke, Ed.. IETF. June 2014. 标准提案。 URL: <a
+            href="https://tools.ietf.org/html/rfc7234">https://tools.ietf.org/html/rfc7234</a>
+        </dd>
+      </dl>
+    </section>
+    <section id="informative-references">
+      <h3 id="d-2-informative-references"><span class="secno">D.2 </span>资料性引用</h3>
+      <dl class="bibliography">
+        <dt id="bib-Micropub">[Micropub]</dt>
+        <dd><a href="https://www.w3.org/TR/micropub/"><cite>Micropub</cite></a>. Aaron Parecki. W3C. 23 May 2017.
+          W3C推荐规范。 URL: <a href="https://www.w3.org/TR/micropub/">https://www.w3.org/TR/micropub/</a>
+        </dd>
+        <dt id="bib-RFC6749">[RFC6749]</dt>
+        <dd><a href="https://tools.ietf.org/html/rfc6749"><cite>The OAuth 2.0 Authorization Framework</cite></a>. D.
+          Hardt, Ed.. IETF. October 2012. 标准提案。 URL: <a
+            href="https://tools.ietf.org/html/rfc6749">https://tools.ietf.org/html/rfc6749</a>
+        </dd>
+        <dt id="bib-RFC6750">[RFC6750]</dt>
+        <dd><a href="https://tools.ietf.org/html/rfc6750"><cite>The OAuth 2.0 Authorization Framework: Bearer Token
+              Usage</cite></a>. M. Jones; D. Hardt. IETF. October 2012. 标准提案。 URL: <a
+            href="https://tools.ietf.org/html/rfc6750">https://tools.ietf.org/html/rfc6750</a>
+        </dd>
+        <dt id="bib-Social-Web-Protocols">[Social-Web-Protocols]</dt>
+        <dd><a href="https://www.w3.org/TR/social-web-protocols/"><cite>Social Web Protocols</cite></a>. Amy Guy. W3C.
+          25 December 2017. W3C 备忘录。 URL: <a
+            href="https://www.w3.org/TR/social-web-protocols/">https://www.w3.org/TR/social-web-protocols/</a>
+        </dd>
+      </dl>
+    </section>
+  </section>
+  <p role="navigation" id="back-to-top"><a href="https://w3c.wholetrans.org/activitypub/#toc"><abbr
+        title="Back to Top">↑</abbr></a></p>
+  <script src="./assets/fixup.js"></script>
+</body>
+
+</html>
